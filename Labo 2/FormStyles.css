@@ -1,0 +1,68 @@
+﻿table, td {
+	border:0px solid black;
+	border-collapse:collapse;
+	width:inherit;
+	padding:5px;
+				
+}
+tr > td:first-child {
+	text-align:right;
+	vertical-align:text-top;
+}
+.main {
+	width:535px;
+	margin:auto;
+	border:1px solid black;
+    font-family:Arial;
+}
+.radio {
+    text-align:left;
+	width: 130px;
+    height:20px;
+    vertical-align:auto;
+    padding:2px;
+    margin-left:4px;
+}
+.textbox, input.ident, input.masked {
+	width:124px;
+    height:16px;
+    padding:2px;
+    font-size:14px;
+}
+div.ui-datepicker{
+    font-size:14px;
+}
+ .thumbnail {
+    width:140px;
+    margin:auto;
+    background-color:lightblue;
+}
+ .submitBTN{
+     width:125px;
+     padding:0px;
+     height:24px;
+ }
+
+ .label {
+    font-weight:600;
+ }
+
+ .radio  {
+     border:1px solid black;
+     font-size:14px;    
+ }
+ .radio td {
+     float:left;
+     padding:2px;
+ }
+
+ .hightLite {
+     background-color: rgb(255,200,200);
+ }
+ /*
+ .radio tr:nth-child(even) {
+     background: #FFF;
+ }
+ .radio tr:nth-child(odd) {
+     background: #FFF;
+ }*/

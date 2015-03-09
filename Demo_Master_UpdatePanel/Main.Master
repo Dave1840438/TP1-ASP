@@ -1,0 +1,51 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="Demo_Master_UpdatePanel.Main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="Main.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <!-- Installe le nécessaire pour les fonctionnalités entourant les UpdatePanels -->
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+        <!-- Horloge qui déclenche (<trigger>) le refraîchissement de l'updatepanel UPN_Time
+         aussi, à chaque Tick d'horloge la méthode TimerTime_Tick sera invoquée
+         -->
+        <asp:Timer runat="server" ID="TimerTime" Interval="1000" OnTick="TimerTime_Tick"></asp:Timer>
+
+        <div class="mainHeader">
+            <table>
+                <tr>
+                    <td>
+                        <h2><asp:Label ID="LBL_Page_Title" runat="server"></asp:Label></h2>
+                    </td>
+                    <td>
+                        <asp:UpdatePanel ID="UPN_Time" runat="server">
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="TimerTime" EventName="Tick" />
+                            </Triggers>
+                            <ContentTemplate>
+                                <asp:Label ID="LBL_Time" CssClass="Time" runat="server"></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <hr />
+        <div>
+            <asp:ContentPlaceHolder ID="Main_Content" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

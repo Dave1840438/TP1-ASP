@@ -11,7 +11,11 @@ namespace TP1_ASP
    {
       protected void Page_Load(object sender, EventArgs e)
       {
-
+         var master = Master as Master_page;
+         if (master != null)
+         {
+            master.setTitre("fhklasjdhfasdfhoasdfhasdfhuioasfuiofuoasdhfo;usdhfiluasdhfui");
+         }
       }
    }
 }

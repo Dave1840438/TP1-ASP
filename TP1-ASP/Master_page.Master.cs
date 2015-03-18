@@ -7,11 +7,16 @@ using System.Web.UI.WebControls;
 
 namespace TP1_ASP
 {
-   public partial class LoginsJournal : System.Web.UI.Page
+   public partial class Master_page : System.Web.UI.MasterPage
    {
       protected void Page_Load(object sender, EventArgs e)
       {
 
+      }
+
+      public void setTitre(String titre)
+      {
+         Master_Page_Titre.Text = titre;
       }
    }
 }

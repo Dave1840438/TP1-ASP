@@ -14,7 +14,30 @@ namespace TP1_ASP
          var master = Master as Master_page;
          if (master != null)
          {
-            master.setTitre("fhklasjdhfasdfhoasdfhasdfhuioasfuiofuoasdhfo;usdhfiluasdhfui");
+            // master.setTitre("fhklasjdhfasdfhoasdfhasdfhuioasfuiofuoasdhfo;usdhfiluasdhfui");
+         }
+      }
+
+      protected void BTT_Inscription_Click(object sender, EventArgs e)
+      {
+         Verify(MainPanel);
+      }
+
+      void Verify(Control container)
+      {
+         foreach(var control in MainPanel.Controls)
+         {
+            if(control is TextBox)
+            {
+               if(((TextBox)control).Text == String.Empty)
+               {
+                  MainPanel.BackColor = System.Drawing.Color.Red;
+               }
+               else
+               {
+                  MainPanel.BackColor = System.Drawing.Color.Gray;
+               }
+            }
          }
       }
    }

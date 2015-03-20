@@ -6,16 +6,15 @@ using System.Web.UI.WebControls;
 
 namespace TP1_ASP
 {
-   public class UserTable :SqlExpressUtilities.SqlExpressWrapper
+   public class LoginTable :SqlExpressUtilities.SqlExpressWrapper
    {
         public long ID { get; set; }
-        public String FullName { get; set; }
-        public String UserName { get; set; }
-        public String Password { get; set; }
-        public String Email { get; set; }
-        public String Avatar { get; set; }
+        public String UserID { get; set; }
+        public String LoginDate { get; set; }
+        public String LogoutDate { get; set; }
+        public String IPAdress { get; set; }
        
-        public UserTable(String connexionString, System.Web.UI.Page Page)
+        public LoginTable(String connexionString, System.Web.UI.Page Page)
             : base(connexionString, Page)
         {
             SQLTableName = "USERS";
@@ -25,17 +24,15 @@ namespace TP1_ASP
         public override void GetValues()
         {
             ID = long.Parse(this["ID"]);
-            FullName = this["FullName"];
-            UserName = this["UserName"];
-            Password = this["Password"];
-            Email = this["Email"];
-            Avatar = this["Avatar"];
+            UserID = this["FullName"];
+            LoginDate = this["UserName"];
+            LogoutDate = this["Password"];
+            IPAdress = this["Email"];
         }
 
         public override void InitColumnsVisibility()
         {
             base.InitColumnsVisibility();
-            SetColumnVisibility("Avatar", false);
         }
 
         public override void InitCellsContentDelegate()
@@ -61,11 +58,11 @@ namespace TP1_ASP
    
         public override void Insert()
         {
-            InsertRecord(UserID, LoginDate, LogoutDate, IPAdress, Avatar);
+            InsertRecord(UserID, LoginDate, LogoutDate, IPAdress);
         }
         public override void Update()
         {
-            UpdateRecord(ID, UserID, LoginDate, LogoutDate, IPAdress, Avatar);
+            UpdateRecord(ID, UserID, LoginDate, LogoutDate, IPAdress);
         }
    }
 }

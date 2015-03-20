@@ -8,9 +8,25 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <script>
+        function PreLoadImage(e) {
+            var imageTarget = document.getElementById("IMG_Avatar");
+            var input = document.getElementById("FU_Avatar");
+            if (imageTarget != null) {
+                var fReader = new FileReader();
+                fReader.readAsDataURL(input.files[0]);
+                fReader.onloadend = function (event) {
+                    // the event.target.result contains the image data 
+                    imageTarget.src = event.target.result;
+
+                }
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="MainForm" runat="server" method="post">
     <asp:Label ID="Master_Page_Titre" runat="server">Lelu</asp:Label>
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

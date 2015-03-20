@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace TP1_ASP
 {
-   public class LoginTable :SqlExpressUtilities.SqlExpressWrapper
+   public class LoginTable : SqlExpressUtilities.SqlExpressWrapper
    {
         public long ID { get; set; }
         public String UserID { get; set; }
@@ -17,7 +17,7 @@ namespace TP1_ASP
         public LoginTable(String connexionString, System.Web.UI.Page Page)
             : base(connexionString, Page)
         {
-            SQLTableName = "USERS";
+            SQLTableName = "LOGINS";
         }
         ////////////////////////////////////////////////////////////////////////////////
         // Nouvelles fonctionnalité plus "user friendly"
@@ -50,10 +50,10 @@ namespace TP1_ASP
         {
             base.InitColumnsTitles();
             SetColumnTitle("ID", "ID");
-            SetColumnTitle("FullName", "Nom complet");
-            SetColumnTitle("UserName", "Nom d'utilisateur");
-            SetColumnTitle("Password", "Mot de passe");
-            SetColumnTitle("Email", "Email");
+            SetColumnTitle("UserID", "ID de l'utilisateur");
+            SetColumnTitle("LoginDate", "Date de connexion");
+            SetColumnTitle("LogoutDate", "Date de déconnexion");
+            SetColumnTitle("IPAdress", "Adresse IP");
         }
    
         public override void Insert()

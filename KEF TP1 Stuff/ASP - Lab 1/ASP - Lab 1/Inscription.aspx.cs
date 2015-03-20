@@ -76,7 +76,5 @@ namespace ASP___Lab_1
         {
             return "SetRadioButtonGroupValue('" + RBG_Name + "', '" + value + "'); ";
         }
-
-
     }
 }

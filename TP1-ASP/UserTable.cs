@@ -46,7 +46,6 @@ namespace TP1_ASP
         public override void InitColumnsSortEnable()
         {
             base.InitColumnsSortEnable();
-            SetColumnSortEnable("ID", false);
         }
 
         public override void InitColumnsTitles()
@@ -61,11 +60,11 @@ namespace TP1_ASP
    
         public override void Insert()
         {
-            InsertRecord(UserID, LoginDate, LogoutDate, IPAdress, Avatar);
+            InsertRecord(FullName, UserName, Password, Email, Avatar);
         }
         public override void Update()
         {
-            UpdateRecord(ID, UserID, LoginDate, LogoutDate, IPAdress, Avatar);
+            UpdateRecord(ID, FullName, UserName, Password, Email, Avatar);
         }
    }
 }

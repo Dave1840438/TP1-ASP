@@ -49,8 +49,8 @@ namespace SqlExpressUtilities
 
         // Liste des délégates chargés de construire contenu personnalisé pour les champs
         public List<CellContentDelegate> CellsContentDelegate = new List<CellContentDelegate>();
-        
-         // contructeur obligatoire auquel il faut fournir la chaine de connection et l'objet Page
+
+        // contructeur obligatoire auquel il faut fournir la chaine de connection et l'objet Page
         public SqlExpressWrapper(String connexionString, System.Web.UI.Page Page)
         {
             this.Page = Page;
@@ -158,7 +158,7 @@ namespace SqlExpressUtilities
             if (Valid(fieldIndex, CellsContentDelegate.Count))
                 CellsContentDelegate[fieldIndex] = ccd;
         }
-        
+
         // Extraire les noms et types des champs 
         void GetFieldsNameAndType()
         {
@@ -166,12 +166,12 @@ namespace SqlExpressUtilities
             {
                 FieldsNames.Clear();
                 FieldsTypes.Clear();
-                
+
                 for (int f = 0; f < reader.FieldCount; f++)
                 {
                     FieldsNames.Add(reader.GetName(f));
                     FieldsTypes.Add(reader.GetFieldType(f));
-                } 
+                }
             }
         }
 
@@ -223,7 +223,7 @@ namespace SqlExpressUtilities
 
             // retourner le nombre d'enregistrements générés
             return reader.RecordsAffected;
-           
+
         }
 
         // Conclure la dernière requête
@@ -231,7 +231,7 @@ namespace SqlExpressUtilities
         {
             // Fermer la connection
             if (connection.State != System.Data.ConnectionState.Closed)
-            connection.Close();
+                connection.Close();
             // Débloquer l'objet Page.Application afin que d'autres session puissent
             // accéder à leur tour à la base de données
             Page.Application.UnLock();
@@ -383,7 +383,7 @@ namespace SqlExpressUtilities
             EndQuerySQL();
 
             string sql = "INSERT INTO " + SQLTableName + "(";
-            for (int i = 1; i < FieldsValues.Length+1; i++)
+            for (int i = 1; i < FieldsValues.Length + 1; i++)
             {
                 sql += FieldsNames[i];
                 if (i < FieldsValues.Length)
@@ -436,7 +436,7 @@ namespace SqlExpressUtilities
         private Panel PN_GridView = null;
         public virtual void MakeGridView(Panel PN_GridView, String EditPage)
         {
-           
+
             // converver le panneau parent (utilisé dans certaines méthodes de cette classe)
             this.PN_GridView = PN_GridView;
             Page.Session["EditPage"] = EditPage;
@@ -473,7 +473,7 @@ namespace SqlExpressUtilities
                     }
                 }
                 Grid.Rows.Add(tr);
-               
+
                 // Construction des rangées de la GridView
                 while (Next())
                 {
@@ -512,7 +512,7 @@ namespace SqlExpressUtilities
                 }
             }
             PN_GridView.Controls.Clear();
-            if (Grid!=null)
+            if (Grid != null)
                 PN_GridView.Controls.Add(Grid);
             EndQuerySQL();
         }
@@ -569,7 +569,7 @@ namespace SqlExpressUtilities
             // rediriger la session vers la "Web Form" désignée pour l'édition
             // de l'enregistement d'id Selected_ID
             Page.Session["Selected_ID"] = ID;
-            if (Page.Session["EditPage"]!=null)
+            if (Page.Session["EditPage"] != null)
                 Page.Response.Redirect((String)Page.Session["EditPage"]);
         }
     }

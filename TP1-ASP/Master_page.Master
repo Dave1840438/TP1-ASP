@@ -24,6 +24,29 @@
             return true;
         }
     </script>
+    <style>
+        .MainPanel {
+            width: 500px;
+            height: auto;
+            background-color: gray;
+            padding: 5px;
+            margin: auto;
+        }
+
+        .Textbox {
+            margin-left: 10px;
+            float: right;
+        }
+
+        .Label {
+            float: left;
+        }
+
+        .Button {
+            float: right;
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
     <form id="MainForm" runat="server" method="post">

@@ -42,13 +42,39 @@ namespace TP1_ASP
             }
         }
 
+        protected void BTT_Annuler_Click(object sender, EventArgs e)
+        {
+            ////if (!Page.IsPostBack)
+            ////  LoadForm();
+            //String action = Request["action"];
+            //if (action == "cancel")
+            //    Response.Redirect("ListUsers.aspx");
+            //if (action == "confirm")
+            //{
+            //    AddPersonne();
+            //    Response.Redirect("ListUsers.aspx");
+            //}
+            //// if (action == "delete")
+            ////    DeleteCurrent();
+            //// if (action == "edit")
+            ////UpdateCurrent();
+
+            Response.Redirect("Login.aspx");
+        }
+
         bool HasEmptyField(Control container)
         {
             bool result = false;
 
             foreach (var control in MainPanel.Controls)
+            {
                 if (control is TextBox)
                     result |= (((TextBox)control).Text == String.Empty);
+                if (control is FileUpload)
+                    result |= (((FileUpload)control).FileName == "");
+            }
+                
+                
 
             if (result)
                 MainPanel.BackColor = System.Drawing.Color.Red;

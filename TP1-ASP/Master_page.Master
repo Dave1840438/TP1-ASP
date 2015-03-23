@@ -31,6 +31,7 @@
             background-color: gray;
             padding: 5px;
             margin: auto;
+            padding-bottom:10px;
         }
 
         .Textbox {

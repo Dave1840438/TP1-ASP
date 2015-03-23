@@ -10,5 +10,6 @@
         <br />
         <asp:Label ID="LBL_Password" runat="server" Text="Password" CssClass="Label"></asp:Label>
         <asp:TextBox ID="TBX_Password" runat="server" CssClass="Textbox"></asp:TextBox>
+        <br />
     </asp:Panel>
 </asp:Content>

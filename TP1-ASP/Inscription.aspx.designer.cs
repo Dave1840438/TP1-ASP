@@ -130,22 +130,13 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.TextBox TBX_ConfirmEmail;
         
         /// <summary>
-        /// BTT_Inscription control.
+        /// Avatar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTT_Inscription;
-        
-        /// <summary>
-        /// BTT_Annuler control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTT_Annuler;
+        protected global::System.Web.UI.WebControls.Label Avatar;
         
         /// <summary>
         /// IMG_Avatar control.
@@ -164,5 +155,23 @@ namespace TP1_ASP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FU_Avatar;
+        
+        /// <summary>
+        /// BTT_Inscription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BTT_Inscription;
+        
+        /// <summary>
+        /// BTT_Annuler control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BTT_Annuler;
     }
 }

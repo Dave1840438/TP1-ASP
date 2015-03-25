@@ -32,6 +32,7 @@
             padding: 5px;
             margin: auto;
             padding-bottom:10px;
+            display:inline-block;
         }
 
         .Textbox {
@@ -46,12 +47,19 @@
         .Button {
             float: right;
             margin-left: 5px;
+            margin-bottom:8px;
+        }
+        .PetitAvatar
+        {
+            height:64px;
         }
     </style>
 </head>
 <body>
     <form id="MainForm" runat="server" method="post">
     <asp:Label ID="Master_Page_Titre" runat="server">Lelu</asp:Label>
+    <asp:Label ID="Master_Page_Username" runat="server">Anonymous</asp:Label>
+    <asp:Image ID="Master_Page_Avatar" runat="server" ImageUrl="/Images/ADD.png" CssClass="PetitAvatar" />
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         

@@ -40,6 +40,24 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.Label Master_Page_Titre;
         
         /// <summary>
+        /// Master_Page_Username control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Master_Page_Username;
+        
+        /// <summary>
+        /// Master_Page_Avatar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Master_Page_Avatar;
+        
+        /// <summary>
         /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>

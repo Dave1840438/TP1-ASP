@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,7 +15,7 @@ namespace TP1_ASP
             var master = Master as Master_page;
             if (master != null)
             {
-                // master.setTitre("fhklasjdhfasdfhoasdfhasdfhuioasfuiofuoasdhfo;usdhfiluasdhfui");
+                master.setTitre("Inscription...");
             }
         }
 
@@ -38,8 +39,12 @@ namespace TP1_ASP
                                    TBX_Username.Text,
                                    TBX_Password.Text,
                                    TBX_Email.Text,
-                                   Avatar_Path);
+                                   avatar_ID);
             }
+
+
+            
+
         }
 
         protected void BTT_Annuler_Click(object sender, EventArgs e)
@@ -73,8 +78,17 @@ namespace TP1_ASP
                 if (control is FileUpload)
                     result |= (((FileUpload)control).FileName == "");
             }
-                
-                
+
+            if (!result)
+            {
+                SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+                Page.Application.Lock();
+
+                result |= DBUtilities.checkIfUsernameExists(connection, TBX_Username.Text);
+
+                Page.Application.UnLock(); 
+            }
+               
 
             if (result)
                 MainPanel.BackColor = System.Drawing.Color.Red;

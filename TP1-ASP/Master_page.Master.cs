@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +12,15 @@ namespace TP1_ASP
    {
       protected void Page_Load(object sender, EventArgs e)
       {
+          if (Session != null && Session["isConnected"] != null && (bool)Session["isConnected"])
+          {
+              SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+              Page.Application.Lock();
 
+              Master_Page_Avatar.ImageUrl = DBUtilities.getAvatar(connection, (String)Session["Username"]);
+
+              Page.Application.UnLock(); 
+          }
       }
 
       public void setTitre(String titre)

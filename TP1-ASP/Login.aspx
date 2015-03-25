@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master_page.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TP1_ASP.Login" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -10,6 +11,12 @@
         <br />
         <asp:Label ID="LBL_Password" runat="server" Text="Password" CssClass="Label"></asp:Label>
         <asp:TextBox ID="TBX_Password" runat="server" CssClass="Textbox"></asp:TextBox>
+        <br />
+        <asp:Button ID="BTT_Login" runat="server" CssClass="Button" Text="Connexion..." OnClick="BTT_Connect_Click" />
+        <br />
+        <asp:Button ID="BTT_Inscription" runat="server" CssClass="Button" Text="Inscription..." OnClick="BTT_Inscription_Click"/>
+        <br />
+        <asp:Button ID="BTT_ForgotPassword" runat="server" CssClass="Button" Text="Mot de passe oublié..." OnClick="BTT_ForgotPassword_Click"/>
         <br />
     </asp:Panel>
 </asp:Content>

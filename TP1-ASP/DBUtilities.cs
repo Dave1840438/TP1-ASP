@@ -50,7 +50,27 @@ namespace TP1_ASP
             }
             else
                 result = "/Images/ADD.png";
-            
+
+
+            userReader.Close();
+            connection.Close();
+
+
+            return result;
+        }
+
+        public static long getUserID(SqlConnection connection, String username)
+        {
+            long result;
+
+            SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT ID FROM USERS WHERE USERNAME = '" + username + "'");
+            sqlcmdUserCheck.Connection = connection;
+            connection.Open();
+
+            SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
+
+            userReader.Read();
+            result = userReader.GetInt64(0);
 
             userReader.Close();
             connection.Close();

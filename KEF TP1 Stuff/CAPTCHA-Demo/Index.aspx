@@ -33,10 +33,10 @@
                                     <asp:ImageButton    ID="RegenarateCaptcha" runat="server" 
                                                         ImageUrl="~/Images/RegenerateCaptcha.png" 
                                                         CausesValidation="False" 
-                                                        onclick="RegenarateCaptcha_Click" 
+                                                        onclick="RegenarateCaptcha_Click(); return false;" 
                                                         ValidationGroup="Subscribe_Validation" 
                                                         width="48"
-                                                        ToolTip="Regénérer le captcha..." />  
+                                                        ToolTip="Regénérer le captcha..."/>  
                                     </td>
                                     <td>
                                         <asp:Image ID="IMGCaptcha" imageurl="~/captcha.png" runat="server" />

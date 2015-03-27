@@ -283,6 +283,10 @@ namespace SqlExpressUtilities
         // FieldsValues
         public int UpdateRecord()
         {
+            SelectAll();
+            NextRecord();
+            EndQuerySQL();
+
             String SQL = "UPDATE " + SQLTableName + " ";
             SQL += "SET ";
             int nb_fields = FieldsNames.Count();
@@ -304,6 +308,10 @@ namespace SqlExpressUtilities
         // FieldsValues fournie en paramètre
         public int UpdateRecord(params object[] FieldsValues)
         {
+            SelectAll();
+            NextRecord();
+            EndQuerySQL();
+
             String SQL = "UPDATE " + SQLTableName + " ";
             SQL += "SET ";
             int nb_fields = FieldsValues.Length;

@@ -50,7 +50,7 @@ namespace TP1_ASP
                 String PW = reader.GetString(0);
                 if (PW == TBX_Password.Text)
                 {
-                   FormsAuthentication.RedirectFromLoginPage(TBX_Username.Text, true);
+                   FormsAuthentication.RedirectFromLoginPage(TBX_Username.Text, false);
 
                    // result = "Connection success";
                    // Session["isConnected"] = true;

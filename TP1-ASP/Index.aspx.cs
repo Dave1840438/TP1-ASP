@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace TP1_ASP
 {
@@ -11,9 +12,6 @@ namespace TP1_ASP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session != null && !((bool)Session["isConnected"]))
-                Response.Redirect("Login.aspx");
-
             var master = Master as Master_page;
             if (master != null)
                 master.setTitre("Accueil...");
@@ -36,8 +34,8 @@ namespace TP1_ASP
 
         protected void BTT_Disconnect_Click(object sender, EventArgs e)
         {
-            Session["isConnected"] = false;
-            Response.Redirect("Login.aspx");
+           FormsAuthentication.SignOut();
+           FormsAuthentication.RedirectToLoginPage();
         }
     }
 }

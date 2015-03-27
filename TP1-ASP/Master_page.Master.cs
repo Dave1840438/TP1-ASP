@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace TP1_ASP
 {
@@ -12,14 +13,14 @@ namespace TP1_ASP
    {
       protected void Page_Load(object sender, EventArgs e)
       {
-          if (Session != null && Session["isConnected"] != null && (bool)Session["isConnected"])
+          if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
           {
               SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
               Page.Application.Lock();
+              
+              Master_Page_Avatar.ImageUrl = DBUtilities.getAvatar(connection, HttpContext.Current.User.Identity.Name);
 
-              Master_Page_Avatar.ImageUrl = DBUtilities.getAvatar(connection, (String)Session["Username"]);
-
-              Page.Application.UnLock(); 
+              Page.Application.UnLock();
           }
       }
 

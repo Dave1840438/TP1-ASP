@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -49,10 +50,12 @@ namespace TP1_ASP
                 String PW = reader.GetString(0);
                 if (PW == TBX_Password.Text)
                 {
-                    result = "Connection success";
-                    Session["isConnected"] = true;
-                    Session["Username"] = TBX_Username.Text;
-                    Response.Redirect("Index.aspx");
+                   FormsAuthentication.RedirectFromLoginPage(TBX_Username.Text, true);
+
+                   // result = "Connection success";
+                   // Session["isConnected"] = true;
+                   // Session["Username"] = TBX_Username.Text;
+                   // Response.Redirect("Index.aspx");
                 }
             }
             else

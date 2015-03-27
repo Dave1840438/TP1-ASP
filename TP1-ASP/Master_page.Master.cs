@@ -13,7 +13,7 @@ namespace TP1_ASP
    {
       protected void Page_Load(object sender, EventArgs e)
       {
-          if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+         if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
           {
               SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
               Page.Application.Lock();
@@ -21,6 +21,7 @@ namespace TP1_ASP
               Master_Page_Avatar.ImageUrl = DBUtilities.getAvatar(connection, HttpContext.Current.User.Identity.Name);
 
               Page.Application.UnLock();
+              Master_Page_Username.Text = HttpContext.Current.User.Identity.Name;
           }
       }
 

@@ -26,28 +26,25 @@
     </script>
     <style>
         .MainPanel {
-            width: 500px;
+            width: 300px;
             height: auto;
             background-color: gray;
             padding: 5px;
             margin: auto;
             padding-bottom:10px;
-            display:inline-block;
         }
 
         .Textbox {
             margin-left: 10px;
-            float: right;
+            display:inline-block;
         }
 
         .Label {
-            float: left;
+            display:inline-block;
         }
 
         .Button {
-            float: right;
             margin-left: 5px;
-            margin-bottom:8px;
         }
         .PetitAvatar
         {

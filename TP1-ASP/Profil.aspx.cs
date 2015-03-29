@@ -16,12 +16,34 @@ namespace TP1_ASP
             var master = Master as Master_page;
             if (master != null)
                 master.setTitre("Gestion de votre profil...");
+            if (!Page.IsPostBack)
+                Initialize();
         }
 
         protected void Initialize()
         {
-            
+            SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+            Page.Application.Lock();
 
+
+            SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT * FROM USERS WHERE USERNAME = '" + HttpContext.Current.User.Identity.Name + "'");
+            sqlcmdUserCheck.Connection = connection;
+            connection.Open();
+
+            SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
+
+            userReader.Read();
+
+            TBX_NomComplet.Text = userReader.GetString(1);
+            TBX_Username.Text = userReader.GetString(2);
+            TBX_Password.Text = TBX_ConfirmPassword.Text = userReader.GetString(3);
+            TBX_Email.Text = TBX_ConfirmEmail.Text = userReader.GetString(4);
+            IMG_Avatar.ImageUrl = @"~\Avatars\" + userReader.GetString(5) + ".png";
+
+            userReader.Close();
+            connection.Close();
+
+            Page.Application.UnLock();
         }
 
         protected void BTT_Modifier_Click(object sender, EventArgs e)
@@ -29,6 +51,10 @@ namespace TP1_ASP
             long userID;
             if (Page.IsValid)
             {
+                SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+                Page.Application.Lock();
+
+
                 // Création d'une nouvelle instance de Users (reliée à la table MainDB.Users)
                 UserTable users = new UserTable((String)Application["MaindDB"], this);
 
@@ -40,10 +66,9 @@ namespace TP1_ASP
                     Avatar_Path = Server.MapPath(@"~\Avatars\") + avatar_ID + ".png";
                     FU_Avatar.SaveAs(Avatar_Path);
                 }
+                else
+                    avatar_ID = DBUtilities.getAvatarID(connection, HttpContext.Current.User.Identity.Name);
 
-
-                SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
-                Page.Application.Lock();
 
                 userID = DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name);
 
@@ -103,7 +128,6 @@ namespace TP1_ASP
             }
         }
 
-
         #region Validators
 
         protected void CV_NameIsEmpty(object source, ServerValidateEventArgs args)
@@ -130,10 +154,6 @@ namespace TP1_ASP
         protected void CV_EmailsMatch(object source, ServerValidateEventArgs args)
         {
             args.IsValid = TBX_Email.Text == TBX_ConfirmEmail.Text;
-        }
-        protected void CV_AvatarIsChosen(object source, ServerValidateEventArgs args)
-        {
-            args.IsValid = FU_Avatar.FileName != "";
         }
 
         #endregion Validators

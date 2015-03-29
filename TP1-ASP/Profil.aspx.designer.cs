@@ -211,15 +211,6 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.FileUpload FU_Avatar;
         
         /// <summary>
-        /// CVal_Avatar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CVal_Avatar;
-        
-        /// <summary>
         /// BTT_Modifer control.
         /// </summary>
         /// <remarks>

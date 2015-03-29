@@ -499,6 +499,8 @@ namespace SqlExpressUtilities
                             }
                             else
                             {
+
+
                                 Type type = FieldsTypes[fieldIndex];
                                 if (SQLHelper.IsNumericType(type))
                                 {

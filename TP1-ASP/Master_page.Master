@@ -28,7 +28,7 @@
         .MainPanel {
             width: 300px;
             height: auto;
-            background-color: gray;
+            background-color: hotpink;
             padding: 5px;
             margin: auto;
             padding-bottom:10px;

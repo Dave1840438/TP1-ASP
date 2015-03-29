@@ -52,8 +52,6 @@
                     <asp:Image ID="IMG_Avatar" runat="server" CssClass="thumbnail" ImageUrl="~/Images/ADD.png" Height="120px" Width="133px" /></td>
                 <td class="auto-style1">
                     <asp:FileUpload ID="FU_Avatar" runat="server" onchange="PreLoadImage();"  />
-                    <asp:CustomValidator ID="CVal_Avatar" runat="server" ErrorMessage="L'avatar n'a pas été choisi!" Text="!"
-                        ControlToValidate="FU_Avatar" OnServerValidate="CV_AvatarIsChosen" ValidateEmptyText="True" />
                 </td>
             </tr>
         </table>

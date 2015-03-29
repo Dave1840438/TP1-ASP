@@ -59,6 +59,27 @@ namespace TP1_ASP
             return result;
         }
 
+        public static String getAvatarID(SqlConnection connection, String username)
+        {
+            String result;
+
+            SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT AVATAR FROM USERS WHERE USERNAME = '" + username + "'");
+            sqlcmdUserCheck.Connection = connection;
+            connection.Open();
+
+            SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
+
+            userReader.Read();
+
+            result = userReader.GetString(0);
+
+            userReader.Close();
+            connection.Close();
+
+
+            return result;
+        }
+
         public static long getUserID(SqlConnection connection, String username)
         {
             long result;

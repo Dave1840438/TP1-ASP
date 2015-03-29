@@ -31,9 +31,11 @@ namespace TP1_ASP
 
         protected void BTT_Inscription_Click(object sender, EventArgs e)
         {
+            string img = IMG_Avatar.ImageUrl;
+            string lel = FU_Avatar.FileName;
+
             if (Page.IsValid)
             {
-                // Création d'une nouvelle instance de Users (reliée à la table MainDB.Users)
                 UserTable users = new UserTable((String)Application["MaindDB"], this);
 
                 String Avatar_Path = "";

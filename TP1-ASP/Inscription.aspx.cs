@@ -36,7 +36,7 @@ namespace TP1_ASP
 
             if (Page.IsValid)
             {
-                UserTable users = new UserTable((String)Application["MaindDB"], this);
+                UserTable users = new UserTable((String)Application["MainDB"], this);
 
                 String Avatar_Path = "";
                 String avatar_ID = "";
@@ -91,7 +91,7 @@ namespace TP1_ASP
 
             if (!result)
             {
-                SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+                SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
                 Page.Application.Lock();
 
                 result |= DBUtilities.checkIfUsernameExists(connection, TBX_Username.Text);

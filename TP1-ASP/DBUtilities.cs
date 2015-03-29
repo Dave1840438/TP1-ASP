@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -98,6 +99,61 @@ namespace TP1_ASP
 
 
             return result;
+        }
+
+        public static void createTable(ContentPlaceHolder CPH_content, SqlDataAdapter sda)
+        {
+            DataSet customersSet = new DataSet();
+            DataTable customersTable = null;
+            sda.Fill(customersSet);
+            customersTable = customersSet.Tables[0];
+            
+
+            TableRow tableRow = null;
+
+            Table tableElem = new Table();
+            tableElem.ID = "DynamicTable";
+            CPH_content.Controls.Add(tableElem);
+
+            TableRow tableHeader = new TableRow();
+            tableHeader.TableSection = TableRowSection.TableHeader;
+            tableElem.Controls.Add(tableHeader);
+
+            foreach (DataColumn col in customersTable.Columns)
+            {
+                TableCell cell = new TableCell();
+                cell.Text = col.ColumnName;
+                tableHeader.Controls.Add(cell);
+            }
+
+            // Create table rows.
+
+            foreach (DataRow dr in customersTable.Rows)
+            {
+                tableRow = new TableRow();
+                tableRow.TableSection = TableRowSection.TableBody;
+                tableElem.Controls.Add(tableRow);
+                foreach (DataColumn col in customersTable.Columns)
+                {
+                    Object dbCell = dr[col];
+                    TableCell tableCell = new TableCell();
+                    if (!(dbCell is DBNull))
+                    {
+                        if (col.ColumnName != "Email")
+                            tableCell.Text = dbCell.ToString();
+                        else
+                        {
+
+                            HyperLink link = new HyperLink();
+                            link.Text = dbCell.ToString();
+                            link.NavigateUrl = "mailto:" + dbCell.ToString();
+
+                            tableCell.Controls.Add(link);
+                        }
+                    }
+                    tableRow.Controls.Add(tableCell);
+                }
+            }
         }
     }
 }

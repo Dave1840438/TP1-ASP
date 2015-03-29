@@ -22,7 +22,7 @@ namespace TP1_ASP
 
         protected void Initialize()
         {
-            SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+            SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
             Page.Application.Lock();
 
 
@@ -51,12 +51,12 @@ namespace TP1_ASP
             long userID;
             if (Page.IsValid)
             {
-                SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+                SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
                 Page.Application.Lock();
 
 
                 // Création d'une nouvelle instance de Users (reliée à la table MainDB.Users)
-                UserTable users = new UserTable((String)Application["MaindDB"], this);
+                UserTable users = new UserTable((String)Application["MainDB"], this);
 
                 String Avatar_Path = "";
                 String avatar_ID = "";
@@ -102,7 +102,7 @@ namespace TP1_ASP
 
             if (!result)
             {
-                SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+                SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
                 Page.Application.Lock();
 
                 result |= DBUtilities.checkIfUsernameExists(connection, TBX_Username.Text);

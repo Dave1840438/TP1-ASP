@@ -24,7 +24,7 @@ namespace TP1_ASP
             var mp = Master as Master_page;
             String result = "...?";
 
-            SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+            SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
             SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT USERNAME FROM USERS WHERE USERNAME = '" + TBX_Username.Text + "'");
             sqlcmdUserCheck.Connection = connection;
             Page.Application.Lock();

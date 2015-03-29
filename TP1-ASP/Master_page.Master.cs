@@ -15,7 +15,7 @@ namespace TP1_ASP
       {
          if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
           {
-              SqlConnection connection = new SqlConnection((String)Application["MaindDB"]);
+              SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
               Page.Application.Lock();
               
               Master_Page_Avatar.ImageUrl = DBUtilities.getAvatar(connection, HttpContext.Current.User.Identity.Name);

@@ -2,5 +2,5 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" ClientIDMode="Static">
-    <asp:Panel ID="PN_OnlineUsers" runat="server"></asp:Panel>
+    <asp:Table ID="PTB_OnlineUsers" runat="server"></asp:Table>
 </asp:Content>

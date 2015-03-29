@@ -18,15 +18,17 @@ namespace TP1_ASP
             var master = Master as Master_page;
             if (master != null)
                 master.setTitre("Usagers en ligne...");
-            CreateTable();
+
+            Page.Application.Lock();
+
+            SqlDataAdapter sda = new SqlDataAdapter("SELECT * FROM USERS", (String)Application["MainDB"]);
+            ContentPlaceHolder CPH_content = (ContentPlaceHolder)Master.FindControl("ContentPlaceHolder1");
+            DBUtilities.createTable(CPH_content, sda);
+           
+            Page.Application.UnLock();
         }
 
 
-        protected void CreateTable()
-        {
-            UserTable users = new UserTable((String)Application["MaindDB"], this);
-            users.SelectAll();
-            users.MakeGridView(PN_OnlineUsers, null);
-        }
+       
     }
 }

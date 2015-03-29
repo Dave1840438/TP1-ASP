@@ -13,12 +13,12 @@ namespace TP1_ASP {
     public partial class Room {
         
         /// <summary>
-        /// PN_OnlineUsers control.
+        /// PTB_OnlineUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PN_OnlineUsers;
+        protected global::System.Web.UI.WebControls.Table PTB_OnlineUsers;
     }
 }

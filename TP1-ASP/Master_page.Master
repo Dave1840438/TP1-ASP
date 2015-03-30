@@ -58,10 +58,19 @@
     &nbsp;<asp:Label ID="Master_Page_Username" runat="server">Anonymous</asp:Label>
     <asp:Image ID="Master_Page_Avatar" runat="server" ImageUrl="/Images/ADD.png" CssClass="PetitAvatar" />
         <asp:ScriptManager runat="server"></asp:ScriptManager>
-    <asp:Timer runat="server" ID="SessionTimeout" Interval="1000" OnTick="Check_Ticket_Validity"></asp:Timer>
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+    <asp:Timer runat="server" ID="SessionTimeout" Interval="1000" OnTick="SessionTimeout_Tick"></asp:Timer>
+    
+        <asp:UpdatePanel ID="UpdatePanel_MasterPage" runat="server">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="SessionTimeout" EventName="Tick"/>
+            </Triggers>
+            <ContentTemplate>
+                <asp:Label ID="LBL_SessionTimeLeft" runat="server">Temps restant à implémenter</asp:Label>
+            </ContentTemplate>
+        </asp:UpdatePanel>
         
+        <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </div>
     </form>

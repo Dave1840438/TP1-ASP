@@ -14,7 +14,7 @@ namespace TP1_ASP
             string DB_Path = Server.MapPath(@"~\App_Data\MainDB.mdf");
             // Toutes les Pages (WebForm) pourront accéder à la propriété Application["MainDB"]
             Application["MainDB"] = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + DB_Path + "';Integrated Security=True";
+            Application["SessionTimeout"] = 3.0;
         }
-        
     }
 }

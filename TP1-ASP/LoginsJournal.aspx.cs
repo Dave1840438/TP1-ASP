@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,6 +15,15 @@ namespace TP1_ASP
             var master = Master as Master_page;
             if (master != null)
                 master.setTitre("Journal des visites...");
+
+            Page.Application.Lock();
+
+            SqlDataAdapter sda = new SqlDataAdapter("SELECT * FROM LOGINS", (String)Application["MainDB"]);
+            ContentPlaceHolder CPH_content = (ContentPlaceHolder)Master.FindControl("ContentPlaceHolder1");
+            DBUtilities.createTable(CPH_content, sda);
+
+            Page.Application.UnLock();
+
         }
     }
 }

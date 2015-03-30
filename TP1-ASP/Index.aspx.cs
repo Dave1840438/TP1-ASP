@@ -34,8 +34,9 @@ namespace TP1_ASP
 
         protected void BTT_Disconnect_Click(object sender, EventArgs e)
         {
-           FormsAuthentication.SignOut();
-           FormsAuthentication.RedirectToLoginPage();
+           var master = Master as Master_page;
+           if (master != null)
+              master.signOut();
         }
     }
 }

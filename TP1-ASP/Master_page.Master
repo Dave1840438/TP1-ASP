@@ -57,6 +57,8 @@
     <asp:Label ID="Master_Page_Titre" runat="server">Lelu</asp:Label>
     &nbsp;<asp:Label ID="Master_Page_Username" runat="server">Anonymous</asp:Label>
     <asp:Image ID="Master_Page_Avatar" runat="server" ImageUrl="/Images/ADD.png" CssClass="PetitAvatar" />
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
+    <asp:Timer runat="server" ID="SessionTimeout" Interval="1000" OnTick="Check_Ticket_Validity"></asp:Timer>
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         

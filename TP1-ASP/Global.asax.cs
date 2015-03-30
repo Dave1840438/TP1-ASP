@@ -15,5 +15,6 @@ namespace TP1_ASP
             // Toutes les Pages (WebForm) pourront accéder à la propriété Application["MainDB"]
             Application["MainDB"] = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + DB_Path + "';Integrated Security=True";
         }
+        
     }
 }

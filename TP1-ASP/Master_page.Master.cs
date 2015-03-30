@@ -29,5 +29,11 @@ namespace TP1_ASP
       {
          Master_Page_Titre.Text = titre;
       }
+
+      protected void Check_Ticket_Validity(object sender, EventArgs e)
+      {
+        //  if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && (Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
+         //     Response.Redirect("Login.aspx");
+      }
    }
 }

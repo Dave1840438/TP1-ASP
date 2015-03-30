@@ -46,6 +46,10 @@
         {
             height:64px;
         }
+        .MicroAvatar
+        {
+            height:15px;
+        }
         .Button{
             width:160px;
             margin-left: 5px;

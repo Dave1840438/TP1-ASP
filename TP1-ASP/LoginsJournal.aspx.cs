@@ -18,7 +18,11 @@ namespace TP1_ASP
 
             Page.Application.Lock();
 
-            SqlDataAdapter sda = new SqlDataAdapter("SELECT * FROM LOGINS", (String)Application["MainDB"]);
+            const String sqlCommand = "SELECT USERID AS ID, CONVERT(VARCHAR(30), LOGINDATE, 0) AS Début, CONVERT(VARCHAR(11), (LOGOUTDATE - LOGINDATE), 8) AS Durée, IPADDRESS AS IP,"
+               +" USERNAME AS 'Nom d''usager', FULLNAME AS 'Nom au complet', EMAIL as Email, AVATAR AS Avatar "
+               + "FROM LOGINS INNER JOIN USERS ON LOGINS.USERID = USERS.ID";
+
+            SqlDataAdapter sda = new SqlDataAdapter(sqlCommand, (String)Application["MainDB"]);
             ContentPlaceHolder CPH_content = (ContentPlaceHolder)Master.FindControl("ContentPlaceHolder1");
             DBUtilities.createTable(CPH_content, sda);
 

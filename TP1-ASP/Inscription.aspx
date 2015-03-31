@@ -62,7 +62,6 @@
         </table>
        <br />
 
-        <asp:ScriptManager ID="ScriptManager1" runat="server" />
         <div>
             <table style="border:2px solid black">
                 <tr>

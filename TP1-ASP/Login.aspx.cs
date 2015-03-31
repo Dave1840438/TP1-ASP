@@ -48,6 +48,7 @@ namespace TP1_ASP
 
             reader.Read();
             String PW = reader.GetString(0);
+            connection.Close();
             if (PW == TBX_Password.Text)
             {
 
@@ -59,14 +60,12 @@ namespace TP1_ASP
                }
 
 
-               HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, false);
+               HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, true);
                authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
                Response.Cookies.Add(authCookie);
+               Session["isAuthenticated"] = true;
                Session["SessionStartTime"] = DateTime.Now;
                Response.Redirect("Index.aspx");
-
-
-
 
                // result = "Connection success";
                // Session["Username"] = TBX_Username.Text;
@@ -76,7 +75,6 @@ namespace TP1_ASP
          else
             result = "Wrong username";
 
-         connection.Close();
          Page.Application.UnLock();
 
          mp.setTitre(result);

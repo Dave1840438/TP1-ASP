@@ -13,6 +13,8 @@ namespace TP1_ASP
    {
       protected void Page_Load(object sender, EventArgs e)
       {
+         
+
          if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
          {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
@@ -39,9 +41,18 @@ namespace TP1_ASP
 
       protected void SessionTimeout_Tick(object sender, EventArgs e)
       {
+         if (Session["isAuthenticated"] != null && !(bool)Session["isAuthenticated"])
+            signOut();
+
+         if (Session["isAuthenticated"] != null && (bool)Session["isAuthenticated"] &&
+            (Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
+            Response.Redirect("Index.aspx");
+
          if (HttpContext.Current.Request.Cookies[".ASPXFORMSAUTH"] == null &&
             !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
+         {
             signOut();
+         }
 
          LBL_SessionTimeLeft.Text = "Lel";
       }
@@ -61,7 +72,6 @@ namespace TP1_ASP
       {
          LoginTable loginTable = new LoginTable((String)Application["MainDB"], Page);
 
-
          SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
          Page.Application.Lock();
 
@@ -75,8 +85,8 @@ namespace TP1_ASP
             ((List<long>)Application["OnlineUsers"]).Remove(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name));
          }
 
+         Session["isAuthenticated"] = false;
          FormsAuthentication.SignOut();
-         Session.Abandon();
          Response.Redirect("Login.aspx");
       }
    }

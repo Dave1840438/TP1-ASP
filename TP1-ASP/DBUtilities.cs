@@ -103,7 +103,7 @@ namespace TP1_ASP
       }
 
 
-      public static void createTable(Control content, SqlDataAdapter sda)
+      public static void createTable(Control content, SqlDataAdapter sda, List<long> OnlineUsers = null)
       {
          DataSet customersSet = new DataSet();
          DataTable customersTable = null;
@@ -168,7 +168,7 @@ namespace TP1_ASP
                   {
                      Image imgOnline = new Image();
                      imgOnline.CssClass = "MicroAvatar";
-                     if (((List<long>)Application["OnlineUsers"]).Contains(long.Parse(col.ToString())))
+                     if (OnlineUsers.Contains(long.Parse(dbCell.ToString())))
                         imgOnline.ImageUrl = "/Images/OnLine.png";
                      else
                         imgOnline.ImageUrl = "/Images/OffLine.png";

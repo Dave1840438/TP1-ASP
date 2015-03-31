@@ -70,6 +70,10 @@ namespace TP1_ASP
          Page.Application.UnLock();
          Master_Page_Username.Text = HttpContext.Current.User.Identity.Name;
 
+         if (((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name)))
+         {
+            ((List<long>)Application["OnlineUsers"]).Remove(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name));
+         }
 
          FormsAuthentication.SignOut();
          Session.Abandon();

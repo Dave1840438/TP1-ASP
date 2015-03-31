@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -101,7 +102,8 @@ namespace TP1_ASP
          return result;
       }
 
-      public static void createTable(ContentPlaceHolder CPH_content, SqlDataAdapter sda)
+
+      public static void createTable(Control content, SqlDataAdapter sda)
       {
          DataSet customersSet = new DataSet();
          DataTable customersTable = null;
@@ -113,9 +115,14 @@ namespace TP1_ASP
 
          Table tableElem = new Table();
          tableElem.ID = "DynamicTable";
-         CPH_content.Controls.Add(tableElem);
+
+         if (content as UpdatePanel == null)
+            content.Controls.Add(tableElem);
+         else
+            content.TemplateControl.Controls.Add(tableElem);
 
          TableRow tableHeader = new TableRow();
+         tableHeader.ID = "DynamicTableHeader";
          tableHeader.TableSection = TableRowSection.TableHeader;
          tableElem.Controls.Add(tableHeader);
 
@@ -130,6 +137,8 @@ namespace TP1_ASP
 
          foreach (DataRow dr in customersTable.Rows)
          {
+
+
             tableRow = new TableRow();
             tableRow.TableSection = TableRowSection.TableBody;
             tableElem.Controls.Add(tableRow);
@@ -154,6 +163,16 @@ namespace TP1_ASP
                      imgAvatar.ImageUrl = @"~\Avatars\" + dbCell.ToString() + ".png";
 
                      tableCell.Controls.Add(imgAvatar);
+                  }
+                  else if (col.ColumnName == "En ligne")
+                  {
+                     Image imgOnline = new Image();
+                     imgOnline.CssClass = "MicroAvatar";
+                     if (((List<long>)Application["OnlineUsers"]).Contains(long.Parse(col.ToString())))
+                        imgOnline.ImageUrl = "/Images/OnLine.png";
+                     else
+                        imgOnline.ImageUrl = "/Images/OffLine.png";
+                     tableCell.Controls.Add(imgOnline);
                   }
                   else
                      tableCell.Text = dbCell.ToString();

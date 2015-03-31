@@ -50,11 +50,22 @@ namespace TP1_ASP
             String PW = reader.GetString(0);
             if (PW == TBX_Password.Text)
             {
+
+
+
+               if (!((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, TBX_Username.Text)))
+               {
+                  ((List<long>)Application["OnlineUsers"]).Add(DBUtilities.getUserID(connection, TBX_Username.Text));
+               }
+
+
                HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, false);
                authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
                Response.Cookies.Add(authCookie);
                Session["SessionStartTime"] = DateTime.Now;
                Response.Redirect("Index.aspx");
+
+
 
 
                // result = "Connection success";

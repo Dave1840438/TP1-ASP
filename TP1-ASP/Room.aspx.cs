@@ -21,19 +21,20 @@ namespace TP1_ASP
             if (master != null)
                 master.setTitre("Usagers en ligne...");
 
-            Page.Application.Lock();
 
-            SqlDataAdapter sda = new SqlDataAdapter("SELECT ID AS 'En ligne', USERNAME AS 'Nom d''usager', FULLNAME AS 'Nom au complet', Email, Avatar FROM USERS", (String)Application["MainDB"]);
-            ContentPlaceHolder CPH_content = (ContentPlaceHolder)Master.FindControl("ContentPlaceHolder1");
-            DBUtilities.createTable(CPH_content, sda, (List<long>)Application["OnlineUsers"]);
-           
-            Page.Application.UnLock();
+              Page.Application.Lock();
+
+              SqlDataAdapter sda = new SqlDataAdapter("SELECT ID AS 'En ligne', USERNAME AS 'Nom d''usager', FULLNAME AS 'Nom au complet', Email, Avatar FROM USERS", (String)Application["MainDB"]);
+              ContentPlaceHolder CPH_content = (ContentPlaceHolder)Master.FindControl("ContentPlaceHolder1");
+              DBUtilities.createTable(CPH_content, sda, (List<long>)Application["OnlineUsers"]);
+
+              Page.Application.UnLock();
         }
 
 
         protected void RefreshUsers_Tick(object sender, EventArgs e)
         {
-
+          
         }
     }
 }

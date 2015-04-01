@@ -1,0 +1,4 @@
+RegEx Email (Inscription et Gestion de profil)
+Il ne faut pas se logger deux fois
+Le session timeout quand la tab est fermé ne fonctionne pas
+La liste des usagers en ligne ne rafraichit pas

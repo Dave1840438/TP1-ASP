@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" ClientIDMode="Static">
+
     <hr />
 
     <asp:Timer runat="server" ID="RefreshUsers" Interval="3000" OnTick="RefreshUsers_Tick"></asp:Timer>
@@ -16,9 +17,10 @@
             <asp:AsyncPostBackTrigger ControlID="RefreshUsers" EventName="Tick" />
         </Triggers>
         <ContentTemplate>
-            <asp:table id="TB_OnlineUsers" runat="server">
-                <asp:TableHeaderRow><asp:TableCell>En ligne</asp:TableCell></asp:TableHeaderRow>
-            </asp:table>
+            <asp:Table ID="TB_OnlineUsers" runat="server">
+                <asp:TableHeaderRow>
+                    <asp:TableCell>En ligne</asp:TableCell></asp:TableHeaderRow>
+            </asp:Table>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

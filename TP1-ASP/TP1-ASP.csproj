@@ -77,6 +77,7 @@
     <Content Include="Global.asax" />
     <Content Include="Profil.aspx" />
     <Content Include="Room.aspx" />
+    <Content Include="ThreadsManager.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +130,13 @@
       <DependentUpon>Room.aspx</DependentUpon>
     </Compile>
     <Compile Include="SqlExpressUtilities.cs" />
+    <Compile Include="ThreadsManager.aspx.cs">
+      <DependentUpon>ThreadsManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ThreadsManager.aspx.designer.cs">
+      <DependentUpon>ThreadsManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserTable.cs" />
     <Compile Include="LoginsJournal.aspx.cs">
       <DependentUpon>LoginsJournal.aspx</DependentUpon>

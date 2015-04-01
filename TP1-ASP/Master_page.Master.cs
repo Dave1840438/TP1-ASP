@@ -11,9 +11,10 @@ namespace TP1_ASP
 {
    public partial class Master_page : System.Web.UI.MasterPage
    {
+
+
       protected void Page_Load(object sender, EventArgs e)
       {
-         
 
          if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
          {
@@ -28,6 +29,7 @@ namespace TP1_ASP
 
          if (!Page.IsPostBack)
          {
+            Session["Timeout"] = DateTime.Now;
             HttpCookie authCookie = FormsAuthentication.GetAuthCookie(HttpContext.Current.User.Identity.Name, false);
             authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
             Response.Cookies.Add(authCookie);
@@ -41,12 +43,9 @@ namespace TP1_ASP
 
       protected void SessionTimeout_Tick(object sender, EventArgs e)
       {
-         if (Session["isAuthenticated"] != null && !(bool)Session["isAuthenticated"])
+         if (((DateTime)Session["Timeout"]).AddMinutes(Session.Timeout) < DateTime.Now &&
+            !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
             signOut();
-
-         if (Session["isAuthenticated"] != null && (bool)Session["isAuthenticated"] &&
-            (Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
-            Response.Redirect("Index.aspx");
 
          if (HttpContext.Current.Request.Cookies[".ASPXFORMSAUTH"] == null &&
             !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))

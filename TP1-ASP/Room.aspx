@@ -17,9 +17,8 @@
             <asp:AsyncPostBackTrigger ControlID="RefreshUsers" EventName="Tick" />
         </Triggers>
         <ContentTemplate>
-            <asp:Table ID="TB_OnlineUsers" runat="server">
-                <asp:TableHeaderRow>
-                    <asp:TableCell>En ligne</asp:TableCell></asp:TableHeaderRow>
+            <asp:Table ID="MaFuckingTableDeCalissDeCriss" runat="server">
+
             </asp:Table>
         </ContentTemplate>
     </asp:UpdatePanel>

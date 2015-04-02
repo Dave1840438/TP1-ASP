@@ -10,177 +10,248 @@ using System.Web.UI.WebControls;
 
 namespace TP1_ASP
 {
-   public static class DBUtilities
-   {
+    public static class DBUtilities
+    {
 
-      public static bool checkIfUsernameExists(SqlConnection connection, String username)
-      {
-         bool result;
+        public static bool checkIfUsernameExists(SqlConnection connection, String username)
+        {
+            bool result;
 
-         SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT USERNAME FROM USERS WHERE USERNAME = '" + username + "'");
-         sqlcmdUserCheck.Connection = connection;
-         connection.Open();
+            SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT USERNAME FROM USERS WHERE USERNAME = '" + username + "'");
+            sqlcmdUserCheck.Connection = connection;
+            connection.Open();
 
-         SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
+            SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
 
-         if (userReader.Read())
-            result = userReader.GetString(0) != "";
-         else
-            result = false;
+            if (userReader.Read())
+                result = userReader.GetString(0) != "";
+            else
+                result = false;
 
-         userReader.Close();
-         connection.Close();
+            userReader.Close();
+            connection.Close();
 
-         return result;
-      }
+            return result;
+        }
 
-      public static String getAvatar(SqlConnection connection, String username)
-      {
-         String result;
+        public static String getAvatar(SqlConnection connection, String username)
+        {
+            String result;
 
-         SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT AVATAR FROM USERS WHERE USERNAME = '" + username + "'");
-         sqlcmdUserCheck.Connection = connection;
-         connection.Open();
+            SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT AVATAR FROM USERS WHERE USERNAME = '" + username + "'");
+            sqlcmdUserCheck.Connection = connection;
+            connection.Open();
 
-         SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
+            SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
 
-         if (userReader.Read())
-         {
-            result = @"~\Avatars\";
-            result += userReader.GetString(0);
-            result += ".png";
-         }
-         else
-            result = "/Images/ADD.png";
-
-
-         userReader.Close();
-         connection.Close();
+            if (userReader.Read())
+            {
+                result = @"~\Avatars\";
+                result += userReader.GetString(0);
+                result += ".png";
+            }
+            else
+                result = "/Images/ADD.png";
 
 
-         return result;
-      }
-
-      public static String getAvatarID(SqlConnection connection, String username)
-      {
-         String result;
-
-         SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT AVATAR FROM USERS WHERE USERNAME = '" + username + "'");
-         sqlcmdUserCheck.Connection = connection;
-         connection.Open();
-
-         SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
-
-         userReader.Read();
-
-         result = userReader.GetString(0);
-
-         userReader.Close();
-         connection.Close();
+            userReader.Close();
+            connection.Close();
 
 
-         return result;
-      }
+            return result;
+        }
 
-      public static long getUserID(SqlConnection connection, String username)
-      {
-         long result;
+        public static String getAvatarID(SqlConnection connection, String username)
+        {
+            String result;
 
-         SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT ID FROM USERS WHERE USERNAME = '" + username + "'");
-         sqlcmdUserCheck.Connection = connection;
-         connection.Open();
+            SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT AVATAR FROM USERS WHERE USERNAME = '" + username + "'");
+            sqlcmdUserCheck.Connection = connection;
+            connection.Open();
 
-         SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
+            SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
 
-         userReader.Read();
-         result = userReader.GetInt64(0);
+            userReader.Read();
 
-         userReader.Close();
-         connection.Close();
+            result = userReader.GetString(0);
 
-
-         return result;
-      }
+            userReader.Close();
+            connection.Close();
 
 
-      public static Table createTable(Control content, SqlDataAdapter sda, List<long> OnlineUsers = null)
-      {
-         DataSet customersSet = new DataSet();
-         DataTable customersTable = null;
-         sda.Fill(customersSet);
-         customersTable = customersSet.Tables[0];
+            return result;
+        }
+
+        public static long getUserID(SqlConnection connection, String username)
+        {
+            long result;
+
+            SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT ID FROM USERS WHERE USERNAME = '" + username + "'");
+            sqlcmdUserCheck.Connection = connection;
+            connection.Open();
+
+            SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
+
+            userReader.Read();
+            result = userReader.GetInt64(0);
+
+            userReader.Close();
+            connection.Close();
 
 
-         TableRow tableRow = null;
-
-         Table tableElem = new Table();
-         tableElem.ID = "DynamicTable";
-
-         if (content as UpdatePanel == null)
-            content.Controls.Add(tableElem);
-         else
-            content.TemplateControl.Controls.Add(tableElem);
-
-         TableRow tableHeader = new TableRow();
-         tableHeader.ID = "DynamicTableHeader";
-         tableHeader.TableSection = TableRowSection.TableHeader;
-         tableElem.Controls.Add(tableHeader);
-
-         foreach (DataColumn col in customersTable.Columns)
-         {
-            TableCell cell = new TableCell();
-            cell.Text = col.ColumnName;
-            tableHeader.Controls.Add(cell);
-         }
-
-         // Create table rows.
-
-         foreach (DataRow dr in customersTable.Rows)
-         {
+            return result;
+        }
 
 
-            tableRow = new TableRow();
-            tableRow.TableSection = TableRowSection.TableBody;
-            tableElem.Controls.Add(tableRow);
+        public static Table createTable(Control content, SqlDataAdapter sda, List<long> OnlineUsers = null)
+        {
+            DataSet customersSet = new DataSet();
+            DataTable customersTable = null;
+            sda.Fill(customersSet);
+            customersTable = customersSet.Tables[0];
+
+
+            TableRow tableRow = null;
+
+            Table tableElem = new Table();
+            tableElem.ID = "DynamicTable";
+
+            if (content as UpdatePanel == null)
+                content.Controls.Add(tableElem);
+            else
+                content.TemplateControl.Controls.Add(tableElem);
+
+            TableRow tableHeader = new TableRow();
+            tableHeader.ID = "DynamicTableHeader";
+            tableHeader.TableSection = TableRowSection.TableHeader;
+            tableElem.Controls.Add(tableHeader);
+
             foreach (DataColumn col in customersTable.Columns)
             {
-               Object dbCell = dr[col];
-               TableCell tableCell = new TableCell();
-               if (!(dbCell is DBNull))
-               {
-                  if (col.ColumnName == "Email")
-                  {
-                     HyperLink link = new HyperLink();
-                     link.Text = dbCell.ToString();
-                     link.NavigateUrl = "mailto:" + dbCell.ToString();
-
-                     tableCell.Controls.Add(link);
-                  }
-                  else if (col.ColumnName == "Avatar")
-                  {
-                     Image imgAvatar = new Image();
-                     imgAvatar.CssClass = "MicroAvatar";
-                     imgAvatar.ImageUrl = @"~\Avatars\" + dbCell.ToString() + ".png";
-
-                     tableCell.Controls.Add(imgAvatar);
-                  }
-                  else if (col.ColumnName == "En ligne")
-                  {
-                     Image imgOnline = new Image();
-                     imgOnline.CssClass = "MicroAvatar";
-                     if (OnlineUsers.Contains(long.Parse(dbCell.ToString())))
-                        imgOnline.ImageUrl = "/Images/OnLine.png";
-                     else
-                        imgOnline.ImageUrl = "/Images/OffLine.png";
-                     tableCell.Controls.Add(imgOnline);
-                  }
-                  else
-                     tableCell.Text = dbCell.ToString();
-               }
-               tableRow.Controls.Add(tableCell);
+                TableCell cell = new TableCell();
+                cell.Text = col.ColumnName;
+                tableHeader.Controls.Add(cell);
             }
-         }
-         return tableElem;
-      }
-   }
+
+            // Create table rows.
+
+            foreach (DataRow dr in customersTable.Rows)
+            {
+
+
+                tableRow = new TableRow();
+                tableRow.TableSection = TableRowSection.TableBody;
+                tableElem.Controls.Add(tableRow);
+                foreach (DataColumn col in customersTable.Columns)
+                {
+                    Object dbCell = dr[col];
+                    TableCell tableCell = new TableCell();
+                    if (!(dbCell is DBNull))
+                    {
+                        if (col.ColumnName == "Email")
+                        {
+                            HyperLink link = new HyperLink();
+                            link.Text = dbCell.ToString();
+                            link.NavigateUrl = "mailto:" + dbCell.ToString();
+
+                            tableCell.Controls.Add(link);
+                        }
+                        else if (col.ColumnName == "Avatar")
+                        {
+                            Image imgAvatar = new Image();
+                            imgAvatar.CssClass = "MicroAvatar";
+                            imgAvatar.ImageUrl = @"~\Avatars\" + dbCell.ToString() + ".png";
+
+                            tableCell.Controls.Add(imgAvatar);
+                        }
+                        else if (col.ColumnName == "En ligne")
+                        {
+                            Image imgOnline = new Image();
+                            imgOnline.CssClass = "MicroAvatar";
+                            if (OnlineUsers.Contains(long.Parse(dbCell.ToString())))
+                                imgOnline.ImageUrl = "/Images/OnLine.png";
+                            else
+                                imgOnline.ImageUrl = "/Images/OffLine.png";
+                            tableCell.Controls.Add(imgOnline);
+                        }
+                        else
+                            tableCell.Text = dbCell.ToString();
+                    }
+                    tableRow.Controls.Add(tableCell);
+                }
+            }
+            return tableElem;
+        }
+
+        public static void AppendToTable(Table container, SqlDataAdapter sda, List<long> OnlineUsers = null)
+        {
+            DataSet customersSet = new DataSet();
+            DataTable customersTable = null;
+            sda.Fill(customersSet);
+            customersTable = customersSet.Tables[0];
+
+
+            TableRow tableRow = null;
+
+            TableRow tableHeader = new TableRow();
+            tableHeader.ID = "DynamicTableHeader";
+            tableHeader.TableSection = TableRowSection.TableHeader;
+            container.Controls.Add(tableHeader);
+
+            foreach (DataColumn col in customersTable.Columns)
+            {
+                TableCell cell = new TableCell();
+                cell.Text = col.ColumnName;
+                tableHeader.Controls.Add(cell);
+            }
+
+            // Create table rows.
+
+            foreach (DataRow dr in customersTable.Rows)
+            {
+
+
+                tableRow = new TableRow();
+                tableRow.TableSection = TableRowSection.TableBody;
+                container.Controls.Add(tableRow);
+                foreach (DataColumn col in customersTable.Columns)
+                {
+                    Object dbCell = dr[col];
+                    TableCell tableCell = new TableCell();
+                    if (!(dbCell is DBNull))
+                    {
+                        if (col.ColumnName == "Email")
+                        {
+                            HyperLink link = new HyperLink();
+                            link.Text = dbCell.ToString();
+                            link.NavigateUrl = "mailto:" + dbCell.ToString();
+
+                            tableCell.Controls.Add(link);
+                        }
+                        else if (col.ColumnName == "Avatar")
+                        {
+                            Image imgAvatar = new Image();
+                            imgAvatar.CssClass = "MicroAvatar";
+                            imgAvatar.ImageUrl = @"~\Avatars\" + dbCell.ToString() + ".png";
+
+                            tableCell.Controls.Add(imgAvatar);
+                        }
+                        else if (col.ColumnName == "En ligne")
+                        {
+                            Image imgOnline = new Image();
+                            imgOnline.CssClass = "MicroAvatar";
+                            if (OnlineUsers.Contains(long.Parse(dbCell.ToString())))
+                                imgOnline.ImageUrl = "/Images/OnLine.png";
+                            else
+                                imgOnline.ImageUrl = "/Images/OffLine.png";
+                            tableCell.Controls.Add(imgOnline);
+                        }
+                        else
+                            tableCell.Text = dbCell.ToString();
+                    }
+                    tableRow.Controls.Add(tableCell);
+                }
+            }
+        }
+    }
 }

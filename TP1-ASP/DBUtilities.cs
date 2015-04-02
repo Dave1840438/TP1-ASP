@@ -103,7 +103,7 @@ namespace TP1_ASP
       }
 
 
-      public static void createTable(Control content, SqlDataAdapter sda, List<long> OnlineUsers = null)
+      public static Table createTable(Control content, SqlDataAdapter sda, List<long> OnlineUsers = null)
       {
          DataSet customersSet = new DataSet();
          DataTable customersTable = null;
@@ -180,6 +180,7 @@ namespace TP1_ASP
                tableRow.Controls.Add(tableCell);
             }
          }
+         return tableElem;
       }
    }
 }

@@ -31,6 +31,24 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.Button BTT_Log;
         
         /// <summary>
+        /// BTT_ManageThreads control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BTT_ManageThreads;
+        
+        /// <summary>
+        /// BTT_ChatRoom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BTT_ChatRoom;
+        
+        /// <summary>
         /// BTT_OnlineUsers control.
         /// </summary>
         /// <remarks>

@@ -38,5 +38,16 @@ namespace TP1_ASP
            if (master != null)
               master.signOut();
         }
+
+        protected void BTT_ChatRoom_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ChatRoom.aspx");
+        }
+
+        protected void BTT_ManageThreads_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ThreadsManager.aspx");
+
+        }
     }
 }

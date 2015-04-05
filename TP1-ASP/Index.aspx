@@ -11,6 +11,12 @@
             <td><asp:Button ID="BTT_Log" runat="server" Text="Journal des visites..." OnClick="BTT_Log_Click" CssClass="Button"/></td>
         </tr>
         <tr>
+            <td><asp:Button ID="BTT_ManageThreads" runat="server" Text="Gérer mes discussions..." OnClick="BTT_ManageThreads_Click" CssClass="Button"/></td>
+        </tr>
+        <tr>
+            <td><asp:Button ID="BTT_ChatRoom" runat="server" Text="Salle de discussion..." OnClick="BTT_ChatRoom_Click" CssClass="Button"/></td>
+        </tr>
+        <tr>
             <td><asp:Button ID="BTT_OnlineUsers" runat="server" Text="Usagers en ligne..." OnClick="BTT_OnlineUsers_Click" CssClass="Button"/></td>
         </tr>
         <tr>

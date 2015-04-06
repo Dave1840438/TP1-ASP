@@ -22,6 +22,15 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.ListView LV_Discussions;
         
         /// <summary>
+        /// DGV_Discussions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataGrid DGV_Discussions;
+        
+        /// <summary>
         /// TBX_TitreDiscussion control.
         /// </summary>
         /// <remarks>
@@ -31,13 +40,40 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.TextBox TBX_TitreDiscussion;
         
         /// <summary>
-        /// PN_Usagers control.
+        /// CVal_TitreDiscussion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PN_Usagers;
+        protected global::System.Web.UI.WebControls.CustomValidator CVal_TitreDiscussion;
+        
+        /// <summary>
+        /// CVal_DiscussionExiste control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CVal_DiscussionExiste;
+        
+        /// <summary>
+        /// CBOX_AllUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CBOX_AllUsers;
+        
+        /// <summary>
+        /// TB_AllExistingUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TB_AllExistingUsers;
         
         /// <summary>
         /// BTN_New control.

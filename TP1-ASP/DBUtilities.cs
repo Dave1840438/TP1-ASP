@@ -183,7 +183,7 @@ namespace TP1_ASP
             return tableElem;
         }
 
-        public static void AppendToTable(Table container, SqlDataAdapter sda, List<long> OnlineUsers = null)
+        public static void AppendToTable(Table container, SqlDataAdapter sda, bool wantHeader = false, List<long> OnlineUsers = null)
         {
             DataSet customersSet = new DataSet();
             DataTable customersTable = null;
@@ -193,17 +193,21 @@ namespace TP1_ASP
 
             TableRow tableRow = null;
 
-            TableRow tableHeader = new TableRow();
-            tableHeader.ID = "DynamicTableHeader";
-            tableHeader.TableSection = TableRowSection.TableHeader;
-            container.Controls.Add(tableHeader);
-
-            foreach (DataColumn col in customersTable.Columns)
+            if (wantHeader)
             {
-                TableCell cell = new TableCell();
-                cell.Text = col.ColumnName;
-                tableHeader.Controls.Add(cell);
+                TableRow tableHeader = new TableRow();
+                tableHeader.ID = "DynamicTableHeader";
+                tableHeader.TableSection = TableRowSection.TableHeader;
+                container.Controls.Add(tableHeader);
+
+                foreach (DataColumn col in customersTable.Columns)
+                {
+                    TableCell cell = new TableCell();
+                    cell.Text = col.ColumnName;
+                    tableHeader.Controls.Add(cell);
+                }
             }
+
 
             // Create table rows.
 
@@ -235,6 +239,13 @@ namespace TP1_ASP
                             imgAvatar.ImageUrl = @"~\Avatars\" + dbCell.ToString() + ".png";
 
                             tableCell.Controls.Add(imgAvatar);
+                        }
+                        else if (col.ColumnName == "CheckBox")
+                        {
+                            CheckBox ChkBox = new CheckBox();
+                            ChkBox.ID = "CHKBOX_" + dbCell.ToString();
+
+                            tableCell.Controls.Add(ChkBox);
                         }
                         else if (col.ColumnName == "En ligne")
                         {

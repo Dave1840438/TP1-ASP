@@ -102,6 +102,26 @@ namespace TP1_ASP
             return result;
         }
 
+        public static long getThreadID(SqlConnection connection, String title)
+        {
+            long result;
+
+            SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT ID FROM THREADS WHERE TITLE = '" + title + "'");
+            sqlcmdUserCheck.Connection = connection;
+            connection.Open();
+
+            SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
+
+            userReader.Read();
+            result = userReader.GetInt64(0);
+
+            userReader.Close();
+            connection.Close();
+
+
+            return result;
+        }
+
 
         public static Table createTable(Control content, SqlDataAdapter sda, List<long> OnlineUsers = null)
         {

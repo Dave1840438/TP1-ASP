@@ -277,6 +277,20 @@ namespace TP1_ASP
                                 imgOnline.ImageUrl = "/Images/OffLine.png";
                             tableCell.Controls.Add(imgOnline);
                         }
+                        else if (col.ColumnName == "Delete button")
+                        {
+                           ImageButton deleteBtn = new ImageButton();
+                           deleteBtn.ImageUrl = "/Images/Delete.png";
+                           deleteBtn.Click += ChatRoom.BTN_Delete_Click;
+                           tableCell.Controls.Add(deleteBtn);
+                        }
+                        else if (col.ColumnName == "Edit button")
+                        {
+                           ImageButton editBtn = new ImageButton();
+                           editBtn.ImageUrl = "/Images/Edit.png";
+                           editBtn.Click += ChatRoom.BTN_Modify_Click;
+                           tableCell.Controls.Add(editBtn);
+                        }
                         else
                             tableCell.Text = dbCell.ToString();
                     }

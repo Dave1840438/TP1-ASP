@@ -174,6 +174,16 @@ namespace TP1_ASP
 
         #region Validators
 
+        protected void UserNameExists_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+           SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
+           Page.Application.Lock();
+
+           args.IsValid = !DBUtilities.checkIfUsernameExists(connection, TBX_Username.Text);
+
+           Page.Application.UnLock(); 
+        }
+
         protected void CV_Captcha_ServerValidate(object source, ServerValidateEventArgs args)
         {
             String lel =  (string)Session["captcha"];
@@ -211,5 +221,7 @@ namespace TP1_ASP
         }
 
         #endregion Validators
+
+        
     }
 }

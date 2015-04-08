@@ -22,6 +22,15 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.Panel MainPanel;
         
         /// <summary>
+        /// Contrôle UserNameExists.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator UserNameExists;
+        
+        /// <summary>
         /// Contrôle FullName.
         /// </summary>
         /// <remarks>
@@ -155,6 +164,15 @@ namespace TP1_ASP {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator CVal_EmptyEmail;
+        
+        /// <summary>
+        /// Contrôle RegExEmail.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExEmail;
         
         /// <summary>
         /// Contrôle Email_Confirm.

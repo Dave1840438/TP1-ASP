@@ -1,3 +1,4 @@
-RegEx Email (Inscription et Gestion de profil) (Le RegEx est déjà fait)
 Il ne faut pas se logger deux fois
 Le session timeout quand la tab est fermée ne fonctionne pas
+Pleins de petite shits
+Mot de passe oublié

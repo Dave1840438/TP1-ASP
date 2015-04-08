@@ -85,6 +85,7 @@ namespace TP1_ASP
          }
 
          Session["isAuthenticated"] = false;
+         Session.Abandon();
          FormsAuthentication.SignOut();
          Response.Redirect("Login.aspx");
       }

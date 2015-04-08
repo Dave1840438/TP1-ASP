@@ -28,9 +28,10 @@ namespace TP1_ASP
             SqlDataAdapter sda = new SqlDataAdapter("SELECT ID AS 'En ligne', USERNAME AS 'Nom d''usager', Avatar FROM USERS WHERE ID IN (SELECT USERS.ID FROM USERS INNER JOIN THREADS_ACCESS ON USERS.ID = THREADS_ACCESS.USER_ID WHERE THREAD_ID = " + DBUtilities.getThreadID(connection, (String)Session["Thread_Name"]) + ")", (String)Application["MainDB"]);
             DBUtilities.AppendToTable(TB_UserList, sda, true, (List<long>)Application["OnlineUsers"]);
 
-            String sqlCommand = "SELECT USERS.AVATAR AS Avatar, USERS.FULLNAME, CONVERT(VARCHAR(30), THREADS_MESSAGES.DATE_OF_CREATION, 0), THREADS_MESSAGES.MESSAGE FROM THREADS_MESSAGES INNER JOIN USERS ON THREADS_MESSAGES.USER_ID = USERS.ID WHERE THREADS_MESSAGES.THREAD_ID = " + DBUtilities.getThreadID(connection, (String)Session["Thread_Name"]);
+            String sqlCommand = "SELECT USERS.AVATAR AS Avatar, USERS.FULLNAME, CONVERT(VARCHAR(30), THREADS_MESSAGES.DATE_OF_CREATION, 0), THREADS_MESSAGES.ID AS 'Delete button', THREADS_MESSAGES.ID AS 'Edit button', THREADS_MESSAGES.MESSAGE FROM THREADS_MESSAGES INNER JOIN USERS ON THREADS_MESSAGES.USER_ID = USERS.ID WHERE THREADS_MESSAGES.THREAD_ID = " + DBUtilities.getThreadID(connection, (String)Session["Thread_Name"]);
             SqlDataAdapter sdaMessages = new SqlDataAdapter(sqlCommand, (String)Application["MainDB"]);
             DBUtilities.AppendToTable(TB_Chat, sdaMessages);
+            addDelegate(TB_Chat);
          }
 
 
@@ -67,6 +68,25 @@ namespace TP1_ASP
 
       }
 
+      protected void addDelegate(Control control)
+      {
+         foreach (Control c in control.Controls)
+         {
+            if (c.ID != null)
+            {
+               if (c.ID.Contains("BTN_DeleteMessage"))
+                  ((ImageButton)c).Click += BTN_Delete_Click;
+               if (c.ID.Contains("BTN_EditMessage"))
+                  ((ImageButton)c).Click += BTN_Modify_Click;
+            }
+
+            if (c.Controls.Count > 0)
+               addDelegate(c);
+         }
+
+      }
+
+
       protected void BTN_Return_Click(object sender, EventArgs e)
       {
          Response.Redirect("Index.aspx");
@@ -77,12 +97,42 @@ namespace TP1_ASP
          Session["Thread_Name"] = ((Button)sender).ID.Remove(0, 11);
       }
 
-      public static void BTN_Modify_Click(object sender, EventArgs e)
+      public void BTN_Modify_Click(object sender, EventArgs e)
       {
+         String id = ((ImageButton)sender).ID.Remove(0, 16);
+
+         Page.Application.Lock();
+         SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
+
+         SqlCommand sqlEdit = new SqlCommand();
+         sqlEdit.Connection = connection;
+         sqlEdit.CommandText = "UPDATE THREADS_MESSAGES SET MESSAGE = '" + TBX_ChatInput.Text + "' WHERE ID = " + id;
+         connection.Open();
+
+         sqlEdit.ExecuteNonQuery();
+
+         connection.Close();
+
+         Page.Application.UnLock();
       }
 
-      public static void BTN_Delete_Click(object sender, EventArgs e)
+      public void BTN_Delete_Click(object sender, EventArgs e)
       {
+         String id = ((ImageButton)sender).ID.Remove(0, 18);
+
+         Page.Application.Lock();
+         SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
+
+         SqlCommand sqlEdit = new SqlCommand();
+         sqlEdit.Connection = connection;
+         sqlEdit.CommandText = "DELETE FROM THREADS_MESSAGES WHERE ID = " + id;
+         connection.Open();
+
+         sqlEdit.ExecuteNonQuery();
+
+         connection.Close();
+
+         Page.Application.UnLock();
       }
 
       protected void BTN_Send_Click(object sender, EventArgs e)

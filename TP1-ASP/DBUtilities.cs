@@ -281,14 +281,14 @@ namespace TP1_ASP
                         {
                            ImageButton deleteBtn = new ImageButton();
                            deleteBtn.ImageUrl = "/Images/Delete.png";
-                           deleteBtn.Click += ChatRoom.BTN_Delete_Click;
+                           deleteBtn.ID = "BTN_DeleteMessage_" + dbCell.ToString();
                            tableCell.Controls.Add(deleteBtn);
                         }
                         else if (col.ColumnName == "Edit button")
                         {
                            ImageButton editBtn = new ImageButton();
                            editBtn.ImageUrl = "/Images/Edit.png";
-                           editBtn.Click += ChatRoom.BTN_Modify_Click;
+                           editBtn.ID = "BTN_EditMessage_" + dbCell.ToString();
                            tableCell.Controls.Add(editBtn);
                         }
                         else

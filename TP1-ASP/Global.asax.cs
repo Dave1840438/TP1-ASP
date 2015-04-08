@@ -16,7 +16,7 @@ namespace TP1_ASP
          string DB_Path = Server.MapPath(@"~\App_Data\MainDB.mdf");
          // Toutes les Pages (WebForm) pourront accéder à la propriété Application["MainDB"]
          Application["MainDB"] = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + DB_Path + "';Integrated Security=True";
-         Application["SessionTimeout"] = 4.0;
+         Application["SessionTimeout"] = 5.0;
 
          Application["OnlineUsers"] = new List<long>();
       }
@@ -51,8 +51,6 @@ namespace TP1_ASP
             FormsAuthentication.SignOut();
             Response.Redirect("Login.aspx");
          }
-
-
       }
       public string GetUserIP()
       {

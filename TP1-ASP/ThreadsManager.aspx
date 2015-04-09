@@ -42,7 +42,13 @@
         <tr>
             <td>
                 <asp:CheckBox ID="CBOX_AllUsers" runat="server" Text="Tous les usagers" OnCheckedChanged="CBOX_AllUsers_CheckedChanged" />
-                <asp:Table ID="TB_AllExistingUsers" runat="server"></asp:Table>
+                
+                <asp:UpdatePanel ID="UPN_UsersCheckboxes" runat="server">
+                    <Triggers></Triggers>
+                    <ContentTemplate>
+                    <asp:Table ID="TB_AllExistingUsers" runat="server"></asp:Table>
+                    </ContentTemplate>
+                    </asp:UpdatePanel>
             </td>
         </tr>
         <tr>

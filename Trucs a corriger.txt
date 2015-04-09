@@ -1,6 +1,5 @@
-Il ne faut pas se logger deux fois
 Le session timeout quand la tab est fermée ne fonctionne pas
-Pleins de petite shits
+Il ne faut pas se logger deux fois
 Mot de passe oublié
 Logout.aspx
 Admin rigths

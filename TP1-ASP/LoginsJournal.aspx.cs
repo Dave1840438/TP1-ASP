@@ -26,10 +26,15 @@ namespace TP1_ASP
 
             SqlDataAdapter sda = new SqlDataAdapter(sqlCommand, (String)Application["MainDB"]);
             ContentPlaceHolder CPH_content = (ContentPlaceHolder)Master.FindControl("ContentPlaceHolder1");
-            DBUtilities.createTable(CPH_content, sda);
+            DBUtilities.AppendToTable(TB_Log, sda, true);
 
             Page.Application.UnLock();
 
+        }
+
+        protected void BTN_Return_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Index.aspx");
         }
     }
 }

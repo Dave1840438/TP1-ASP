@@ -3,4 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <hr />
+    <asp:Table ID="TB_Log" runat="server"></asp:Table>
+    <asp:Button id="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" />
 </asp:Content>

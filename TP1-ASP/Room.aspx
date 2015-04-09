@@ -17,9 +17,10 @@
             <asp:AsyncPostBackTrigger ControlID="RefreshUsers" EventName="Tick" />
         </Triggers>
         <ContentTemplate>
-            <asp:Table ID="MaFuckingTableDeCalissDeCriss" runat="server">
+            <asp:Table ID="TB_OnlineUsers" runat="server">
 
             </asp:Table>
+            <asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" />
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

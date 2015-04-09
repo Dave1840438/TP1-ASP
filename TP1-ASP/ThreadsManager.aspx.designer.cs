@@ -67,6 +67,15 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.CheckBox CBOX_AllUsers;
         
         /// <summary>
+        /// UPN_UsersCheckboxes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_UsersCheckboxes;
+        
+        /// <summary>
         /// TB_AllExistingUsers control.
         /// </summary>
         /// <remarks>

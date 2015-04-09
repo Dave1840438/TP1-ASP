@@ -31,12 +31,21 @@ namespace TP1_ASP {
         protected global::System.Web.UI.UpdatePanel UPN_OnlineUsers;
         
         /// <summary>
-        /// MaFuckingTableDeCalissDeCriss control.
+        /// TB_OnlineUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table MaFuckingTableDeCalissDeCriss;
+        protected global::System.Web.UI.WebControls.Table TB_OnlineUsers;
+        
+        /// <summary>
+        /// BTN_Return control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BTN_Return;
     }
 }

@@ -108,7 +108,7 @@ namespace TP1_ASP
                     {
                         var chkBox = tc.Controls[0] as CheckBox;
                         if (chkBox != null)
-                            chkBox.Visible = !CBOX_AllUsers.Checked;
+                            chkBox.Enabled = !CBOX_AllUsers.Checked;
                     }
                 }
             }
@@ -123,15 +123,7 @@ namespace TP1_ASP
 
             if (CBOX_AllUsers.Checked)
             {
-                SqlCommand sqlGetAllUserID = new SqlCommand("SELECT ID FROM USERS");
-                sqlGetAllUserID.Connection = connection;
-
-                SqlDataReader reader = sqlGetAllUserID.ExecuteReader();
-
-                while (reader.Read())
-                    usersToAdd.Add(reader.GetInt64(0));
-
-                reader.Close();
+                    usersToAdd.Add(0);
             }
             else
             {

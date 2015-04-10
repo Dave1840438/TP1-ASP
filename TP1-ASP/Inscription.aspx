@@ -24,17 +24,18 @@
     <hr />
 
     <asp:Panel ID="MainPanel" runat="server" CssClass="MainPanel" Width="435px">
-        <asp:CustomValidator ID="UserNameExists" runat="server" ErrorMessage="Le nom d'usager existe déjà!" Text="!"
-                        ControlToValidate="TBX_Username" OnServerValidate="UserNameExists_ServerValidate" ValidateEmptyText="true" />
+        <asp:CustomValidator ID="UserNameExists" runat="server" ErrorMessage="Le nom d'usager existe déjà!" Display="None"
+            ControlToValidate="TBX_Username" OnServerValidate="UserNameExists_ServerValidate" ValidateEmptyText="true" />
         <table style="border: 2px solid black">
             <tr>
                 <td>
                     <asp:Label ID="FullName" runat="server" Text="Nom Complet:" CssClass="Label"></asp:Label></td>
                 <td>
                     <asp:TextBox ID="TBX_NomComplet" runat="server" CssClass="Textbox"></asp:TextBox></td>
+
                 <td class="auto-style3">
-                    <asp:CustomValidator ID="CVal_Name" runat="server" ErrorMessage="Nom complet ne peut être vide!" Text="!"
-                        ControlToValidate="TBX_UserName" OnServerValidate="CV_UsernameIsEmpty" ValidateEmptyText="true" /></td>
+                    <asp:CustomValidator ID="CV_FullNameIsNotEmpty" runat="server" ErrorMessage="Le nom complet ne peut pas être vide!" Text="!"
+                        ControlToValidate="TBX_Username" OnServerValidate="CV_FullNameIsNotEmpty_ServerValidate" ValidateEmptyText="true" /></td>
             </tr>
             <tr>
                 <td>
@@ -71,7 +72,7 @@
                 <td class="auto-style3">
                     <asp:CustomValidator ID="CVal_EmptyEmail" runat="server" ErrorMessage="L'email ne peut pas être vide!" Text="!"
                         ControlToValidate="TBX_Email" OnServerValidate="CV_EmailIsEmpty" ValidateEmptyText="True" />
-                    <asp:RegularExpressionValidator  ErrorMessage="L'adresse de courriel est syntaxiquement invalide!" display="None" ID="RegExEmail" runat="server" ControlToValidate="TBX_Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" />
+                    <asp:RegularExpressionValidator ErrorMessage="L'adresse de courriel est syntaxiquement invalide!" Display="None" ID="RegExEmail" runat="server" ControlToValidate="TBX_Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" />
                 </td>
             </tr>
             <tr>

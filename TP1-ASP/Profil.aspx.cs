@@ -156,6 +156,11 @@ namespace TP1_ASP
             args.IsValid = TBX_Email.Text == TBX_ConfirmEmail.Text;
         }
 
+        protected void CV_FullNameIsNotEmpty_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = TBX_NomComplet.Text != "";
+        }
+
         #endregion Validators
     }
 }

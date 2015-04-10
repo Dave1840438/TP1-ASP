@@ -25,7 +25,7 @@ namespace TP1_ASP
 
             if (Session["Thread_Name"] != null && (String)Session["Thread_Name"] != "")
             {
-                SqlDataAdapter sda = new SqlDataAdapter("SELECT ID AS 'En ligne', USERNAME AS 'Nom d''usager', Avatar FROM USERS WHERE ID IN (SELECT USERS.ID FROM USERS INNER JOIN THREADS_ACCESS ON USERS.ID = THREADS_ACCESS.USER_ID WHERE THREAD_ID = " + DBUtilities.getThreadID(connection, (String)Session["Thread_Name"]) + ")", (String)Application["MainDB"]);
+                SqlDataAdapter sda = new SqlDataAdapter("SELECT ID AS 'En ligne', USERNAME AS 'Nom d''usager', Avatar FROM USERS WHERE ID IN (SELECT USERS.ID FROM USERS INNER JOIN THREADS_ACCESS ON USERS.ID = THREADS_ACCESS.USER_ID WHERE THREAD_ID = " + DBUtilities.getThreadID(connection, (String)Session["Thread_Name"]) + ")" + " OR (SELECT ACCESS_TO_ALL FROM THREADS WHERE ID = " + DBUtilities.getThreadID(connection, (String)Session["Thread_Name"]) + ") = 1", (String)Application["MainDB"]);
                 DBUtilities.AppendToTable(TB_UserList, sda, true, (List<long>)Application["OnlineUsers"]);
 
                 String sqlCommand = "SELECT USERS.AVATAR AS Avatar, USERS.FULLNAME, CONVERT(VARCHAR(30), THREADS_MESSAGES.DATE_OF_CREATION, 0), THREADS_MESSAGES.ID AS 'Delete button', THREADS_MESSAGES.ID AS 'Edit button', THREADS_MESSAGES.MESSAGE FROM THREADS_MESSAGES INNER JOIN USERS ON THREADS_MESSAGES.USER_ID = USERS.ID WHERE THREADS_MESSAGES.THREAD_ID = " + DBUtilities.getThreadID(connection, (String)Session["Thread_Name"]);
@@ -36,7 +36,7 @@ namespace TP1_ASP
 
 
             SqlCommand sqlFetchThreads = new SqlCommand();
-            sqlFetchThreads.CommandText = "SELECT DISTINCT(THREADS.TITLE) FROM THREADS LEFT JOIN THREADS_ACCESS ON THREADS.ID = THREADS_ACCESS.THREAD_ID WHERE ACCESS_TO_ALL = 1 OR USER_ID = " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name);
+            sqlFetchThreads.CommandText = "SELECT DISTINCT(THREADS.TITLE) FROM THREADS LEFT JOIN THREADS_ACCESS ON THREADS.ID = THREADS_ACCESS.THREAD_ID WHERE + '" + HttpContext.Current.User.Identity.Name + "' = 'admin' OR ACCESS_TO_ALL = 1 OR USER_ID = " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name);
             sqlFetchThreads.Connection = connection;
 
 
@@ -93,17 +93,12 @@ namespace TP1_ASP
 
             foreach (Control c in control.Controls)
             {
-
-
-
-
-
                 if (c.ID != null)
                 {
                     if (c.ID.Contains("BTN_DeleteMessage"))
                     {
                         long id = long.Parse(c.ID.Remove(0, 18));
-                        if (messagesID.Contains(id))
+                        if (messagesID.Contains(id) || HttpContext.Current.User.Identity.Name == "admin")
                             ((ImageButton)c).Click += BTN_Delete_Click;
                         else
                             control.Controls.Remove(c);

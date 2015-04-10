@@ -1,5 +1,45 @@
-Le session timeout quand la tab est fermée ne fonctionne pas
-Il ne faut pas se logger deux fois
+Note: Y MANQUE DU CSS, BORDEL PAT!!
+
+Inscription.aspx: ALRIGHT!
+Profil.aspx: ALRIGHT!
+Room.aspx: ALRIGHT!
+LoginsJournal: ALRIGHT!
+
+
+
+Login.aspx:
 Mot de passe oublié
+Liste noire
+Il ne faut pas se logger deux fois
+Custom validator si le nom d'usager n'existe pas / mauvais mot de passe
+Trois essais avant de bloquer
+
 Logout.aspx
-Admin rigths
+Au complet, lel
+
+ChatRoom.aspx:
+Mécanique de modifier à modifier (lel)
+Touche enter pour envoyer les messages
+Le message ne doit pas être vide
+Coordonner les mises à jours (UpdatePanel Conditional)
+Ordre des messages
+
+Threads_Manager.aspx
+Les convos ne s'override pas (Redirection sans changements)
+Mécanique de modifier à modifier (lel)
+Le titre ne doit pas être vide
+La liste view est dégeu
+Le créateur est automatiquement un invité
+Il faut au moins un invité
+
+
+Misc:
+Le session timeout quand la tab est fermée ne fonctionne pas
+Nom complet dans la master page
+Countdown dans la master page
+
+Admin rigths:
+Modifier supprimer tous les threads?
+
+
+YEAH LET'S DO THIS!

@@ -20,10 +20,9 @@
                 <td>
                     <asp:Label ID="FullName" runat="server" Text="Nom Complet:" CssClass="Label"></asp:Label></td>
                 <td class="auto-style2">
-                    <asp:TextBox ID="TBX_NomComplet" runat="server" CssClass="Textbox"></asp:TextBox></td>
-                <td>
-                    <asp:CustomValidator ID="CVal_Name" runat="server" ErrorMessage="Nom complet ne peut être vide!" Text="!"
-                        ControlToValidate="TBX_UserName" OnServerValidate="CV_UsernameIsEmpty" ValidateEmptyText="true" /></td>
+                    <asp:TextBox ID="TBX_NomComplet" runat="server" CssClass="Textbox"></asp:TextBox>
+                    <asp:CustomValidator ID="CV_FullNameIsNotEmpty" runat="server" ErrorMessage="Le nom complet ne peut pas être vide!" Text="!"
+                        ControlToValidate="TBX_Username" OnServerValidate="CV_FullNameIsNotEmpty_ServerValidate" ValidateEmptyText="true" /></td>
             </tr>
             <tr>
                 <td>

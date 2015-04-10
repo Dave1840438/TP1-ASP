@@ -220,8 +220,11 @@ namespace TP1_ASP
             args.IsValid = FU_Avatar.FileName != "";
         }
 
-        #endregion Validators
+        protected void CV_FullNameIsNotEmpty_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = TBX_Username.Text != "";
+        }
 
-        
+        #endregion Validators
     }
 }

@@ -42,14 +42,14 @@ namespace TP1_ASP
         }
 
 
-
-
         protected void BTN_New_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
             Page.Application.Lock();
 
-            SqlCommand sqlcmdInsertThread = new SqlCommand("INSERT INTO THREADS VALUES(" + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name) + ", '" + TBX_TitreDiscussion.Text + "', '" + DateTime.Now.ToString() + "')");
+            int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
+
+            SqlCommand sqlcmdInsertThread = new SqlCommand("INSERT INTO THREADS VALUES(" + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name) + ", '" + TBX_TitreDiscussion.Text + "', '" + DateTime.Now.ToString() + "', " + accessToAll +")");
             sqlcmdInsertThread.Connection = connection;
             connection.Open();
 
@@ -66,7 +66,9 @@ namespace TP1_ASP
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
             Page.Application.Lock();
 
-            SqlCommand sqlcmdUpdateThread = new SqlCommand("UPDATE THREADS SET TITLE = '" + TBX_TitreDiscussion.Text + "' WHERE TITLE = '" + (DGV_Discussions.SelectedItem.Cells[1]).Text + "'");
+            int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
+
+            SqlCommand sqlcmdUpdateThread = new SqlCommand("UPDATE THREADS SET TITLE = '" + TBX_TitreDiscussion.Text + "', ACCESS_TO_ALL = " + accessToAll + " WHERE TITLE = '" + (DGV_Discussions.SelectedItem.Cells[1]).Text + "'");
             sqlcmdUpdateThread.Connection = connection;
             connection.Open();
 
@@ -87,7 +89,7 @@ namespace TP1_ASP
 
             connection.Open();
 
-            ModifyRightsToThread();
+            ModifyRightsToThread(true);
             sqlcmdDeleteThread.ExecuteNonQuery();
             connection.Close();
             Page.Application.UnLock();
@@ -116,36 +118,9 @@ namespace TP1_ASP
 
         protected void ModifyRightsToThread(bool deleting = false)
         {
-            List<long> usersToAdd = new List<long>();
 
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
             connection.Open();
-
-            if (CBOX_AllUsers.Checked)
-            {
-                    usersToAdd.Add(0);
-            }
-            else
-            {
-                foreach (TableRow tr in TB_AllExistingUsers.Rows)
-                {
-                    foreach (TableCell tc in tr.Cells)
-                    {
-                        if (tc.Controls.Count > 0)
-                        {
-                            var chkBox = tc.Controls[0] as CheckBox;
-                            if (chkBox != null)
-                            {
-                                if (chkBox.Checked)
-                                {
-                                    String userID = chkBox.ID.Remove(0, 7);
-                                    usersToAdd.Add(long.Parse(userID));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
 
             SqlCommand getThreadID = new SqlCommand("SELECT ID FROM THREADS WHERE TITLE = '" + TBX_TitreDiscussion.Text + "'");
             getThreadID.Connection = connection;
@@ -158,14 +133,45 @@ namespace TP1_ASP
             deleteAllPermissionsToThread.Connection = connection;
             deleteAllPermissionsToThread.ExecuteNonQuery();
 
-            SqlCommand sqlInsert = new SqlCommand();
-            sqlInsert.Connection = connection;
-            if (!deleting)
+            if (!deleting && !CBOX_AllUsers.Checked)
             {
-                foreach (long id in usersToAdd)
+                List<long> usersToAdd = new List<long>();
+
+                if (CBOX_AllUsers.Checked)
                 {
-                    sqlInsert.CommandText = "INSERT INTO THREADS_ACCESS VALUES(" + threadID.ToString() + ", " + id.ToString() + ")";
-                    sqlInsert.ExecuteNonQuery();
+                    usersToAdd.Add(0);
+                }
+                else
+                {
+                    foreach (TableRow tr in TB_AllExistingUsers.Rows)
+                    {
+                        foreach (TableCell tc in tr.Cells)
+                        {
+                            if (tc.Controls.Count > 0)
+                            {
+                                var chkBox = tc.Controls[0] as CheckBox;
+                                if (chkBox != null)
+                                {
+                                    if (chkBox.Checked)
+                                    {
+                                        String userID = chkBox.ID.Remove(0, 7);
+                                        usersToAdd.Add(long.Parse(userID));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                SqlCommand sqlInsert = new SqlCommand();
+                sqlInsert.Connection = connection;
+                if (!deleting)
+                {
+                    foreach (long id in usersToAdd)
+                    {
+                        sqlInsert.CommandText = "INSERT INTO THREADS_ACCESS VALUES(" + threadID.ToString() + ", " + id.ToString() + ")";
+                        sqlInsert.ExecuteNonQuery();
+                    }
                 }
             }
             connection.Close();

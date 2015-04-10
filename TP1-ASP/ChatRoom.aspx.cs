@@ -36,7 +36,7 @@ namespace TP1_ASP
 
 
             SqlCommand sqlFetchThreads = new SqlCommand();
-            sqlFetchThreads.CommandText = "SELECT THREADS.TITLE FROM THREADS INNER JOIN THREADS_ACCESS ON THREADS.ID = THREADS_ACCESS.THREAD_ID WHERE USER_ID = 0 OR UERS_ID = " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name);
+            sqlFetchThreads.CommandText = "SELECT DISTINCT(THREADS.TITLE) FROM THREADS LEFT JOIN THREADS_ACCESS ON THREADS.ID = THREADS_ACCESS.THREAD_ID WHERE ACCESS_TO_ALL = 1 OR USER_ID = " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name);
             sqlFetchThreads.Connection = connection;
 
 

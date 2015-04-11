@@ -21,9 +21,12 @@
         </tr>
         <tr>
             <td rowspan="2">
-                <asp:ListView ID="LV_Discussions" runat="server">
+                <asp:ListView ID="LV_Discussions" runat="server" OnSelectedIndexChanged="LV_Discussions_SelectedIndexChanged">
+                    <LayoutTemplate>
+                        <asp:Label runat="server"></asp:Label>
+                    </LayoutTemplate>
                 </asp:ListView>
-                <asp:DataGrid ID="DGV_Discussions" runat="server" BackColor="Red" SelectedItemStyle-BackColor="Pink">
+                <asp:DataGrid ID="DGV_Discussions" runat="server" BackColor="Red" SelectedItemStyle-BackColor="Pink" OnSelectedIndexChanged="LV_Discussions_SelectedIndexChanged">
                     <Columns>
                         <asp:ButtonColumn CommandName="Select" Text="Select"></asp:ButtonColumn>
                     </Columns>
@@ -53,12 +56,12 @@
         </tr>
         <tr>
             <td>
-                <asp:Button runat="server" ID="BTN_New" Text="Nouvelle discussion..." OnClick="BTN_New_Click" />
+                <asp:Button runat="server" ID="BTN_New" Text="Nouveau..." OnClick="BTN_Clear_Click" />
             </td>
         </tr>
         <tr>
             <td>
-                <asp:Button runat="server" ID="BTN_Modify" Text="Modifier la discussion..." OnClick="BTN_Modify_Click" />
+                <asp:Button runat="server" ID="BTN_Modify_Or_Create" Text="Créer..." OnClick="BTN_Modify_Or_Create_Click" />
             </td>
         </tr>
         <tr>

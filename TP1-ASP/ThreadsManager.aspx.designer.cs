@@ -94,13 +94,13 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.Button BTN_New;
         
         /// <summary>
-        /// BTN_Modify control.
+        /// BTN_Modify_Or_Create control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTN_Modify;
+        protected global::System.Web.UI.WebControls.Button BTN_Modify_Or_Create;
         
         /// <summary>
         /// BTN_Delete control.

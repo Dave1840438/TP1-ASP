@@ -13,7 +13,6 @@ Mot de passe oublié (Le message d'usager inexistant ne s'affiche pas)
 ChatRoom.aspx:
 Mécanique de modifier à modifier (lel)
 Touche enter pour envoyer les messages
-Le message ne doit pas être vide
 Coordonner les mises à jours (UpdatePanel Conditional)
 Scrolling thing
 Ordre des messages
@@ -25,7 +24,6 @@ Le titre ne doit pas être vide
 La liste view est dégeu
 Le créateur est automatiquement un invité
 Il faut au moins un invité
-
 
 
 À faire après avoir réglé le problème de timeout:

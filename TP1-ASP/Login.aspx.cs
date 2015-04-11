@@ -9,85 +9,166 @@ using System.Web.UI.WebControls;
 
 namespace TP1_ASP
 {
-   public partial class Login : System.Web.UI.Page
-   {
-      protected void Page_Load(object sender, EventArgs e)
-      {
-         var master = Master as Master_page;
-         if (master != null)
-            master.setTitre("Login...");
-      }
+    public partial class Login : System.Web.UI.Page
+    {
 
-      protected void BTT_Connect_Click(object sender, EventArgs e)
-      {
 
-         var mp = Master as Master_page;
-         String result = "...?";
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            var master = Master as Master_page;
+            if (master != null)
+                master.setTitre("Login...");
+        }
 
-         SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-         SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT USERNAME FROM USERS WHERE USERNAME = '" + TBX_Username.Text + "'");
-         sqlcmdUserCheck.Connection = connection;
-         Page.Application.Lock();
-         connection.Open();
+        protected void BTT_Connect_Click(object sender, EventArgs e)
+        {
+            SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
 
-         SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
-
-         String lele = "";
-         if (userReader.Read())
-            lele = userReader.GetString(0);
-
-         userReader.Close();
-
-         if (lele != "")
-         {
-            SqlCommand sqlcmdVerifyPassword = new SqlCommand("SELECT PASSWORD FROM USERS WHERE USERNAME = '" + TBX_Username.Text + "'");
-            sqlcmdVerifyPassword.Connection = connection;
-            SqlDataReader reader = sqlcmdVerifyPassword.ExecuteReader();
-
-            result = "Wrong Password";
-
-            reader.Read();
-            String PW = reader.GetString(0);
-            connection.Close();
-            if (PW == TBX_Password.Text)
+            if (Page.IsValid)
             {
+                if (!((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, TBX_Username.Text)))
+                {
+                    ((List<long>)Application["OnlineUsers"]).Add(DBUtilities.getUserID(connection, TBX_Username.Text));
+                }
 
-
-
-               if (!((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, TBX_Username.Text)))
-               {
-                  ((List<long>)Application["OnlineUsers"]).Add(DBUtilities.getUserID(connection, TBX_Username.Text));
-               }
-
-
-               HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, true);
-               authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
-               Response.Cookies.Add(authCookie);
-               Session["isAuthenticated"] = true;
-               Session["SessionStartTime"] = DateTime.Now;
-               Response.Redirect("Index.aspx");
-
-               // result = "Connection success";
-               // Session["Username"] = TBX_Username.Text;
-               // Response.Redirect("Index.aspx");
+                HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, true);
+                authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
+                Response.Cookies.Add(authCookie);
+                Session["isAuthenticated"] = true;
+                Session["SessionStartTime"] = DateTime.Now;
+                Response.Redirect("Index.aspx");
             }
-         }
-         else
-            result = "Wrong username";
+        }
 
-         Page.Application.UnLock();
+        protected void BTT_Inscription_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Inscription.aspx");
+        }
 
-         mp.setTitre(result);
-      }
+        protected void BTT_ForgotPassword_Click(object sender, EventArgs e)
+        {
+            Page.Application.Lock();
 
-      protected void BTT_Inscription_Click(object sender, EventArgs e)
-      {
-         Response.Redirect("Inscription.aspx");
-      }
+            SqlDataReader reader = null;
 
-      protected void BTT_ForgotPassword_Click(object sender, EventArgs e)
-      {
-         //??????????
-      }
-   }
+            SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
+            bool exists = DBUtilities.checkIfUsernameExists(connection, TBX_Username.Text);
+
+            connection.Open();
+
+            if (exists)
+            {
+                SqlCommand fetchNeededInfo = new SqlCommand();
+                fetchNeededInfo.Connection = connection;
+                fetchNeededInfo.CommandText = "SELECT EMAIL, PASSWORD FROM USERS WHERE USERNAME = '" + TBX_Username.Text + "'";
+                reader = fetchNeededInfo.ExecuteReader();
+            }
+
+
+
+            if (reader != null)
+            {
+                reader.Read();
+
+                EMail eMail = new EMail();
+
+                // Vous devez avoir un compte gmail
+                eMail.From = "tp1asp27@gmail.com";
+                eMail.Password = "asdasdasd2";
+                eMail.SenderName = "TravailUn ASP";
+
+                eMail.Host = "smtp.gmail.com";
+                eMail.HostPort = 587;
+                eMail.SSLSecurity = true;
+
+                eMail.To = reader.GetString(0);
+                eMail.Subject = "Forgotten Password";
+                eMail.Body = "Your password is: " + reader.GetString(1) + "<br/><br/>--<br/>Cordially, TactikalTeam (T3)";
+
+                if (eMail.Send())
+                    ClientAlert(this, "Le EMail a été envoyé avec succès!");
+                else
+                    ClientAlert(this, "Échec de l'envoi du EMail!");
+            }
+            else
+            {
+                ClientAlert(this, "Le nom d'utilisateur n'existe pas!");
+            }
+            connection.Close();
+
+            Page.Application.UnLock();
+        }
+
+        public static void ClientAlert(System.Web.UI.Page page, string message)
+        {
+            page.ClientScript.RegisterStartupScript(page.GetType(), "alert", "alert('" + message + "');", true);
+        }
+
+        bool usernameIsValid;
+
+        protected void CV_Password_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            bool passwordIsGood = false;
+
+            Page.Application.Lock();
+
+
+            if (usernameIsValid)
+            {
+                SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
+                SqlCommand sqlcmdVerifyPassword = new SqlCommand("SELECT PASSWORD FROM USERS WHERE USERNAME = '" + TBX_Username.Text + "'");
+                sqlcmdVerifyPassword.Connection = connection;
+                connection.Open();
+                SqlDataReader reader = sqlcmdVerifyPassword.ExecuteReader();
+
+                reader.Read();
+
+                if (reader.GetString(0) == TBX_Password.Text)
+                    args.IsValid = passwordIsGood = true;
+
+                reader.Close();
+                connection.Close();
+            }
+
+            if (TBX_Password.Text == "")
+            {
+                args.IsValid = false;
+                CV_Password.ErrorMessage = "Le mot de passe est vide!";
+                CV_Password.Text = "Vide!";
+            }
+            else if (!passwordIsGood)
+            {
+                args.IsValid = false;
+                CV_Password.ErrorMessage = "Le mot de passe est incorrect!";
+                CV_Password.Text = "!";
+            }
+
+            Page.Application.UnLock();
+        }
+
+        protected void CV_Username_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            Page.Application.Lock();
+
+            SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
+
+            if (TBX_Username.Text == "")
+            {
+                args.IsValid = usernameIsValid = false;
+                CV_Username.ErrorMessage = "Le nom d'usager est vide!";
+                CV_Username.Text = "Vide!";
+            }
+            else if (!DBUtilities.checkIfUsernameExists(connection, TBX_Username.Text))
+            {
+                args.IsValid = usernameIsValid = false;
+                CV_Username.ErrorMessage = "Cet usager n'existe pas!";
+                CV_Username.Text = "!";
+            }
+            else
+                args.IsValid = usernameIsValid = true;
+
+            Page.Application.UnLock();
+        }
+
+    }
 }

@@ -24,9 +24,9 @@ namespace EmailSender
             EMail eMail = new EMail();
 
             // Vous devez avoir un compte gmail
-            eMail.From = "votrecompte@gmail.com";
-            eMail.Password = "mot de passe gmail";
-            eMail.SenderName = "votre nom";
+            eMail.From = "tp1asp27@gmail.com";
+            eMail.Password = "asdasdasd2";
+            eMail.SenderName = "TravailUn ASP";
 
             eMail.Host = "smtp.gmail.com";
             eMail.HostPort = 587;

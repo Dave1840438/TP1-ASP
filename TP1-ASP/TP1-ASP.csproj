@@ -90,6 +90,7 @@
       <DependentUpon>ChatRoom.aspx</DependentUpon>
     </Compile>
     <Compile Include="DBUtilities.cs" />
+    <Compile Include="EMail.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

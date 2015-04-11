@@ -190,6 +190,7 @@ namespace TP1_ASP
 
                 connection.Close();
                 Page.Application.UnLock();
+                UPN_Chat.Update();
             }
 
             TBX_ChatInput.Text = "";

@@ -4,19 +4,18 @@
 </asp:Content>
 
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" ClientIDMode="Static">
     <asp:Timer runat="server" ID="RefreshChat" Interval="3000" OnTick="RefreshChat_Tick"></asp:Timer>
     <asp:Timer runat="server" ID="RefreshUsers" Interval="3000" OnTick="RefreshUsers_Tick"></asp:Timer>
-
     <table>
         <tr>
             <td>
                 <asp:Panel ID="PN_ConvoList" runat="server"></asp:Panel>
             </td>
             <td>
-
-
-                <asp:UpdatePanel ID="UPN_Chat" runat="server">
+                <asp:UpdatePanel ID="UPN_Chat" runat="server" UpdateMode="Conditional">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="RefreshChat" EventName="Tick" />
                     </Triggers>
@@ -27,7 +26,7 @@
                 </asp:UpdatePanel>
             </td>
             <td>
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <asp:UpdatePanel ID="UPN_OnlineUsers" runat="server">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="RefreshUsers" EventName="Tick" />
                     </Triggers>
@@ -43,7 +42,7 @@
         <tr>
             <td />
             <td>
-                <asp:TextBox ID="TBX_ChatInput" runat="server" Rows="2" Columns="40" MaxLength="80"></asp:TextBox>
+                <asp:TextBox ID="TBX_ChatInput" runat="server" Rows="2" Columns="40" MaxLength="80" ></asp:TextBox>
                 <asp:Button ID="BTN_Send" runat="server" Text="Envoyer..." OnClick="BTN_Send_Click" />
             </td>
         </tr>

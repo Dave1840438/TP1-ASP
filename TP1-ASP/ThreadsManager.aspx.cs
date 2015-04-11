@@ -20,7 +20,7 @@ namespace TP1_ASP
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
             Page.Application.Lock();
 
-            SqlCommand sqlcmdFetchThreads = new SqlCommand("SELECT TITLE FROM THREADS WHERE CREATOR = " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name));
+            SqlCommand sqlcmdFetchThreads = new SqlCommand("SELECT TITLE FROM THREADS WHERE CREATOR = " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name) + " OR 'admin' = '" + HttpContext.Current.User.Identity.Name + "'");
             sqlcmdFetchThreads.Connection = connection;
             connection.Open();
 

@@ -98,6 +98,24 @@ namespace TP1_ASP
             userReader.Close();
             connection.Close();
 
+            return result;
+        }
+
+        public static string getUserFullName(SqlConnection connection, String username)
+        {
+            string result;
+
+            SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT FULLNAME FROM USERS WHERE USERNAME = '" + username + "'");
+            sqlcmdUserCheck.Connection = connection;
+            connection.Open();
+
+            SqlDataReader userReader = sqlcmdUserCheck.ExecuteReader();
+
+            userReader.Read();
+            result = userReader.GetString(0);
+
+            userReader.Close();
+            connection.Close();
 
             return result;
         }

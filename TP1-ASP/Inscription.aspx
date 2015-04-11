@@ -138,7 +138,7 @@
         <asp:Button ID="BTT_Inscription" runat="server" Text="Inscription" CssClass="Button" OnClick="BTT_Inscription_Click" />
         <asp:Button ID="BTT_Annuler" runat="server" Text="Annuler" CssClass="Button" OnClick="BTT_Annuler_Click" />
         <br />
-        <asp:ValidationSummary ID="Subscrive_Validation" runat="server" />
+        <asp:ValidationSummary ID="Subscribe_Validation" runat="server" />
 
     </asp:Panel>
 </asp:Content>

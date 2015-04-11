@@ -1,27 +1,21 @@
 Note: Y MANQUE DU CSS, BORDEL PAT!!
 
-Inscription.aspx: ALRIGHT!
-Profil.aspx: ALRIGHT!
-Room.aspx: ALRIGHT!
-LoginsJournal: ALRIGHT!
+Inscription.aspx: CLEARED!
+Profil.aspx: CLEARED!
+Room.aspx: CLEARED!
+LoginsJournal: CLEARED!
 
 
 
 Login.aspx:
-Mot de passe oublié
-Liste noire
-Il ne faut pas se logger deux fois
-Custom validator si le nom d'usager n'existe pas / mauvais mot de passe
-Trois essais avant de bloquer
-
-Logout.aspx
-Au complet, lel
+Mot de passe oublié (Le message d'usager inexistant ne s'affiche pas)
 
 ChatRoom.aspx:
 Mécanique de modifier à modifier (lel)
 Touche enter pour envoyer les messages
 Le message ne doit pas être vide
 Coordonner les mises à jours (UpdatePanel Conditional)
+Scrolling thing
 Ordre des messages
 
 Threads_Manager.aspx
@@ -33,13 +27,17 @@ Le créateur est automatiquement un invité
 Il faut au moins un invité
 
 
-Misc:
-Le session timeout quand la tab est fermée ne fonctionne pas
-Nom complet dans la master page
-Countdown dans la master page
 
-Admin rigths:
-Modifier supprimer tous les threads?
+À faire après avoir réglé le problème de timeout:
+Le session timeout quand la tab est fermée ne fonctionne pas
+Countdown dans la master page
+Logout.aspx au complet, lel
+Liste noire, Trois essais avant de bloquer
+Il ne faut pas se logger deux fois
+
 
 
 YEAH LET'S DO THIS!
+
+
+

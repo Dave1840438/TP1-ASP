@@ -183,7 +183,7 @@ namespace TP1_ASP
 
         protected void CVal_TitreDiscussion_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            args.IsValid = TBX_TitreDiscussion.Text.Length > 0;
+            args.IsValid = TBX_TitreDiscussion.Text != "";
         }
 
         protected void CVal_DiscussionExiste_Exists(object source, ServerValidateEventArgs args)

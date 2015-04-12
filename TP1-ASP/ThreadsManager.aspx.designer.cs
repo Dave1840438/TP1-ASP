@@ -49,15 +49,6 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.CustomValidator CVal_TitreDiscussion;
         
         /// <summary>
-        /// CVal_DiscussionExiste control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CVal_DiscussionExiste;
-        
-        /// <summary>
         /// CBOX_AllUsers control.
         /// </summary>
         /// <remarks>

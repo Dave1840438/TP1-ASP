@@ -35,11 +35,8 @@
             </td>
             <td>
                 <asp:TextBox ID="TBX_TitreDiscussion" runat="server"></asp:TextBox>
-                 <asp:CustomValidator ID="CVal_TitreDiscussion" runat="server" ErrorMessage="Le titre ne peut pas être vide!" Text="!"
+                 <asp:CustomValidator ID="CVal_TitreDiscussion" runat="server" ErrorMessage="Le titre ne peut pas être vide!" Text="Vide!"
                         ControlToValidate="TBX_TitreDiscussion" OnServerValidate="CVal_TitreDiscussion_ServerValidate" ValidateEmptyText="True" />
-               <asp:CustomValidator ID="CVal_DiscussionExiste" runat="server" ErrorMessage="Le titre existe déjà!" Text="!"
-                        ControlToValidate="TBX_TitreDiscussion" OnServerValidate="CVal_DiscussionExiste_Exists" ValidateEmptyText="True" />
-               
             </td>
         </tr>
         <tr>

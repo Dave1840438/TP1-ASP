@@ -76,15 +76,6 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.Table TB_UserList;
         
         /// <summary>
-        /// BTN_Return control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTN_Return;
-        
-        /// <summary>
         /// TBX_ChatInput control.
         /// </summary>
         /// <remarks>
@@ -101,5 +92,14 @@ namespace TP1_ASP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BTN_Send;
+        
+        /// <summary>
+        /// BTN_Return control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BTN_Return;
     }
 }

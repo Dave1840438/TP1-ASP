@@ -54,16 +54,10 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </td>
-            <td class="auto-style1" style="border-style: solid; border-width: medium">
-                <asp:UpdatePanel ID="UPN_Chat" runat="server" UpdateMode="Conditional">
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="RefreshChat" EventName="Tick" />
-                    </Triggers>
+            <td>
+                <asp:UpdatePanel ID="UPN_Creator" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <div id="DIV_Chat" style="overflow: auto">
-                            <asp:Table GridLines="Horizontal" CssClass="Salles" ID="TB_Chat" runat="server">
-                            </asp:Table>
-                        </div>
+                        <asp:Label ID="LBL_Creator" runat="server"></asp:Label>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </td>
@@ -73,7 +67,7 @@
                         <asp:AsyncPostBackTrigger ControlID="RefreshUsers" EventName="Tick" />
                     </Triggers>
                     <ContentTemplate>
-                        <div id="DIV_OnlineUsers" style="overflow: auto">
+                        <div id="DIV_OnlineUsers" style="overflow: auto; height: 200px;">
                             <asp:Table CssClass="UserTable" GridLines="Both" ID="TB_UserList" runat="server"></asp:Table>
                         </div>
                     </ContentTemplate>
@@ -82,14 +76,27 @@
             <td class="auto-style1"></td>
         </tr>
         <tr>
+            <td class="auto-style1" style="border-style: solid; border-width: medium">
+                <asp:UpdatePanel ID="UPN_Chat" runat="server" UpdateMode="Conditional">
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="RefreshChat" EventName="Tick" />
+                    </Triggers>
+                    <ContentTemplate>
+                        <div id="DIV_Chat" style="overflow: auto; height: 200px">
+                            <asp:Table GridLines="Horizontal" CssClass="Salles" ID="TB_Chat" runat="server">
+                            </asp:Table>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </td>
             <td />
             <td>
-                <asp:TextBox ID="TBX_ChatInput" runat="server" Style="display: none"></asp:TextBox>
-                <textarea rows="2" maxlength="80" onkeyup="document.getElementById('TBX_ChatInput').value = this.value; char = (event.which || event.keyCode); if (char == 13) document.getElementById('BTN_Send').click();"></textarea>
                 <asp:UpdatePanel ID="UPN_BTN_Send" runat="server" UpdateMode="Conditional">
                     <Triggers>
                     </Triggers>
                     <ContentTemplate>
+                        <asp:TextBox ID="TBX_ChatInput" runat="server" Style="display: none"></asp:TextBox>
+                        <textarea rows="2" maxlength="80" onkeyup="document.getElementById('TBX_ChatInput').value = this.value; char = (event.which || event.keyCode); if (char == 13) document.getElementById('BTN_Send').click();"></textarea>
                         <asp:Button ID="BTN_Send" runat="server" Text="Envoyer..." OnClick="BTN_Send_Click" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -98,6 +105,52 @@
     </table>
     <br />
     <asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" />
+    <script type="text/javascript">
 
+        // It is important to place this JavaScript code after ScriptManager1
+        var xPos1, yPos1, xPos2, yPos2, xPos3, yPos3;
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
 
+        function BeginRequestHandler(sender, args) {
+            if ($get('DIV_Chat') != null) {
+                // Get X and Y positions of scrollbar before the partial postback
+                xPos1 = $get('DIV_Chat').scrollLeft;
+                yPos1 = $get('DIV_Chat').scrollTop;
+            }
+
+            if ($get('DIV_OnlineUsers') != null) {
+                // Get X and Y positions of scrollbar before the partial postback
+                xPos2 = $get('DIV_OnlineUsers').scrollLeft;
+                yPos2 = $get('DIV_OnlineUsers').scrollTop;
+            }
+
+            if ($get('DIV_ConvoList') != null) {
+
+                // Get X and Y positions of scrollbar before the partial postback
+                xPos3 = $get('DIV_ConvoList').scrollLeft;
+                yPos3 = $get('DIV_ConvoList').scrollTop;
+            }
+        }
+
+        function EndRequestHandler(sender, args) {
+            if ($get('DIV_Chat') != null) {
+                // Set X and Y positions back to the scrollbar  after partial postback
+                $get('DIV_Chat').scrollLeft = xPos1;
+                $get('DIV_Chat').scrollTop = yPos1;
+            }
+
+            if ($get('DIV_OnlineUsers') != null) {
+                // Set X and Y positions back to the scrollbar  after partial postback
+                $get('DIV_OnlineUsers').scrollLeft = xPos2;
+                $get('DIV_OnlineUsers').scrollTop = yPos2;
+            }
+            if ($get('DIV_ConvoList') != null) {
+                // Set X and Y positions back to the scrollbar  after partial postback
+                $get('DIV_ConvoList').scrollLeft = xPos3;
+                $get('DIV_ConvoList').scrollTop = yPos3;
+            }
+        }
+        prm.add_beginRequest(BeginRequestHandler);
+        prm.add_endRequest(EndRequestHandler);
+    </script>
 </asp:Content>

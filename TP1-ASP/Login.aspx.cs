@@ -35,9 +35,9 @@ namespace TP1_ASP
 
                 HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, true);
                 authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
-                Response.Cookies.Add(authCookie);
                 Session["isAuthenticated"] = true;
                 Session["SessionStartTime"] = DateTime.Now;
+                Response.Cookies.Add(authCookie);
                 Response.Redirect("Index.aspx");
             }
         }

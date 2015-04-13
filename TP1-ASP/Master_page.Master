@@ -4,10 +4,11 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+  
     <script>
         function PreLoadImage(e) {
             var imageTarget = document.getElementById("IMG_Avatar");
@@ -26,109 +27,59 @@
     </script>
     <style>
         .MainPanel {
-            width:600px;
+            width: 600px;
             height: auto;
             background-color: lightgray;
             padding: 5px;
             margin: auto;
-            padding-bottom:10px;
+            padding-bottom: 10px;
         }
 
         .Textbox {
             margin-left: 10px;
-            display:inline-block;
+            display: inline-block;
         }
 
         .Label {
-            display:inline-block;
+            display: inline-block;
         }
-        .PetitAvatar
-        {
-            height:64px;
+
+        .PetitAvatar {
+            height: 64px;
         }
-        .MicroAvatar
-        {
-            height:15px;
+
+        .MicroAvatar {
+            height: 15px;
         }
-        .Button{
-            width:160px;
+
+        .Button {
+            width: 160px;
             margin-left: 5px;
         }
     </style>
 </head>
 <body>
     <form id="MainForm" runat="server" method="post">
-    <asp:Label ID="Master_Page_Titre" runat="server">Lelu</asp:Label>
-    &nbsp;<asp:Label ID="Master_Page_Username" runat="server">Anonymous</asp:Label>
-    <asp:Image ID="Master_Page_Avatar" runat="server" ImageUrl="/Images/ADD.png" CssClass="PetitAvatar" />
+        <asp:Label ID="Master_Page_Titre" runat="server"></asp:Label>
+        &nbsp;<asp:Label ID="Master_Page_Username" runat="server">Anonymous</asp:Label>
+        <asp:Image ID="Master_Page_Avatar" runat="server" ImageUrl="/Images/ADD.png" CssClass="PetitAvatar" />
         <asp:ScriptManager runat="server"></asp:ScriptManager>
-    <asp:Timer runat="server" ID="SessionTimeout" Interval="1000" OnTick="SessionTimeout_Tick"></asp:Timer>
-    
+        <asp:Timer runat="server" ID="SessionTimeout" Interval="1000" OnTick="SessionTimeout_Tick"></asp:Timer>
+
         <asp:UpdatePanel ID="UpdatePanel_MasterPage" runat="server">
             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="SessionTimeout" EventName="Tick"/>
+                <asp:AsyncPostBackTrigger ControlID="SessionTimeout" EventName="Tick" />
             </Triggers>
             <ContentTemplate>
                 <asp:Label ID="LBL_SessionTimeLeft" runat="server"></asp:Label>
             </ContentTemplate>
         </asp:UpdatePanel>
-        
+
         <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-    </div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
     </form>
-   <script type="text/javascript">
-
-       // It is important to place this JavaScript code after ScriptManager1
-       var xPos1, yPos1, xPos2, yPos2, xPos3, yPos3;
-       var prm = Sys.WebForms.PageRequestManager.getInstance();
-
-
-       function BeginRequestHandler(sender, args) {
-           if ($get('DIV_Chat') != null) {
-               // Get X and Y positions of scrollbar before the partial postback
-               xPos1 = $get('DIV_Chat').scrollLeft;
-               yPos1 = $get('DIV_Chat').scrollTop;
-           }
-
-           if ($get('DIV_OnlineUsers') != null) {
-               // Get X and Y positions of scrollbar before the partial postback
-               xPos2 = $get('DIV_OnlineUsers').scrollLeft;
-               yPos2 = $get('DIV_OnlineUsers').scrollTop;
-           }
-
-           if ($get('DIV_ConvoList') != null) {
-
-               // Get X and Y positions of scrollbar before the partial postback
-               xPos3 = $get('DIV_ConvoList').scrollLeft;
-               yPos3 = $get('DIV_ConvoList').scrollTop;
-               alert(yPos3);
-           }
-       }
-
-       function EndRequestHandler(sender, args) {
-           if ($get('DIV_Chat') != null) {
-               // Set X and Y positions back to the scrollbar  after partial postback
-               $get('DIV_Chat').scrollLeft = xPos1;
-               $get('DIV_Chat').scrollTop = yPos1;
-           }
-
-           if ($get('DIV_OnlineUsers') != null) {
-               // Set X and Y positions back to the scrollbar  after partial postback
-               $get('DIV_OnlineUsers').scrollLeft = xPos2;
-               $get('DIV_OnlineUsers').scrollTop = yPos2;
-           }
-           if ($get('DIV_ConvoList') != null) {
-               // Set X and Y positions back to the scrollbar  after partial postback
-               $get('DIV_ConvoList').scrollLeft = xPos3;
-               $get('DIV_ConvoList').scrollTop = yPos3;
-               alert(yPos3);
-           }
-       }
-       prm.add_beginRequest(BeginRequestHandler);
-       prm.add_endRequest(EndRequestHandler);
-
-    </script>
+   
 </body>
 </html>

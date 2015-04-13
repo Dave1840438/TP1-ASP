@@ -8,9 +8,7 @@ LoginsJournal: CLEARED!
 Logout.aspx: CLEARED!
 
 ChatRoom.aspx:
-Scrolling thing
-Créateur
-Confirmation sur le delete
+Headers (Patsky?)
 
 Threads_Manager.aspx
 La listview est dégeu (Demander à Chourot si c'est correct)
@@ -21,7 +19,7 @@ Liste noire, Trois essais avant de bloquer
 Il ne faut pas se logger deux fois
 UserTimeout.. again...
 
-PLS SCROLLING PANEL, NO!!
+
 
 YEAH LET'S DO THIS!
 

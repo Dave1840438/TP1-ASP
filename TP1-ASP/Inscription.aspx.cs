@@ -92,11 +92,11 @@ namespace TP1_ASP
             if (!result)
             {
                 SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-                Page.Application.Lock();
+                
 
                 result |= DBUtilities.checkIfUsernameExists(connection, TBX_Username.Text);
 
-                Page.Application.UnLock(); 
+                 
             }
                
 
@@ -177,11 +177,11 @@ namespace TP1_ASP
         protected void UserNameExists_ServerValidate(object source, ServerValidateEventArgs args)
         {
            SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-           Page.Application.Lock();
+           
 
            args.IsValid = !DBUtilities.checkIfUsernameExists(connection, TBX_Username.Text);
 
-           Page.Application.UnLock(); 
+            
         }
 
         protected void CV_Captcha_ServerValidate(object source, ServerValidateEventArgs args)

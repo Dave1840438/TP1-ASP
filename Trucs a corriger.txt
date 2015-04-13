@@ -7,12 +7,9 @@ Login.aspx: CLEARED!
 LoginsJournal: CLEARED;
 
 ChatRoom.aspx:
-Mécanique de modifier à modifier (lel)
-Coordonner les mises à jours (UpdatePanel Conditional)
 Scrolling thing
-Ordre des messages
-Click double sur les boutons?
 Créateur
+Confirmation sur le delete
 
 Threads_Manager.aspx
 La listview est dégeu (Demander à Chourot si c'est correct)
@@ -21,8 +18,11 @@ Uncomment le redirect
 À faire après avoir réglé le problème de timeout:
 Liste noire, Trois essais avant de bloquer
 Il ne faut pas se logger deux fois
+UserTimeout.. again...
 
-À quel temps faut disply le timeout??
+À quel temps faut display le timeout??
+
+PLS SCROLLING PANEL, NO!!
 
 YEAH LET'S DO THIS!
 

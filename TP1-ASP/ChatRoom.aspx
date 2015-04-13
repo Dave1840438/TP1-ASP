@@ -62,12 +62,12 @@
                 </asp:UpdatePanel>
             </td>
             <td class="auto-style1">
-                <asp:UpdatePanel ID="UPN_OnlineUsers" runat="server">
+                <asp:UpdatePanel ID="UPN_OnlineUsers" runat="server" UpdateMode="Conditional">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="RefreshUsers" EventName="Tick" />
                     </Triggers>
                     <ContentTemplate>
-                        <div id="DIV_OnlineUsers" style="overflow:auto">
+                        <div id="DIV_OnlineUsers" style="overflow: auto">
                             <asp:Table CssClass="UserTable" GridLines="Both" ID="TB_UserList" runat="server"></asp:Table>
                         </div>
                     </ContentTemplate>
@@ -78,14 +78,20 @@
         <tr>
             <td />
             <td>
-                <asp:TextBox ID="TBX_ChatInput" runat="server" style="display:none"></asp:TextBox>
+                <asp:TextBox ID="TBX_ChatInput" runat="server" Style="display: none"></asp:TextBox>
                 <textarea rows="2" maxlength="80" onkeyup="document.getElementById('TBX_ChatInput').value = this.value; char = (event.which || event.keyCode); if (char == 13) document.getElementById('BTN_Send').click();"></textarea>
-                <asp:Button ID="BTN_Send" runat="server" Text="Envoyer..." OnClick="BTN_Send_Click" />
+                <asp:UpdatePanel ID="UPN_BTN_Send" runat="server" UpdateMode="Conditional">
+                    <Triggers>
+                    </Triggers>
+                    <ContentTemplate>
+                        <asp:Button ID="BTN_Send" runat="server" Text="Envoyer..." OnClick="BTN_Send_Click" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </td>
         </tr>
     </table>
     <br />
     <asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" />
 
-     
+
 </asp:Content>

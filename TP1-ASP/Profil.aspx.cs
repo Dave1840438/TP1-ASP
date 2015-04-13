@@ -23,7 +23,7 @@ namespace TP1_ASP
         protected void Initialize()
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            Page.Application.Lock();
+            
 
 
             SqlCommand sqlcmdUserCheck = new SqlCommand("SELECT * FROM USERS WHERE USERNAME = '" + HttpContext.Current.User.Identity.Name + "'");
@@ -43,7 +43,7 @@ namespace TP1_ASP
             userReader.Close();
             connection.Close();
 
-            Page.Application.UnLock();
+            
         }
 
         protected void BTT_Modifier_Click(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace TP1_ASP
             if (Page.IsValid)
             {
                 SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-                Page.Application.Lock();
+                
 
 
                 // Création d'une nouvelle instance de Users (reliée à la table MainDB.Users)
@@ -72,7 +72,7 @@ namespace TP1_ASP
 
                 userID = DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name);
 
-                Page.Application.UnLock();
+                
 
                 users.UpdateRecord(userID, TBX_NomComplet.Text, TBX_Username.Text, TBX_Password.Text,
                                    TBX_Email.Text, avatar_ID);
@@ -103,11 +103,11 @@ namespace TP1_ASP
             if (!result)
             {
                 SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-                Page.Application.Lock();
+                
 
                 result |= DBUtilities.checkIfUsernameExists(connection, TBX_Username.Text);
 
-                Page.Application.UnLock();
+                
             }
 
 

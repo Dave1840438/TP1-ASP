@@ -208,7 +208,7 @@ namespace SqlExpressUtilities
             sqlcmd.Connection = connection;
             // bloquer l'objet Page.Application afin d'empêcher d'autres sessions concurentes
             // d'avoir accès à la base de données concernée par la requête en cours
-            Page.Application.Lock();
+            
             // ouvrir la connection avec la bd
             connection.Open();
             // éxécuter la requête SQL et récupérer les enregistrements qui en découlent dans l'objet Reader
@@ -234,7 +234,7 @@ namespace SqlExpressUtilities
                 connection.Close();
             // Débloquer l'objet Page.Application afin que d'autres session puissent
             // accéder à leur tour à la base de données
-            Page.Application.UnLock();
+            
         }
 
         // Extraire tous les enregistrements

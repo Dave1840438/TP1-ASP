@@ -18,7 +18,7 @@ namespace TP1_ASP
 
            SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
 
-            Page.Application.Lock();
+            
 
             String sqlCommand = "SELECT USERID AS ID, CONVERT(VARCHAR(30), LOGINDATE, 0) AS Début, CONVERT(VARCHAR(11), (LOGOUTDATE - LOGINDATE), 8) AS Durée, IPADDRESS AS IP,"
                +" USERNAME AS 'Nom d''usager', FULLNAME AS 'Nom au complet', EMAIL as Email, AVATAR AS Avatar "
@@ -29,7 +29,7 @@ namespace TP1_ASP
             ContentPlaceHolder CPH_content = (ContentPlaceHolder)Master.FindControl("ContentPlaceHolder1");
             DBUtilities.AppendToTable(TB_Log, sda, true);
 
-            Page.Application.UnLock();
+            
 
         }
 

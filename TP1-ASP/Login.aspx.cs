@@ -26,10 +26,12 @@ namespace TP1_ASP
 
             if (Page.IsValid)
             {
+               Page.Application.Lock();
                 if (!((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, TBX_Username.Text)))
                 {
                     ((List<long>)Application["OnlineUsers"]).Add(DBUtilities.getUserID(connection, TBX_Username.Text));
                 }
+                Page.Application.UnLock();
 
                 HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, true);
                 authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
@@ -47,7 +49,7 @@ namespace TP1_ASP
 
         protected void BTT_ForgotPassword_Click(object sender, EventArgs e)
         {
-            Page.Application.Lock();
+            
 
             SqlDataReader reader = null;
 
@@ -96,7 +98,7 @@ namespace TP1_ASP
             }
             connection.Close();
 
-            Page.Application.UnLock();
+            
         }
 
         public static void ClientAlert(System.Web.UI.Page page, string message)
@@ -110,7 +112,7 @@ namespace TP1_ASP
         {
             bool passwordIsGood = false;
 
-            Page.Application.Lock();
+            
 
 
             if (usernameIsValid)
@@ -143,12 +145,12 @@ namespace TP1_ASP
                 CV_Password.Text = "!";
             }
 
-            Page.Application.UnLock();
+            
         }
 
         protected void CV_Username_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            Page.Application.Lock();
+            
 
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
 
@@ -167,7 +169,7 @@ namespace TP1_ASP
             else
                 args.IsValid = usernameIsValid = true;
 
-            Page.Application.UnLock();
+            
         }
 
     }

@@ -21,12 +21,12 @@ namespace TP1_ASP
             if (master != null)
                 master.setTitre("Usagers en ligne...");
 
-            Page.Application.Lock();
+            
 
             SqlDataAdapter sda = new SqlDataAdapter("SELECT ID AS 'En ligne', USERNAME AS 'Nom d''usager', FULLNAME AS 'Nom au complet', Email, Avatar FROM USERS", (String)Application["MainDB"]);
             DBUtilities.AppendToTable(TB_OnlineUsers, sda, true, (List<long>)Application["OnlineUsers"]);
 
-            Page.Application.UnLock();
+            
         }
 
 

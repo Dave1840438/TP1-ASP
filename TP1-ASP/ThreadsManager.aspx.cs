@@ -18,7 +18,7 @@ namespace TP1_ASP
                 master.setTitre("Gestion de mes discussions...");
 
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            Page.Application.Lock();
+            
 
             SqlCommand sqlcmdFetchThreads = new SqlCommand("SELECT TITLE AS 'Titre' FROM THREADS WHERE CREATOR = " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name) + " OR 'admin' = '" + HttpContext.Current.User.Identity.Name + "'");
             sqlcmdFetchThreads.Connection = connection;
@@ -37,7 +37,7 @@ namespace TP1_ASP
 
             connection.Close();
 
-            Page.Application.UnLock();
+            
 
             if (!Page.IsPostBack)
                 Session["isModifying"] = false;
@@ -47,8 +47,7 @@ namespace TP1_ASP
         protected void BTN_New_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            Page.Application.Lock();
-
+            
             int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
 
             SqlCommand sqlcmdInsertThread = new SqlCommand("INSERT INTO THREADS VALUES(" + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name) + ", '" + TBX_TitreDiscussion.Text + "', '" + DateTime.Now.ToString() + "', " + accessToAll + ")");
@@ -59,14 +58,14 @@ namespace TP1_ASP
 
             connection.Close();
             ModifyRightsToThread();
-            Page.Application.UnLock();
+            
             Response.Redirect(Request.Url.ToString());
         }
 
         protected void BTN_Modify_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            Page.Application.Lock();
+            
 
             int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
 
@@ -78,13 +77,13 @@ namespace TP1_ASP
 
             connection.Close();
             ModifyRightsToThread();
-            Page.Application.UnLock();
+            
             Response.Redirect(Request.Url.ToString());
         }
         protected void BTN_Delete_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            Page.Application.Lock();
+            
 
             TBX_TitreDiscussion.Text = DGV_Discussions.SelectedItem.Cells[1].Text;
             ModifyRightsToThread(true);
@@ -95,7 +94,7 @@ namespace TP1_ASP
 
             sqlcmdDeleteThread.ExecuteNonQuery();
             connection.Close();
-            Page.Application.UnLock();
+            
             Response.Redirect(Request.Url.ToString());
         }
         protected void BTT_Return_Click(object sender, EventArgs e)
@@ -198,7 +197,7 @@ namespace TP1_ASP
             bool result;
 
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            Page.Application.Lock();
+            
 
             SqlCommand sqlcmdDeleteThread = new SqlCommand("SELECT TITLE FROM THREADS WHERE TITLE = '" + TBX_TitreDiscussion.Text + "'");
             sqlcmdDeleteThread.Connection = connection;
@@ -209,7 +208,7 @@ namespace TP1_ASP
             result = reader.Read();
 
             connection.Close();
-            Page.Application.UnLock();
+            
 
             return result;
         }
@@ -237,7 +236,7 @@ namespace TP1_ASP
                 if (Session["isModifying"] == null || (bool)Session["isModifying"] == false)
                 {
                     SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-                    Page.Application.Lock();
+                    
 
                     int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
 
@@ -249,13 +248,13 @@ namespace TP1_ASP
 
                     connection.Close();
                     ModifyRightsToThread();
-                    Page.Application.UnLock();
+                    
                     Response.Redirect(Request.Url.ToString());
                 }
                 else
                 {
                     SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-                    Page.Application.Lock();
+                    
 
                     int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
 
@@ -267,7 +266,7 @@ namespace TP1_ASP
 
                     connection.Close();
                     ModifyRightsToThread();
-                    Page.Application.UnLock();
+                    
                     Response.Redirect(Request.Url.ToString());
                 }
             }

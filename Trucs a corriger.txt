@@ -20,6 +20,8 @@ Liste noire, Trois essais avant de bloquer
 Il ne faut pas se logger deux fois
 UserTimeout.. again...
 
+Déconnexion = logoout.aspx?
+
 À quel temps faut display le timeout??
 
 PLS SCROLLING PANEL, NO!!

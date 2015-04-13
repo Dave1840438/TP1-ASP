@@ -11,12 +11,9 @@ namespace TP1_ASP
 {
     public partial class Master_page : System.Web.UI.MasterPage
     {
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
+            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Logout.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
             {
                 SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
                 Page.Application.Lock();
@@ -29,6 +26,7 @@ namespace TP1_ASP
 
             if (!Page.IsPostBack)
             {
+                Session["VraiTimeout"] = 60;
                 Session["Timeout"] = DateTime.Now;
                 HttpCookie authCookie = FormsAuthentication.GetAuthCookie(HttpContext.Current.User.Identity.Name, false);
                 authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
@@ -43,6 +41,18 @@ namespace TP1_ASP
 
         protected void SessionTimeout_Tick(object sender, EventArgs e)
         {
+            if (Session["VraiTimeout"] != null)
+            {
+                int test = (int)Session["VraiTimeout"] - 1;
+                Session["VraiTimeout"] = (int)Session["VraiTimeout"] - 1;
+
+                if ((int)Session["VraiTimeout"] <= 0)
+                    signOut();
+
+            }
+
+
+
             if (((DateTime)Session["Timeout"]).AddMinutes(Session.Timeout) < DateTime.Now &&
                !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
                 signOut();
@@ -53,7 +63,8 @@ namespace TP1_ASP
                 signOut();
             }
 
-            LBL_SessionTimeLeft.Text = "Lel";
+            if ((int)Session["VraiTimeout"] < 120 && !Request.Url.ToString().Contains("Logout.aspx"))
+                LBL_SessionTimeLeft.Text = "Temps restant avant l'expiration de la session: " + (int)Session["VraiTimeout"] / 60 + ":" + ((int)Session["VraiTimeout"] % 60 >= 10 ? "" : "0") + (int)Session["VraiTimeout"] % 60;
         }
 
         public string GetUserIP()
@@ -69,25 +80,28 @@ namespace TP1_ASP
 
         public void signOut()
         {
-            LoginTable loginTable = new LoginTable((String)Application["MainDB"], Page);
-
-            SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            Page.Application.Lock();
-
-            loginTable.InsertRecord(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name), (DateTime)Session["SessionStartTime"], DateTime.Now, GetUserIP());
-
-            Page.Application.UnLock();
-            Master_Page_Username.Text = HttpContext.Current.User.Identity.Name;
-
-            if (((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name)))
+            if (Session["isAuthenticated"] != null &&  (bool)Session["isAuthenticated"])
             {
-                ((List<long>)Application["OnlineUsers"]).Remove(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name));
-            }
+                LoginTable loginTable = new LoginTable((String)Application["MainDB"], Page);
 
-            Session["isAuthenticated"] = false;
+                SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
+                Page.Application.Lock();
+
+                loginTable.InsertRecord(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name), (DateTime)Session["SessionStartTime"], DateTime.Now, GetUserIP());
+
+                Page.Application.UnLock();
+                Master_Page_Username.Text = HttpContext.Current.User.Identity.Name;
+
+                if (((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name)))
+                {
+                    ((List<long>)Application["OnlineUsers"]).Remove(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name));
+                }
+
+                Session["isAuthenticated"] = false;
+                FormsAuthentication.SignOut();
+            }
             Session.Abandon();
-            FormsAuthentication.SignOut();
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Logout.aspx");
         }
     }
 }

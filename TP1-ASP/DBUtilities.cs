@@ -251,8 +251,6 @@ namespace TP1_ASP
 
             foreach (DataRow dr in customersTable.Rows)
             {
-
-
                 tableRow = new TableRow();
                 tableRow.TableSection = TableRowSection.TableBody;
                 container.Controls.Add(tableRow);

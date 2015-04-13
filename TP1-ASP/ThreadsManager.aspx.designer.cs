@@ -31,13 +31,13 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.CustomValidator CVal_TitreDiscussion;
         
         /// <summary>
-        /// LV_Discussions control.
+        /// LB_Discussions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView LV_Discussions;
+        protected global::System.Web.UI.WebControls.ListBox LB_Discussions;
         
         /// <summary>
         /// DGV_Discussions control.
@@ -47,6 +47,15 @@ namespace TP1_ASP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataGrid DGV_Discussions;
+        
+        /// <summary>
+        /// CV_AuMoinsUnInvite control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CV_AuMoinsUnInvite;
         
         /// <summary>
         /// CBOX_AllUsers control.

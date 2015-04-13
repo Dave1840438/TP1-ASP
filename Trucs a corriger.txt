@@ -3,37 +3,26 @@ Note: Y MANQUE DU CSS, BORDEL PAT!!
 Inscription.aspx: CLEARED!
 Profil.aspx: CLEARED!
 Room.aspx: CLEARED!
-LoginsJournal: CLEARED!
-
-
-
-Login.aspx:
-Mot de passe oublié (Le message d'usager inexistant ne s'affiche pas)
+Login.aspx: CLEARED!
+LoginsJournal: CLEARED;
 
 ChatRoom.aspx:
 Mécanique de modifier à modifier (lel)
-Touche enter pour envoyer les messages
 Coordonner les mises à jours (UpdatePanel Conditional)
 Scrolling thing
 Ordre des messages
+Click double sur les boutons?
+Créateur
 
 Threads_Manager.aspx
-Les convos ne s'override pas (Redirection sans changements)
-Mécanique de modifier à modifier (lel)
-Le titre ne doit pas être vide
-La liste view est dégeu
-Le créateur est automatiquement un invité
-Il faut au moins un invité
-
+La listview est dégeu (Demander à Chourot si c'est correct)
+Uncomment le redirect
 
 À faire après avoir réglé le problème de timeout:
-Le session timeout quand la tab est fermée ne fonctionne pas
-Countdown dans la master page
-Logout.aspx au complet, lel
 Liste noire, Trois essais avant de bloquer
 Il ne faut pas se logger deux fois
 
-
+À quel temps faut disply le timeout??
 
 YEAH LET'S DO THIS!
 

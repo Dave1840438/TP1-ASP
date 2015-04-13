@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace TP1_ASP
@@ -47,24 +48,25 @@ namespace TP1_ASP
             {
                 Button btn = new Button();
                 btn.Text = threadsReader.GetString(0);
+                btn.CssClass = "ConvoButton";
                 btn.ID = "BTN_Thread_" + btn.Text;
                 btn.Click += BTN_ConvoName_Click;
-                PN_ConvoList.Controls.Add(btn);
+                TableRow tr = new TableRow();
+                tr.CssClass = "TableConvo";
+                TableCell td = new TableCell();
+                td.CssClass = "TableConvo";
+                tr.Controls.Add(td);
+                td.Controls.Add(btn);
+                TB_ConvoList.Controls.Add(tr);
             }
 
             threadsReader.Close();
             connection.Close();
 
-
-
-
-
+            if (!Page.IsPostBack)
+                Session["ModifierLeMessage"] = false;
 
             Page.Application.UnLock();
-
-
-
-
         }
 
         protected void addDelegate(Control control)

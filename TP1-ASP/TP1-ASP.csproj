@@ -65,6 +65,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Inscription.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Logout.aspx" />
     <Content Include="Master_page.Master" />
     <Content Include="LoginsJournal.aspx" />
     <None Include="Web.Debug.config">
@@ -116,6 +117,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoginTable.cs" />
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Master_page.Master.cs">
       <DependentUpon>Master_page.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

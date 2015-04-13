@@ -31,13 +31,13 @@ namespace TP1_ASP {
         protected global::System.Web.UI.Timer RefreshUsers;
         
         /// <summary>
-        /// PN_ConvoList control.
+        /// TB_ConvoList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PN_ConvoList;
+        protected global::System.Web.UI.WebControls.Table TB_ConvoList;
         
         /// <summary>
         /// UPN_Chat control.

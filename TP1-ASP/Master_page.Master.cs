@@ -26,7 +26,7 @@ namespace TP1_ASP
 
          if (!Page.IsPostBack)
          {
-            Session["VraiTimeout"] = 60;
+            Session["VraiTimeout"] = 10;
             Session["Timeout"] = DateTime.Now;
             HttpCookie authCookie = FormsAuthentication.GetAuthCookie(HttpContext.Current.User.Identity.Name, false);
             authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
@@ -102,7 +102,7 @@ namespace TP1_ASP
             FormsAuthentication.SignOut();
          }
          Session.Abandon();
-         Response.Redirect("Logout.aspx");
+         Response.Redirect("Index.aspx");
       }
    }
 }

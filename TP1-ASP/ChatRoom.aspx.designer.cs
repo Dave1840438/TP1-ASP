@@ -31,6 +31,15 @@ namespace TP1_ASP {
         protected global::System.Web.UI.Timer RefreshUsers;
         
         /// <summary>
+        /// Contrôle UPN_ConvoList.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_ConvoList;
+        
+        /// <summary>
         /// Contrôle TB_ConvoList.
         /// </summary>
         /// <remarks>

@@ -103,6 +103,7 @@
                // Get X and Y positions of scrollbar before the partial postback
                xPos3 = $get('DIV_ConvoList').scrollLeft;
                yPos3 = $get('DIV_ConvoList').scrollTop;
+               alert(yPos3);
            }
        }
 
@@ -122,6 +123,7 @@
                // Set X and Y positions back to the scrollbar  after partial postback
                $get('DIV_ConvoList').scrollLeft = xPos3;
                $get('DIV_ConvoList').scrollTop = yPos3;
+               alert(yPos3);
            }
        }
        prm.add_beginRequest(BeginRequestHandler);

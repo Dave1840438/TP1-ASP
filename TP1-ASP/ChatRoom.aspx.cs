@@ -134,7 +134,7 @@ namespace TP1_ASP
          Session["Thread_Name"] = ((Button)sender).ID.Remove(0, 11);
          BTN_Send.Text = "Envoyer...";
          UPN_BTN_Send.Update();
-         Response.Redirect(Request.Url.ToString());
+         //Response.Redirect(Request.Url.ToString());
       }
 
       public void BTN_Modify_Click(object sender, EventArgs e)

@@ -54,7 +54,6 @@
         <tr>
             <td rowspan="4">
                 <div style="overflow:auto; width:200px; height:230px;">
-                    <asp:ListBox ID="LB_Discussions" runat="server" OnSelectedIndexChanged="LB_Discussions_SelectedIndexChanged"></asp:ListBox>
                     <asp:DataGrid ID="DGV_Discussions" runat="server" BackColor="GhostWhite" SelectedItemStyle-BackColor="Pink" OnSelectedIndexChanged="LV_Discussions_SelectedIndexChanged">
                         <Columns>
                             <asp:ButtonColumn CommandName="Select" Text="Select"></asp:ButtonColumn>

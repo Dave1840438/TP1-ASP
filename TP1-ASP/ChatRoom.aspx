@@ -43,10 +43,16 @@
     <table class="MainTable">
         <tr>
             <td class="auto-style1">
-                <div id="DIV_ConvoList" style="overflow: auto; border: 2px; border-color: black; border-style: solid; height: 200px; width: 200px; display: inline-block">
-                    <asp:Table ID="TB_ConvoList" runat="server" CssClass="Table_Convo">
-                    </asp:Table>
-                </div>
+                <asp:UpdatePanel ID="UPN_ConvoList" runat="server">
+                    <Triggers>
+                    </Triggers>
+                    <ContentTemplate>
+                        <div id="DIV_ConvoList" style="overflow: auto; border: 2px; border-color: black; border-style: solid; height: 200px; width: 200px; display: inline-block">
+                            <asp:Table ID="TB_ConvoList" runat="server" CssClass="Table_Convo">
+                            </asp:Table>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </td>
             <td class="auto-style1" style="border-style: solid; border-width: medium">
                 <asp:UpdatePanel ID="UPN_Chat" runat="server" UpdateMode="Conditional">

@@ -86,11 +86,7 @@ namespace TP1_ASP
 
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
 
-
             loginTable.InsertRecord(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name), (DateTime)Session["SessionStartTime"], DateTime.Now, GetUserIP());
-
-
-            Master_Page_Username.Text = HttpContext.Current.User.Identity.Name;
 
             Page.Application.Lock();
             if (((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name)))

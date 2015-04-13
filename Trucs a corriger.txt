@@ -4,7 +4,8 @@ Inscription.aspx: CLEARED!
 Profil.aspx: CLEARED!
 Room.aspx: CLEARED!
 Login.aspx: CLEARED!
-LoginsJournal: CLEARED;
+LoginsJournal: CLEARED!
+Logout.aspx: CLEARED!
 
 ChatRoom.aspx:
 Scrolling thing
@@ -19,10 +20,6 @@ Uncomment le redirect
 Liste noire, Trois essais avant de bloquer
 Il ne faut pas se logger deux fois
 UserTimeout.. again...
-
-Déconnexion = logoout.aspx?
-
-À quel temps faut display le timeout??
 
 PLS SCROLLING PANEL, NO!!
 

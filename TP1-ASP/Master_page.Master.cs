@@ -96,7 +96,7 @@ namespace TP1_ASP
                 FormsAuthentication.SignOut();
             }
             Session.Abandon();
-            Response.Redirect("Logout.aspx");
+            Response.Redirect("Login.aspx");
         }
     }
 }

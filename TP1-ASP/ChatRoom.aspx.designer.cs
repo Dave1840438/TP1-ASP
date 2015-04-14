@@ -31,6 +31,33 @@ namespace TP1_ASP {
         protected global::System.Web.UI.Timer RefreshUsers;
         
         /// <summary>
+        /// UPN_Creator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_Creator;
+        
+        /// <summary>
+        /// LBL_Titre_Convo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LBL_Titre_Convo;
+        
+        /// <summary>
+        /// LBL_Creator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LBL_Creator;
+        
+        /// <summary>
         /// UPN_ConvoList control.
         /// </summary>
         /// <remarks>
@@ -47,24 +74,6 @@ namespace TP1_ASP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table TB_ConvoList;
-        
-        /// <summary>
-        /// UPN_Creator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UPN_Creator;
-        
-        /// <summary>
-        /// LBL_Creator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LBL_Creator;
         
         /// <summary>
         /// UPN_OnlineUsers control.

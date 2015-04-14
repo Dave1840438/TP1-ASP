@@ -42,6 +42,23 @@
     <asp:Timer runat="server" ID="RefreshUsers" Interval="3000" OnTick="RefreshUsers_Tick"></asp:Timer>
     <table class="MainTable">
         <tr>
+            <td>Liste des conversations</td>
+
+            <asp:UpdatePanel ID="UPN_Creator" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <td>
+                        <asp:Label ID="LBL_Titre_Convo" runat="server"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="LBL_Creator" runat="server"></asp:Label>
+                    </td>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <td>
+                Usagers en ligne
+            </td>
+        </tr>
+        <tr>
             <td class="auto-style1">
                 <asp:UpdatePanel ID="UPN_ConvoList" runat="server">
                     <Triggers>
@@ -54,13 +71,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </td>
-            <td>
-                <asp:UpdatePanel ID="UPN_Creator" runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
-                        <asp:Label ID="LBL_Creator" runat="server"></asp:Label>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </td>
+            <td></td>
             <td class="auto-style1">
                 <asp:UpdatePanel ID="UPN_OnlineUsers" runat="server" UpdateMode="Conditional">
                     <Triggers>

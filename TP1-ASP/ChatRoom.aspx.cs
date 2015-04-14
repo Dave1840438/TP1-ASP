@@ -81,6 +81,7 @@ namespace TP1_ASP
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
             LBL_Creator.Text = "";
+            LBL_Titre_Convo.Text = (String)Session["Thread_Name"];
             TB_UserList.Controls.Clear();
             TB_Chat.Controls.Clear();
             if (Session["Thread_Name"] != null && (String)Session["Thread_Name"] != "")

@@ -45,21 +45,23 @@
                 :
                 <br />
                 <br />
-                <asp:TextBox ID="TBX_TitreDiscussion" runat="server"></asp:TextBox>
-                <asp:CustomValidator ID="CVal_TitreDiscussion" runat="server" ErrorMessage="Le titre ne peut pas être vide!" Text="Vide!"
-                    ControlToValidate="TBX_TitreDiscussion" OnServerValidate="CVal_TitreDiscussion_ServerValidate" ValidateEmptyText="True" />
+                <asp:UpdatePanel ID="UPN_Titre_Discussion" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:TextBox ID="TBX_TitreDiscussion" runat="server"></asp:TextBox>
+                        <asp:CustomValidator ID="CVal_TitreDiscussion" runat="server" ErrorMessage="Le titre ne peut pas être vide!" Text="Vide!"
+                            ControlToValidate="TBX_TitreDiscussion" OnServerValidate="CVal_TitreDiscussion_ServerValidate" ValidateEmptyText="True" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 <br />
             </td>
         </tr>
         <tr>
             <td rowspan="4">
-                <div style="overflow:auto; width:200px; height:230px;">
-                    <asp:DataGrid ID="DGV_Discussions" runat="server" BackColor="GhostWhite" SelectedItemStyle-BackColor="Pink" OnSelectedIndexChanged="LV_Discussions_SelectedIndexChanged">
-                        <Columns>
-                            <asp:ButtonColumn CommandName="Select" Text="Select"></asp:ButtonColumn>
-                        </Columns>
-                    </asp:DataGrid>
-                </div>
+                <asp:UpdatePanel ID="UPN_Thread_List" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:ListBox ID="LB_Thread_List" runat="server" OnSelectedIndexChanged="LB_Thread_List_SelectedIndexChanged" Style="height: 250px; width: 165px"></asp:ListBox>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </td>
             <td class="auto-style2">&nbsp;</td>
         </tr>
@@ -73,11 +75,10 @@
                 <asp:CustomValidator ID="CV_AuMoinsUnInvite" runat="server" Text="Il faut au moins un invité!"
                     OnServerValidate="CV_AuMoinsUnInvite_ServerValidate" />
                 <br />
-                <asp:CheckBox ID="CBOX_AllUsers" runat="server" Text="Tous les usagers" OnCheckedChanged="CBOX_AllUsers_CheckedChanged" />
-
                 <asp:UpdatePanel ID="UPN_UsersCheckboxes" runat="server" UpdateMode="Conditional">
                     <Triggers></Triggers>
                     <ContentTemplate>
+                        <asp:CheckBox ID="CBOX_AllUsers" runat="server" Text="Tous les usagers" OnCheckedChanged="CBOX_AllUsers_CheckedChanged" />
                         <asp:Table ID="TB_AllExistingUsers" runat="server"></asp:Table>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -94,7 +95,11 @@
         </tr>
         <tr>
             <td>
-                <asp:Button runat="server" ID="BTN_Modify_Or_Create" Text="Créer..." OnClick="BTN_Modify_Or_Create_Click" CssClass="Button" />
+                <asp:UpdatePanel ID="UPN_BTN_Send_Or_Create" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:Button runat="server" ID="BTN_Modify_Or_Create" Text="Créer..." OnClick="BTN_Modify_Or_Create_Click" CssClass="Button" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </td>
         </tr>
         <tr>

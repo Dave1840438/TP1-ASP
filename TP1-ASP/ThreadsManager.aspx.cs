@@ -18,26 +18,30 @@ namespace TP1_ASP
                 master.setTitre("Gestion de mes discussions...");
 
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            
-
-            SqlCommand sqlcmdFetchThreads = new SqlCommand("SELECT TITLE AS 'Titre' FROM THREADS WHERE CREATOR = " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name) + " OR 'admin' = '" + HttpContext.Current.User.Identity.Name + "'");
-            sqlcmdFetchThreads.Connection = connection;
 
             SqlDataAdapter sda = new SqlDataAdapter("SELECT ID AS 'CheckBox', AVATAR AS 'Avatar', USERNAME FROM USERS WHERE ID != " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name), (String)Application["MainDB"]);
             DBUtilities.AppendToTable(TB_AllExistingUsers, sda, false);
 
-            connection.Open();
+            if (!Page.IsPostBack)
+            {
 
-            DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter(sqlcmdFetchThreads.CommandText, connection);
-            da.Fill(ds);
+                SqlCommand sqlcmdFetchThreads = new SqlCommand("SELECT TITLE AS 'Titre' FROM THREADS WHERE CREATOR = " + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name) + " OR 'admin' = '" + HttpContext.Current.User.Identity.Name + "'");
+                sqlcmdFetchThreads.Connection = connection;
 
-            DGV_Discussions.DataSource = ds;
-            DGV_Discussions.DataBind();
+                connection.Open();
 
-            connection.Close();
+                SqlDataReader reader = sqlcmdFetchThreads.ExecuteReader();
+                LB_Thread_List.Items.Clear();
+                while (reader.Read())
+                {
+                    ListItem item = new ListItem();
+                    item.Text = item.Value = reader.GetString(0);
+                    LB_Thread_List.Items.Add(item);
+                }
 
-            
+                reader.Close();
+                connection.Close();
+            }
 
             if (!Page.IsPostBack)
                 Session["isModifying"] = false;
@@ -47,7 +51,7 @@ namespace TP1_ASP
         protected void BTN_New_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            
+
             int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
 
             SqlCommand sqlcmdInsertThread = new SqlCommand("INSERT INTO THREADS VALUES(" + DBUtilities.getUserID(connection, HttpContext.Current.User.Identity.Name) + ", '" + TBX_TitreDiscussion.Text + "', '" + DateTime.Now.ToString() + "', " + accessToAll + ")");
@@ -58,18 +62,18 @@ namespace TP1_ASP
 
             connection.Close();
             ModifyRightsToThread();
-            
+
             Response.Redirect(Request.Url.ToString());
         }
 
         protected void BTN_Modify_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            
+
 
             int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
 
-            SqlCommand sqlcmdUpdateThread = new SqlCommand("UPDATE THREADS SET TITLE = '" + TBX_TitreDiscussion.Text + "', ACCESS_TO_ALL = " + accessToAll + " WHERE TITLE = '" + (DGV_Discussions.SelectedItem.Cells[1]).Text + "'");
+            SqlCommand sqlcmdUpdateThread = new SqlCommand("UPDATE THREADS SET TITLE = '" + TBX_TitreDiscussion.Text + "', ACCESS_TO_ALL = " + accessToAll + " WHERE TITLE = '" + LB_Thread_List.SelectedValue + "'");
             sqlcmdUpdateThread.Connection = connection;
             connection.Open();
 
@@ -77,24 +81,24 @@ namespace TP1_ASP
 
             connection.Close();
             ModifyRightsToThread();
-            
+
             Response.Redirect(Request.Url.ToString());
         }
         protected void BTN_Delete_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            
 
-            TBX_TitreDiscussion.Text = DGV_Discussions.SelectedItem.Cells[1].Text;
+
+            TBX_TitreDiscussion.Text = LB_Thread_List.SelectedValue;
             ModifyRightsToThread(true);
-            SqlCommand sqlcmdDeleteThread = new SqlCommand("DELETE FROM THREADS WHERE TITLE = '" + (DGV_Discussions.SelectedItem.Cells[1]).Text + "'");
+            SqlCommand sqlcmdDeleteThread = new SqlCommand("DELETE FROM THREADS WHERE TITLE = '" + LB_Thread_List.SelectedValue + "'");
             sqlcmdDeleteThread.Connection = connection;
 
             connection.Open();
 
             sqlcmdDeleteThread.ExecuteNonQuery();
             connection.Close();
-            
+
             Response.Redirect(Request.Url.ToString());
         }
         protected void BTT_Return_Click(object sender, EventArgs e)
@@ -197,7 +201,7 @@ namespace TP1_ASP
             bool result;
 
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-            
+
 
             SqlCommand sqlcmdDeleteThread = new SqlCommand("SELECT TITLE FROM THREADS WHERE TITLE = '" + TBX_TitreDiscussion.Text + "'");
             sqlcmdDeleteThread.Connection = connection;
@@ -208,17 +212,9 @@ namespace TP1_ASP
             result = reader.Read();
 
             connection.Close();
-            
+
 
             return result;
-        }
-
-        protected void LV_Discussions_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Session["isModifying"] = true;
-
-            BTN_Modify_Or_Create.Text = "Modifier...";
-            TBX_TitreDiscussion.Text = DGV_Discussions.SelectedItem.Cells[1].Text;
         }
 
         protected void BTN_Clear_Click(object sender, EventArgs e)
@@ -227,16 +223,32 @@ namespace TP1_ASP
             TBX_TitreDiscussion.Text = "";
 
             Session["isModifying"] = false;
+
+            CBOX_AllUsers.Checked = false;
+
+            foreach (TableRow tr in TB_AllExistingUsers.Rows)
+            {
+                foreach (TableCell tc in tr.Cells)
+                {
+                    if (tc.Controls.Count > 0)
+                    {
+                        var chkBox = tc.Controls[0] as CheckBox;
+                        if (chkBox != null)
+                        {
+                            chkBox.Checked = false;
+                        }
+                    }
+                }
+            }
         }
 
         protected void BTN_Modify_Or_Create_Click(object sender, EventArgs e)
         {
-            if (!DiscussionExiste())
-            {
-                if (Session["isModifying"] == null || (bool)Session["isModifying"] == false)
+            
+                if (Session["isModifying"] == null || (bool)Session["isModifying"] == false && !DiscussionExiste())
                 {
                     SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-                    
+
 
                     int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
 
@@ -248,17 +260,16 @@ namespace TP1_ASP
 
                     connection.Close();
                     ModifyRightsToThread();
-                    
-                    Response.Redirect(Request.Url.ToString());
+
                 }
-                else
+                else if (!DiscussionExiste() || TBX_TitreDiscussion.Text == LB_Thread_List.SelectedValue)
                 {
                     SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
-                    
+
 
                     int accessToAll = CBOX_AllUsers.Checked ? 1 : 0;
 
-                    SqlCommand sqlcmdUpdateThread = new SqlCommand("UPDATE THREADS SET TITLE = '" + TBX_TitreDiscussion.Text + "', ACCESS_TO_ALL = " + accessToAll + " WHERE TITLE = '" + (DGV_Discussions.SelectedItem.Cells[1]).Text + "'");
+                    SqlCommand sqlcmdUpdateThread = new SqlCommand("UPDATE THREADS SET TITLE = '" + TBX_TitreDiscussion.Text + "', ACCESS_TO_ALL = " + accessToAll + " WHERE TITLE = '" + LB_Thread_List.SelectedValue + "'");
                     sqlcmdUpdateThread.Connection = connection;
                     connection.Open();
 
@@ -266,12 +277,9 @@ namespace TP1_ASP
 
                     connection.Close();
                     ModifyRightsToThread();
-                    
-                    Response.Redirect(Request.Url.ToString());
-                }
-            }
 
-            // Response.Redirect("ChatRoom.aspx");
+                }
+            Response.Redirect("ChatRoom.aspx");
         }
 
         protected void CV_AuMoinsUnInvite_ServerValidate(object source, ServerValidateEventArgs args)
@@ -298,6 +306,83 @@ namespace TP1_ASP
             }
 
             return result;
+        }
+
+        protected void LB_Thread_List_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            Session["isModifying"] = true;
+            BTN_Modify_Or_Create.Text = "Modifier...";
+            TBX_TitreDiscussion.Text = LB_Thread_List.SelectedValue;
+            UPN_BTN_Send_Or_Create.Update();
+            UPN_Titre_Discussion.Update();
+
+            CBOX_AllUsers.Checked = false;
+
+            foreach (TableRow tr in TB_AllExistingUsers.Rows)
+            {
+                foreach (TableCell tc in tr.Cells)
+                {
+                    if (tc.Controls.Count > 0)
+                    {
+                        var chkBox = tc.Controls[0] as CheckBox;
+                        if (chkBox != null)
+                        {
+                            chkBox.Checked = false;
+                        }
+                    }
+                }
+            }
+
+            SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
+
+            int count = LB_Thread_List.Items.Count;
+            String titre = LB_Thread_List.Items[LB_Thread_List.SelectedIndex].Text;
+
+            String threadID = DBUtilities.getThreadID(connection, LB_Thread_List.SelectedValue).ToString();
+            List<String> usersID = new List<String>();
+
+            SqlCommand fetchIDs = new SqlCommand();
+            fetchIDs.Connection = connection;
+            fetchIDs.CommandText = "select user_id from THREADS_ACCESS where THREAD_ID = " + threadID;
+
+            connection.Open();
+
+            SqlDataReader reader = fetchIDs.ExecuteReader();
+
+
+            while (reader.Read())
+                usersID.Add(reader.GetInt64(0).ToString());
+
+            reader.Close();
+            connection.Close();
+
+            if (usersID.Count == 0)
+            {
+                CBOX_AllUsers.Checked = true;
+            }
+            else
+            {
+                CBOX_AllUsers.Checked = false;
+                foreach (TableRow tr in TB_AllExistingUsers.Rows)
+                {
+                    foreach (TableCell tc in tr.Cells)
+                    {
+                        if (tc.Controls.Count > 0)
+                        {
+                            var chkBox = tc.Controls[0] as CheckBox;
+                            if (chkBox != null)
+                            {
+                                String userID = chkBox.ID.Remove(0, 7);
+                                chkBox.Checked = usersID.Contains(userID);
+                            }
+                        }
+                    }
+                }
+            }
+            UPN_UsersCheckboxes.Update();
+            UPN_Titre_Discussion.Update();
+            TBX_TitreDiscussion.Focus();
         }
     }
 }

@@ -6,13 +6,12 @@ Room.aspx: CLEARED!
 Login.aspx: CLEARED!
 LoginsJournal: CLEARED!
 Logout.aspx: CLEARED!
+Threads_Manager.aspx: CLEARED!
+ChatRoom.aspx: CLEARED!
 
-ChatRoom.aspx:
-Headers (Patsky?)
 
-Threads_Manager.aspx
-La listview est dégeu (Demander à Chourot si c'est correct)
-Uncomment le redirect
+Scroling panels pour loginsjournal et usagers en ligne
+
 
 À faire après avoir réglé le problème de timeout:
 Liste noire, Trois essais avant de bloquer
@@ -20,6 +19,16 @@ Il ne faut pas se logger deux fois
 UserTimeout.. again...
 
 
+Section pour Pat:
+La label du temps restant dans la master page
+apparait en dessou du titre, ce qui chie
+la mise en page quand le timeout s'affiche 
+(s'il reste moins de deux minutes)
+
+LA CHATROOM
+
+Essais de faire un peu comme chourot, ou au 
+moins que ça à de l'allure
 
 YEAH LET'S DO THIS!
 

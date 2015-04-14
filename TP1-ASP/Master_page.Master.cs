@@ -49,8 +49,6 @@ namespace TP1_ASP
                     signOut();
             }
 
-
-
             if (((DateTime)Session["Timeout"]).AddMinutes(Session.Timeout) < DateTime.Now &&
                !(Request.Url.ToString().Contains("Login.aspx") || Request.Url.ToString().Contains("Inscription.aspx")))
                 signOut();

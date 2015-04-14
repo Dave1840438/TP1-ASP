@@ -10,10 +10,7 @@ Threads_Manager.aspx: CLEARED!
 ChatRoom.aspx: CLEARED!
 
 
-Scroling panels pour loginsjournal et usagers en ligne
-
-
-À faire après avoir réglé le problème de timeout:
+À faire après avoir réglé le problème de timeout quand la tab est fermé:
 Liste noire, Trois essais avant de bloquer
 Il ne faut pas se logger deux fois
 UserTimeout.. again...

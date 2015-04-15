@@ -37,6 +37,8 @@ namespace TP1_ASP
            var master = Master as Master_page;
            if (master != null)
               master.signOut();
+
+           Session["tries"] = 0;
         }
 
         protected void BTT_ChatRoom_Click(object sender, EventArgs e)

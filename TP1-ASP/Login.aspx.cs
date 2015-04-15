@@ -18,6 +18,12 @@ namespace TP1_ASP
             var master = Master as Master_page;
             if (master != null)
                 master.setTitre("Login...");
+
+            if ((int)Session["tries"] == 2)
+            {
+                ClientAlert(this, "Désolé que vous éprouviez des difficultés, veuillez réassayer plus tard.");
+                Response.End();
+            }
         }
 
         protected void BTT_Connect_Click(object sender, EventArgs e)
@@ -134,9 +140,6 @@ namespace TP1_ASP
         {
             bool passwordIsGood = false;
 
-            
-
-
             if (usernameIsValid)
             {
                 SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
@@ -163,11 +166,10 @@ namespace TP1_ASP
             else if (!passwordIsGood)
             {
                 args.IsValid = false;
+                Session["tries"] = (int)Session["tries"] + 1;
                 CV_Password.ErrorMessage = "Le mot de passe est incorrect!";
                 CV_Password.Text = "!";
             }
-
-            
         }
 
         protected void CV_Username_ServerValidate(object source, ServerValidateEventArgs args)
@@ -192,6 +194,20 @@ namespace TP1_ASP
                 args.IsValid = usernameIsValid = true;
 
             
+        }
+
+        protected void CV_UserIsOnline_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (usernameIsValid)
+            {
+                SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
+
+                Page.Application.Lock();
+
+                args.IsValid = !((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, TBX_Username.Text));
+
+                Page.Application.UnLock();
+            }
         }
 
     }

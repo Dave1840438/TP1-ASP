@@ -95,6 +95,9 @@ namespace TP1_ASP
       {
          Session["bidon"] = 3;
          Session["Timeout"] = DateTime.Now;
+         Session["tries"] = 0;
+
+         
       }
 
       protected void Session_End(object sender, EventArgs e)

@@ -27,6 +27,15 @@ namespace TP1_ASP
             if (Page.IsValid)
             {
                Page.Application.Lock();
+
+               Global.unUsagerEnLigne u = new Global.unUsagerEnLigne();
+               u.id = DBUtilities.getUserID(connection, TBX_Username.Text);
+               u.sessionStart = DateTime.Now;
+               u.sessionTimeOut = DateTime.Now.AddMinutes((int)Application["SessionTimeout"]);
+               u.userIP = GetUserIP();
+
+               ((Dictionary<string, Global.unUsagerEnLigne>)Application["OnlineUsersTwo"]).Add(TBX_Username.Text, u);
+
                 if (!((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, TBX_Username.Text)))
                 {
                     ((List<long>)Application["OnlineUsers"]).Add(DBUtilities.getUserID(connection, TBX_Username.Text));
@@ -34,14 +43,27 @@ namespace TP1_ASP
                 Page.Application.UnLock();
 
                 HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, true);
-                authCookie.Expires = DateTime.Now.AddMinutes((double)Application["SessionTimeout"]);
+                authCookie.Expires = DateTime.Now.AddMinutes((int)Application["SessionTimeout"]);
                 Session["isAuthenticated"] = true;
                 Session["SessionStartTime"] = DateTime.Now;
                 Response.Cookies.Add(authCookie);
+
+                Page.Application.Lock();
+
                 Response.Redirect("Index.aspx");
             }
         }
 
+        public string GetUserIP()
+        {
+           string ipList = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+           if (!string.IsNullOrEmpty(ipList))
+              return ipList.Split(',')[0];
+           string ipAddress = Request.ServerVariables["REMOTE_ADDR"];
+           if (ipAddress == "::1") // local host
+              ipAddress = "127.0.0.1";
+           return ipAddress;
+        }
         protected void BTT_Inscription_Click(object sender, EventArgs e)
         {
             Response.Redirect("Inscription.aspx");

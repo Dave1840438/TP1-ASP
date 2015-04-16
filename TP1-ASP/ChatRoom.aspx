@@ -88,8 +88,8 @@
                         <asp:AsyncPostBackTrigger ControlID="RefreshChat" EventName="Tick" />
                     </Triggers>
                     <ContentTemplate>
-                        <div id="DIV_Chat" style="overflow: auto; height: 200px; width:600px" >
-                            <asp:Table GridLines="Horizontal" CssClass="Salles" ID="TB_Chat" runat="server">
+                        <div id="DIV_Chat" style="overflow: auto; height: 200px; width:800px" >
+                            <asp:Table GridLines="Horizontal" CssClass="Salles" ID="TB_Chat" runat="server" Width="400px">
                             </asp:Table>
                         </div>
                     </ContentTemplate>

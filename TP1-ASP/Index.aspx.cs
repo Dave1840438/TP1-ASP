@@ -36,7 +36,7 @@ namespace TP1_ASP
         {
            var master = Master as Master_page;
            if (master != null)
-              master.signOut();
+              master.signOut(true);
 
            Session["tries"] = 0;
         }

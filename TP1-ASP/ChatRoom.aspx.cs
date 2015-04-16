@@ -146,6 +146,7 @@ namespace TP1_ASP
                         {
                             ((ImageButton)c).Click += BTN_Delete_Click;
                             ((ImageButton)c).OnClientClick = "return confirm(\"Êtes-vous sûr de vouloir supprimer le message?\")";
+                            ((ImageButton)c).CssClass = "MicroAvatar";
                         }
                         else
                             control.Controls.Remove(c);
@@ -154,7 +155,11 @@ namespace TP1_ASP
                     {
                         long id = long.Parse(c.ID.Remove(0, 16));
                         if (messagesID.Contains(id))
+                        {
                             ((ImageButton)c).Click += BTN_Modify_Click;
+                            ((ImageButton)c).CssClass = "MicroAvatar";
+                        }
+                            
                         else
                             control.Controls.Remove(c);
                     }

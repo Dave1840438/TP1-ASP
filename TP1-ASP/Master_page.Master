@@ -71,7 +71,7 @@
                 <asp:AsyncPostBackTrigger ControlID="SessionTimeout" EventName="Tick" />
             </Triggers>
             <ContentTemplate>
-                <asp:Label ID="LBL_SessionTimeLeft" runat="server"></asp:Label>
+                <div style="text-align:right"><asp:Label ID="LBL_SessionTimeLeft" runat="server"></asp:Label></div>
             </ContentTemplate>
         </asp:UpdatePanel>
 

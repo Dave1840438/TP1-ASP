@@ -108,14 +108,14 @@
                     <ContentTemplate>
                         <asp:TextBox ID="TBX_ChatInput" runat="server" Style="display: none"></asp:TextBox>
                         <textarea rows="2" maxlength="80" onkeyup="document.getElementById('TBX_ChatInput').value = this.value; char = (event.which || event.keyCode); if (char == 13) document.getElementById('BTN_Send').click();"></textarea>
-                        <asp:Button ID="BTN_Send" runat="server" Text="Envoyer..." OnClick="BTN_Send_Click" />
+                        <asp:Button ID="BTN_Send" runat="server" Text="Envoyer..." OnClick="BTN_Send_Click" CssClass="Button" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </td>
         </tr>
     </table>
     <br />
-    <asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" />
+    <asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" CssClass="Button" />
     <script type="text/javascript">
 
         // It is important to place this JavaScript code after ScriptManager1

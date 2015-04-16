@@ -11,64 +11,65 @@ namespace TP1_ASP
 {
     public partial class Login : System.Web.UI.Page
     {
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             var master = Master as Master_page;
             if (master != null)
                 master.setTitre("Login...");
 
-            if ((int)Session["tries"] == 2)
-            {
-                ClientAlert(this, "Désolé que vous éprouviez des difficultés, veuillez réassayer plus tard.");
-                Response.End();
-            }
+
         }
 
         protected void BTT_Connect_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
 
-            if (Page.IsValid)
+            if (Session["blocked"] == null || (bool)Session["blocked"] == false)
             {
-               Page.Application.Lock();
-
-               Global.unUsagerEnLigne u = new Global.unUsagerEnLigne();
-               u.id = DBUtilities.getUserID(connection, TBX_Username.Text);
-               u.sessionStart = DateTime.Now;
-               u.sessionTimeOut = DateTime.Now.AddMinutes((int)Application["SessionTimeout"]);
-               u.userIP = GetUserIP();
-
-               ((Dictionary<string, Global.unUsagerEnLigne>)Application["OnlineUsersTwo"]).Add(TBX_Username.Text, u);
-
-                if (!((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, TBX_Username.Text)))
+                if (Page.IsValid)
                 {
-                    ((List<long>)Application["OnlineUsers"]).Add(DBUtilities.getUserID(connection, TBX_Username.Text));
+                    Page.Application.Lock();
+
+                    Global.unUsagerEnLigne u = new Global.unUsagerEnLigne();
+                    u.id = DBUtilities.getUserID(connection, TBX_Username.Text);
+                    u.sessionStart = DateTime.Now;
+                    u.sessionTimeOut = DateTime.Now.AddMinutes((int)Application["SessionTimeout"]);
+                    u.userIP = GetUserIP();
+
+                    if (!((Dictionary<string, Global.unUsagerEnLigne>)Application["OnlineUsersTwo"]).ContainsKey(TBX_Username.Text))
+                    ((Dictionary<string, Global.unUsagerEnLigne>)Application["OnlineUsersTwo"]).Add(TBX_Username.Text, u);
+
+                    if (!((List<long>)Application["OnlineUsers"]).Contains(DBUtilities.getUserID(connection, TBX_Username.Text)))
+                    {
+                        ((List<long>)Application["OnlineUsers"]).Add(DBUtilities.getUserID(connection, TBX_Username.Text));
+                    }
+                    Page.Application.UnLock();
+
+                    HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, true);
+                    authCookie.Expires = DateTime.Now.AddMinutes((int)Application["SessionTimeout"]);
+                    Session["isAuthenticated"] = true;
+                    Session["SessionStartTime"] = DateTime.Now;
+                    Response.Cookies.Add(authCookie);
+
+                    Page.Application.Lock();
+
+                    Response.Redirect("Index.aspx");
                 }
-                Page.Application.UnLock();
-
-                HttpCookie authCookie = FormsAuthentication.GetAuthCookie(TBX_Username.Text, true);
-                authCookie.Expires = DateTime.Now.AddMinutes((int)Application["SessionTimeout"]);
-                Session["isAuthenticated"] = true;
-                Session["SessionStartTime"] = DateTime.Now;
-                Response.Cookies.Add(authCookie);
-
-                Page.Application.Lock();
-
-                Response.Redirect("Index.aspx");
             }
+            else
+                ClientAlert(this, "Désolé que vous éprouviez des difficultés, veuillez réassayer plus tard.");
+
         }
 
         public string GetUserIP()
         {
-           string ipList = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-           if (!string.IsNullOrEmpty(ipList))
-              return ipList.Split(',')[0];
-           string ipAddress = Request.ServerVariables["REMOTE_ADDR"];
-           if (ipAddress == "::1") // local host
-              ipAddress = "127.0.0.1";
-           return ipAddress;
+            string ipList = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            if (!string.IsNullOrEmpty(ipList))
+                return ipList.Split(',')[0];
+            string ipAddress = Request.ServerVariables["REMOTE_ADDR"];
+            if (ipAddress == "::1") // local host
+                ipAddress = "127.0.0.1";
+            return ipAddress;
         }
         protected void BTT_Inscription_Click(object sender, EventArgs e)
         {
@@ -77,8 +78,6 @@ namespace TP1_ASP
 
         protected void BTT_ForgotPassword_Click(object sender, EventArgs e)
         {
-            
-
             SqlDataReader reader = null;
 
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
@@ -93,8 +92,6 @@ namespace TP1_ASP
                 fetchNeededInfo.CommandText = "SELECT EMAIL, PASSWORD FROM USERS WHERE USERNAME = '" + TBX_Username.Text + "'";
                 reader = fetchNeededInfo.ExecuteReader();
             }
-
-
 
             if (reader != null)
             {
@@ -125,8 +122,6 @@ namespace TP1_ASP
                 ClientAlert(this, "Le nom d'utilisateur n'existe pas!");
             }
             connection.Close();
-
-            
         }
 
         public static void ClientAlert(System.Web.UI.Page page, string message)
@@ -167,6 +162,8 @@ namespace TP1_ASP
             {
                 args.IsValid = false;
                 Session["tries"] = (int)Session["tries"] + 1;
+                if ((int)Session["tries"] == 3)
+                    Session["blocked"] = true;
                 CV_Password.ErrorMessage = "Le mot de passe est incorrect!";
                 CV_Password.Text = "!";
             }
@@ -174,8 +171,6 @@ namespace TP1_ASP
 
         protected void CV_Username_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            
-
             SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
 
             if (TBX_Username.Text == "")
@@ -192,8 +187,6 @@ namespace TP1_ASP
             }
             else
                 args.IsValid = usernameIsValid = true;
-
-            
         }
 
         protected void CV_UserIsOnline_ServerValidate(object source, ServerValidateEventArgs args)

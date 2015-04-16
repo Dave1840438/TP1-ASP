@@ -38,7 +38,7 @@
                     <asp:Button ID="BTT_ForgotPassword" runat="server" CssClass="Button" Text="Mot de passe oublié..." OnClick="BTT_ForgotPassword_Click" /></td>
             </tr>
         </table>
-        <asp:CustomValidator ID="CV_UserIsOnline" Text="" runat="server" ControlToValidate="TBX_Username" ErrorMessage="Cet usager est déjà en ligne!" OnServerValidate="CV_UserIsOnline_ServerValidate"></asp:CustomValidator>
+        <asp:CustomValidator ID="CV_UserIsOnline" Display="None" runat="server" ControlToValidate="TBX_Username" Text="ta mère en shorts" ErrorMessage="Cet usager est déjà en ligne!" OnServerValidate="CV_UserIsOnline_ServerValidate"></asp:CustomValidator>
         <asp:ValidationSummary ID="Login_Validation" runat="server" />
     </asp:Panel>
 </asp:Content>

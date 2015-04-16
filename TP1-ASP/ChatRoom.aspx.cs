@@ -149,7 +149,6 @@ namespace TP1_ASP
                         }
                         else
                             control.Controls.Remove(c);
-
                     }
                     if (c.ID.Contains("BTN_EditMessage"))
                     {
@@ -158,7 +157,6 @@ namespace TP1_ASP
                             ((ImageButton)c).Click += BTN_Modify_Click;
                         else
                             control.Controls.Remove(c);
-
                     }
                 }
 

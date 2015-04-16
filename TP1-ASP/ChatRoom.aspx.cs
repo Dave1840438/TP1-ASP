@@ -228,6 +228,8 @@ namespace TP1_ASP
 
         protected void BTN_Send_Click(object sender, EventArgs e)
         {
+            TBX_ChatInput.Text = TBX_ChatInput.Text.Replace("'", "''");
+
             if (Session["ModifierLeMessage"] == null || !(bool)Session["ModifierLeMessage"])
             {
                 if (TBX_ChatInput.Text != "")

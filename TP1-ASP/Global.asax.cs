@@ -29,10 +29,9 @@ namespace TP1_ASP
          Application["MainDB"] = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + DB_Path + "';Integrated Security=True";
          Application["SessionTimeout"] = 1;
 
+         Application["OnlineUsersTwo"] = new Dictionary<string, unUsagerEnLigne>();
          Application["OnlineUsers"] = new List<long>();
          AddTask("DoStuff", 3);
-
-         Application["OnlineUsersTwo"] = new Dictionary<string, unUsagerEnLigne>();
       }
 
       private static CacheItemRemovedCallback OnCacheRemove = null;

@@ -90,7 +90,7 @@
         <tr>
             <td>
                 <hr />
-                <asp:Button runat="server" ID="BTN_New" Text="Nouveau..." OnClick="BTN_Clear_Click" CssClass="Button" />
+                <asp:Button runat="server" ID="BTN_New" Text="Nouveau..." OnClick="BTN_Clear_Click" CssClass="Button" CausesValidation="false" />
             </td>
         </tr>
         <tr>

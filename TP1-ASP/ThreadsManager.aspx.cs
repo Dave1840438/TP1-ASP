@@ -244,7 +244,8 @@ namespace TP1_ASP
 
         protected void BTN_Modify_Or_Create_Click(object sender, EventArgs e)
         {
-            
+            if (Page.IsValid)
+            {
                 if (Session["isModifying"] == null || (bool)Session["isModifying"] == false && !DiscussionExiste())
                 {
                     SqlConnection connection = new SqlConnection((String)Application["MainDB"]);
@@ -279,7 +280,9 @@ namespace TP1_ASP
                     ModifyRightsToThread();
 
                 }
-            Response.Redirect("ChatRoom.aspx");
+                Response.Redirect("ChatRoom.aspx");
+            }
+
         }
 
         protected void CV_AuMoinsUnInvite_ServerValidate(object source, ServerValidateEventArgs args)

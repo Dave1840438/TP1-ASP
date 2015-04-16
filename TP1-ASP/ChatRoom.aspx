@@ -54,8 +54,7 @@
                     </td>
                 </ContentTemplate>
             </asp:UpdatePanel>
-            <td>
-                Usagers en ligne
+            <td>Usagers en ligne
             </td>
         </tr>
         <tr>
@@ -106,8 +105,7 @@
                     <Triggers>
                     </Triggers>
                     <ContentTemplate>
-                        <asp:TextBox ID="TBX_ChatInput" runat="server" Style="display: none"></asp:TextBox>
-                        <textarea rows="2" maxlength="80" onkeyup="document.getElementById('TBX_ChatInput').value = this.value; char = (event.which || event.keyCode); if (char == 13) document.getElementById('BTN_Send').click();"></textarea>
+                        <asp:TextBox ID="TBX_ChatInput" TextMode="MultiLine" Rows="3" Columns="50" runat="server" onkeyup="char = (event.which || event.keyCode); if (char == 13) document.getElementById('BTN_Send').click();"></asp:TextBox>
                         <asp:Button ID="BTN_Send" runat="server" Text="Envoyer..." OnClick="BTN_Send_Click" />
                     </ContentTemplate>
                 </asp:UpdatePanel>

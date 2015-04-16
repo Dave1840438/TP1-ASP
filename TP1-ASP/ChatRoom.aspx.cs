@@ -269,6 +269,7 @@ namespace TP1_ASP
             }
             TBX_ChatInput.Text = "";
             updateChat();
+            TBX_ChatInput.Focus();
         }
 
         protected void RefreshChat_Tick(object sender, EventArgs e)

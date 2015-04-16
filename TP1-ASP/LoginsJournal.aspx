@@ -8,10 +8,6 @@
             border-spacing: 1px;
             border-collapse: separate;
         }
-
-        td {
-            padding: 5px;
-        }
         .DIV{
             overflow:auto;
             height:350px;
@@ -33,7 +29,8 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <br />
-        <asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" CssClass="Button" />
     </div>
+    <div class="DIV"><asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" CssClass="Button" /></div>
+    
     
 </asp:Content>

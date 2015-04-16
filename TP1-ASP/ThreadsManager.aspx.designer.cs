@@ -58,15 +58,6 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.ListBox LB_Thread_List;
         
         /// <summary>
-        /// CV_AuMoinsUnInvite control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CV_AuMoinsUnInvite;
-        
-        /// <summary>
         /// UPN_UsersCheckboxes control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace TP1_ASP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UPN_UsersCheckboxes;
+        
+        /// <summary>
+        /// CV_AuMoinsUnInvite control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CV_AuMoinsUnInvite;
         
         /// <summary>
         /// CBOX_AllUsers control.

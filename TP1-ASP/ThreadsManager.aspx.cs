@@ -194,6 +194,7 @@ namespace TP1_ASP
         protected void CVal_TitreDiscussion_ServerValidate(object source, ServerValidateEventArgs args)
         {
             args.IsValid = TBX_TitreDiscussion.Text != "";
+            UPN_Titre_Discussion.Update();
         }
 
         protected bool DiscussionExiste()
@@ -288,6 +289,7 @@ namespace TP1_ASP
         protected void CV_AuMoinsUnInvite_ServerValidate(object source, ServerValidateEventArgs args)
         {
             args.IsValid = CBOX_AllUsers.Checked || AuMoinsUnInviteEstCoché();
+            UPN_UsersCheckboxes.Update();
         }
 
         protected bool AuMoinsUnInviteEstCoché()

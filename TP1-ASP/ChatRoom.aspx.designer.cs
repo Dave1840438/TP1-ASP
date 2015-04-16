@@ -76,24 +76,6 @@ namespace TP1_ASP {
         protected global::System.Web.UI.WebControls.Table TB_ConvoList;
         
         /// <summary>
-        /// UPN_OnlineUsers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UPN_OnlineUsers;
-        
-        /// <summary>
-        /// TB_UserList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table TB_UserList;
-        
-        /// <summary>
         /// UPN_Chat control.
         /// </summary>
         /// <remarks>
@@ -110,6 +92,24 @@ namespace TP1_ASP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table TB_Chat;
+        
+        /// <summary>
+        /// UPN_OnlineUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_OnlineUsers;
+        
+        /// <summary>
+        /// TB_UserList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TB_UserList;
         
         /// <summary>
         /// UPN_BTN_Send control.

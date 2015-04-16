@@ -34,6 +34,20 @@
             text-align: left;
             width: 178px;
         }
+        .auto-style2 {
+            width: 67px;
+        }
+        .auto-style4 {
+            height: 49px;
+            width: 282px;
+        }
+        .auto-style5 {
+            width: 282px;
+        }
+        .auto-style6 {
+            width: 67px;
+            height: 49px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" ClientIDMode="Static">
@@ -42,7 +56,7 @@
     <asp:Timer runat="server" ID="RefreshUsers" Interval="3000" OnTick="RefreshUsers_Tick"></asp:Timer>
     <table class="MainTable">
         <tr>
-            <td>Liste des conversations</td>
+            
 
             <asp:UpdatePanel ID="UPN_Creator" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
@@ -54,39 +68,21 @@
                     </td>
                 </ContentTemplate>
             </asp:UpdatePanel>
-            <td>Usagers en ligne
-            </td>
         </tr>
         <tr>
-            <td class="auto-style1">
-                <asp:UpdatePanel ID="UPN_ConvoList" runat="server">
+            <td class="auto-style4">
+                Liste des conversations<asp:UpdatePanel ID="UPN_ConvoList" runat="server">
                     <Triggers>
                     </Triggers>
                     <ContentTemplate>
-                        <div id="DIV_ConvoList" style="overflow: auto; border: 2px; border-color: black; border-style: solid; height: 200px; width: 200px; display: inline-block">
+                        <div id="DIV_ConvoList" style="overflow: auto; border: thin solid black; height: 200px; width: 278px; display: inline-block">
                             <asp:Table ID="TB_ConvoList" runat="server" CssClass="Table_Convo">
                             </asp:Table>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </td>
-            <td></td>
-            <td class="auto-style1">
-                <asp:UpdatePanel ID="UPN_OnlineUsers" runat="server" UpdateMode="Conditional">
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="RefreshUsers" EventName="Tick" />
-                    </Triggers>
-                    <ContentTemplate>
-                        <div id="DIV_OnlineUsers" style="overflow: auto; height: 200px;">
-                            <asp:Table CssClass="UserTable" GridLines="Both" ID="TB_UserList" runat="server"></asp:Table>
-                        </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </td>
-            <td class="auto-style1"></td>
-        </tr>
-        <tr>
-            <td class="auto-style1" style="border-style: solid; border-width: medium">
+            <td class="auto-style6"></td><td class="auto-style1" style="border-style: solid; ">
                 <asp:UpdatePanel ID="UPN_Chat" runat="server" UpdateMode="Conditional">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="RefreshChat" EventName="Tick" />
@@ -99,21 +95,43 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </td>
-            <td />
-            <td>
+        </tr>
+        <tr>
+            <td class="auto-style4">
+                Usagers en ligne
+                <asp:UpdatePanel ID="UPN_OnlineUsers" runat="server" UpdateMode="Conditional">
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="RefreshUsers" EventName="Tick" />
+                    </Triggers>
+                    <ContentTemplate>
+                        <div id="DIV_OnlineUsers" style="overflow: auto; height: 200px; border-width: thin; border-style: solid;">
+                            <asp:Table CssClass="UserTable" GridLines="Both" ID="TB_UserList" runat="server"></asp:Table>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </td>
+            
+            <td class="auto-style2"/>
+            <td style="vertical-align: top; text-align:center"> <%-- ERREUR DE CSS CAVE DE MARDE --%>
                 <asp:UpdatePanel ID="UPN_BTN_Send" runat="server" UpdateMode="Conditional">
                     <Triggers>
                     </Triggers>
                     <ContentTemplate>
-                        <asp:TextBox ID="TBX_ChatInput" TextMode="MultiLine" Rows="3" Columns="50" runat="server" onkeyup="char = (event.which || event.keyCode); if (char == 13) document.getElementById('BTN_Send').click();"></asp:TextBox>
-                        <asp:Button ID="BTN_Send" runat="server" Text="Envoyer..." OnClick="BTN_Send_Click" />
+                        <asp:TextBox ID="TBX_ChatInput" TextMode="MultiLine" Rows="3" Columns="50" runat="server" onkeyup="char = (event.which || event.keyCode); if (char == 13) document.getElementById('BTN_Send').click();" Height="96px"></asp:TextBox>
+                        <br />
+                        <br />
+                        <asp:Button ID="BTN_Send" runat="server" Text="Envoyer..." OnClick="BTN_Send_Click" CssClass="Button" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </td>
         </tr>
+        <tr>
+            <td class="auto-style5"><asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" CssClass="Button" /></td>
+        </tr>
+        
     </table>
     <br />
-    <asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" />
+    
     <script type="text/javascript">
 
         // It is important to place this JavaScript code after ScriptManager1

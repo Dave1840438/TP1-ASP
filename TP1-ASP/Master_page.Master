@@ -60,20 +60,24 @@
 </head>
 <body>
     <form id="MainForm" runat="server" method="post">
-        <asp:Label ID="Master_Page_Titre" runat="server"></asp:Label>
-        &nbsp;<asp:Label ID="Master_Page_Username" runat="server">Anonymous</asp:Label>
-        <asp:Image ID="Master_Page_Avatar" runat="server" ImageUrl="/Images/ADD.png" CssClass="PetitAvatar" />
         <asp:ScriptManager runat="server"></asp:ScriptManager>
         <asp:Timer runat="server" ID="SessionTimeout" Interval="1000" OnTick="SessionTimeout_Tick"></asp:Timer>
-
-        <asp:UpdatePanel ID="UpdatePanel_MasterPage" runat="server">
+        <table>
+            <tr>
+                <td><asp:Label ID="Master_Page_Titre" runat="server"></asp:Label></td>
+                <td>&nbsp;<asp:Label ID="Master_Page_Username" runat="server">Anonymous</asp:Label></td>
+                <td><asp:Image ID="Master_Page_Avatar" runat="server" ImageUrl="/Images/ADD.png" CssClass="PetitAvatar" /></td>
+                <td><asp:UpdatePanel ID="UpdatePanel_MasterPage" runat="server">
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="SessionTimeout" EventName="Tick" />
             </Triggers>
             <ContentTemplate>
                 <asp:Label ID="LBL_SessionTimeLeft" runat="server"></asp:Label>
             </ContentTemplate>
-        </asp:UpdatePanel>
+        </asp:UpdatePanel></td>
+            </tr>
+        </table>
+        
 
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

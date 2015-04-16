@@ -12,12 +12,18 @@
         td{
             padding:5px;
         }
+        .DIV{
+            overflow:auto;
+            height:350px;
+            width:600px;
+            margin:auto;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" ClientIDMode="Static">
     <hr />
     <asp:Timer runat="server" ID="RefreshUsers" Interval="3000" OnTick="RefreshUsers_Tick"></asp:Timer>
-   <div id="DIV_Users" style="overflow:auto; height:350px; width:600px" >
+   <div id="DIV_Users" class="DIV" >
      <asp:UpdatePanel ID="UPN_OnlineUsers" runat="server">
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="RefreshUsers" EventName="Tick" />
@@ -28,6 +34,6 @@
             <br />
         </ContentTemplate>
           </asp:UpdatePanel>
+       <asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" CssClass="Button" />
        </div>
-            <asp:Button ID="BTN_Return" runat="server" Text="Retour..." OnClick="BTN_Return_Click" />
 </asp:Content>

@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <hr />
-    <table>
+    <table style="margin:auto">
         <tr>
             <td><asp:Button ID="BTT_ManageProfile" runat="server" Text="Gérer votre profil..." OnClick="BTT_ManageProfile_Click" CssClass="Button"/></td>
         </tr>

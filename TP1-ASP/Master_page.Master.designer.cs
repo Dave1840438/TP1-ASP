@@ -31,6 +31,15 @@ namespace TP1_ASP {
         protected global::System.Web.UI.HtmlControls.HtmlForm MainForm;
         
         /// <summary>
+        /// SessionTimeout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer SessionTimeout;
+        
+        /// <summary>
         /// Master_Page_Titre control.
         /// </summary>
         /// <remarks>
@@ -56,15 +65,6 @@ namespace TP1_ASP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image Master_Page_Avatar;
-        
-        /// <summary>
-        /// SessionTimeout control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.Timer SessionTimeout;
         
         /// <summary>
         /// UpdatePanel_MasterPage control.

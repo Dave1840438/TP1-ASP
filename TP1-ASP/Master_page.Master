@@ -57,18 +57,22 @@
             width: 160px;
             margin-left: 5px;
         }
+        .auto-style1 {
+            width: 1378px;
+        }
+        .auto-style2 {
+            width: 340px;
+        }
     </style>
 </head>
 <body>
     <form id="MainForm" runat="server" method="post">
         <asp:ScriptManager runat="server"></asp:ScriptManager>
         <asp:Timer runat="server" ID="SessionTimeout" Interval="1000" OnTick="SessionTimeout_Tick"></asp:Timer>
-        <table>
+        <table style="width: 100%">
             <tr>
-                <td><asp:Label ID="Master_Page_Titre" runat="server"></asp:Label></td>
-                <td>&nbsp;<asp:Label ID="Master_Page_Username" runat="server">Anonymous</asp:Label></td>
-                <td><asp:Image ID="Master_Page_Avatar" runat="server" ImageUrl="/Images/ADD.png" CssClass="PetitAvatar" /></td>
-                <td><asp:UpdatePanel ID="UpdatePanel_MasterPage" runat="server">
+                <td class="auto-style1"><asp:Label ID="Master_Page_Titre" runat="server" Font-Bold="True" Font-Size="Large"></asp:Label></td>
+                <td class="auto-style2" style="text-align: left; vertical-align: middle"><asp:UpdatePanel ID="UpdatePanel_MasterPage" runat="server">
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="SessionTimeout" EventName="Tick" />
             </Triggers>
@@ -76,6 +80,9 @@
                 <asp:Label ID="LBL_SessionTimeLeft" runat="server"></asp:Label>
             </ContentTemplate>
         </asp:UpdatePanel></td>
+                <td style="text-align: right; vertical-align: middle">&nbsp;<asp:Label ID="Master_Page_Username" runat="server" Font-Bold="True">Anonymous</asp:Label></td>
+                <td style="text-align: right; vertical-align: middle"><asp:Image ID="Master_Page_Avatar" runat="server" ImageUrl="/Images/ADD.png" CssClass="PetitAvatar" /></td>
+                
             </tr>
         </table>
         

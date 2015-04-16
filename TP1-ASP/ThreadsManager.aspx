@@ -14,7 +14,6 @@
         .MainTable {
             background-color: lightgray;
             padding: 5px;
-            margin:auto;
         }
 
         .auto-style2 {

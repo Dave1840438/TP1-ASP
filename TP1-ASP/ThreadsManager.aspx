@@ -72,12 +72,13 @@
         <tr>
             <td class="auto-style2">&nbsp;</td>
             <td class="auto-style5" rowspan="2" style="border-style: solid; border-width: thin">Droit d&#39;accès à la discussion:<br />
-                <asp:CustomValidator ID="CV_AuMoinsUnInvite" runat="server" Text="Il faut au moins un invité!"
-                    OnServerValidate="CV_AuMoinsUnInvite_ServerValidate" />
-                <br />
+
                 <asp:UpdatePanel ID="UPN_UsersCheckboxes" runat="server" UpdateMode="Conditional">
                     <Triggers></Triggers>
                     <ContentTemplate>
+                        <asp:CustomValidator ID="CV_AuMoinsUnInvite" runat="server" Text="Il faut au moins un invité!"
+                            OnServerValidate="CV_AuMoinsUnInvite_ServerValidate" ValidateEmptyText="true" />
+                        <br />
                         <asp:CheckBox ID="CBOX_AllUsers" runat="server" Text="Tous les usagers" OnCheckedChanged="CBOX_AllUsers_CheckedChanged" />
                         <asp:Table ID="TB_AllExistingUsers" runat="server"></asp:Table>
                     </ContentTemplate>
@@ -97,7 +98,7 @@
             <td>
                 <asp:UpdatePanel ID="UPN_BTN_Send_Or_Create" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:Button runat="server" ID="BTN_Modify_Or_Create" Text="Créer..." OnClick="BTN_Modify_Or_Create_Click" CssClass="Button" />
+                        <asp:Button runat="server" ID="BTN_Modify_Or_Create" Text="Créer..." OnClick="BTN_Modify_Or_Create_Click" CssClass="Button" CausesValidation="true" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </td>
